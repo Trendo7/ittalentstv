@@ -1,0 +1,86 @@
+[
+  {
+    "title": "Bootstrap Tutorial",
+    "videoUrl": "https://www.html5rocks.com/en/tutorials/video/basics/devstories.webm",
+    "thumbnailUrl": "https://i.ytimg.com/vi/gqOEoUR5RHg/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBBB8TVfakUmkHSu_cGEjIuq3i5XA",
+    "id": 1,
+    "description": "Build responsive, mobile-first projects on the web with the world's most popular front-end component library.",
+    "uploadedBy": "Derek Banas",
+    "comments": [],
+    "viewCount": 0,
+    "likeCount": 0,
+    "dislikeCount": 0
+  },
+  {
+    "title": "AngularJS Tutorial",
+    "videoUrl": "https://permadi.com/thirdParty/videos/redcliff450.webm",
+    "thumbnailUrl": "https://i.ytimg.com/an_webp/OPxeCiy0RdY/mqdefault_6s.webp?du=3000&sqp=COyu-dYF&rs=AOn4CLA5Z3v3LMq--Bj-t0sTtO5RmMdfzw",
+    "id": 2,
+    "description": "AngularJS is what HTML would have been, had it been designed for building web-apps. Declarative templates with data-binding, MVW, MVVM, MVC, dependency injection and great testability story all implemented with pure client-side JavaScript!",
+    "uploadedBy": "Derek Banas",
+    "comments": [],
+    "viewCount": 0,
+    "likeCount": 0,
+    "dislikeCount": 0
+  },
+  {
+    "title": "Firebase - Ultimate Beginner's Guide",
+    "videoUrl": "http://www.ioncannon.net/examples/vp8-webm/big_buck_bunny_480p.webm",
+    "thumbnailUrl": "https://i.ytimg.com/an_webp/9kRgVxULbag/mqdefault_6s.webp?du=3000&sqp=CMj499YF&rs=AOn4CLAlHhClLT2rDoHRCbsV9tTr_UE86A",
+    "id": 3,
+    "description": "Master the basics of Firebase in 20 minutes. In this episode, we run through hosting, auth, firestore, storage, and cloud functions using nothing but plain JavaScript. ",
+    "uploadedBy": "Angular Firebase",
+    "comments": [],
+    "viewCount": 0,
+    "likeCount": 0,
+    "dislikeCount": 0
+  },
+  {
+    "title": "MongoDB In 30 Minutes",
+    "videoUrl": "https://www.youtube.com/watch?v=pWbMrx5rVBE",
+    "thumbnailUrl": "https://i.ytimg.com/an_webp/pWbMrx5rVBE/mqdefault_6s.webp?du=3000&sqp=CIuz-NYF&rs=AOn4CLDGaq9OzanEalrECF8TxEGZZq0AQQ",
+    "id": 4,
+    "description": "In this video we will dive into the MongoDB NoSQL database and look at the fundamentals and the syntax to create, read, update and delete documents/data",
+    "uploadedBy": "Traversy Media",
+    "comments": [],
+    "viewCount": 0,
+    "likeCount": 0,
+    "dislikeCount": 0
+  },
+  {
+    "title": "2Pac - After The Pain",
+    "videoUrl": "https://www.youtube.com/watch?v=H-IaCRfcfkk&list=RDGMEMHDXYb1_DDSgDsobPsOFxpAVM4sdjJvCVmjE&index=2",
+    "thumbnailUrl": "https://i.ytimg.com/vi/H-IaCRfcfkk/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBV23DiKMYvBnlUBfnMwWRWbV_HCQ",
+    "id": 5,
+    "description": "NEW 2017. Song of Tupac Shakur remixed \" After The Pain \" (2017) (Remix by 2Pac TV)",
+    "uploadedBy": "Thug Theory",
+    "comments": [],
+    "viewCount": 0,
+    "likeCount": 0,
+    "dislikeCount": 0
+  },
+  {
+    "title": "Eminem - Till I Collapse",
+    "videoUrl": "https://www.youtube.com/watch?v=pWbMrx5rVBE",
+    "thumbnailUrl": "https://i.ytimg.com/an_webp/ytQ5CYE1VZw/mqdefault_6s.webp?du=3000&sqp=CPCf-NYF&rs=AOn4CLCkFrH-18QrF97JbJvqtb66CpsY-w",
+    "id": 6,
+    "description": "feat. Hugh Jackman from the movie REAL STEEL",
+    "uploadedBy": "msvogue23",
+    "comments": [],
+    "viewCount": 0,
+    "likeCount": 0,
+    "dislikeCount": 0
+  },
+  {
+    "title": "Castle of Glass (Official Video)",
+    "videoUrl": "https://www.youtube.com/watch?v=ScNNfyq3d_w",
+    "thumbnailUrl": "https://i.ytimg.com/vi/ScNNfyq3d_w/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLBeFUWXzOsaiapYQ232uw2FJGZ9Ew",
+    "id": 7,
+    "description": "Linkin Park \"CASTLE OF GLASS\" off of the album LIVING THINGS. \"CASTLE OF GLASS\" is featured in the EA game Medal of Honor Warfighter. Directed by Drew Stauffer and Jerry O'Flaherty.",
+    "uploadedBy": "Linkin Park",
+    "comments": [],
+    "viewCount": 0,
+    "likeCount": 0,
+    "dislikeCount": 0
+  }
+]
