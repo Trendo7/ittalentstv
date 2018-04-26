@@ -6,6 +6,8 @@ const logger = require('morgan');
 const mongo = require('mongodb');
 const monk = require('monk');
 const db = monk('mongodb://admin:spgcpaptzi@ds253959.mlab.com:53959/it_talents_tv');
+const cors = require('cors');
+const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -26,11 +28,26 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//session Middleware
+app.use(session({secret: '3d#0L1sD'}));
+
+//CORS Middleware
+app.use(cors());
+
 //Put db object in request
 app.use(function (req, res, next) {
     req.db = db;
     next();
 });
+
+// //Middlewate for isLogged
+// function checkLogin(req, res, next) {
+//     if ((req.session) && (req.session.user)) {
+//         next();
+//     } else {
+//         res.redirect('http://localhost/....../login.html');
+//     }
+// }
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

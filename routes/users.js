@@ -72,14 +72,20 @@ router.post('/login', function (req, res, next) {
     usersCollection.find({username: user.username, password: user.password}, {}, function (err, docs) {
         if (!err) {
             if (docs.length > 0) {
+                //returns the user
+                req.session.user = docs[0];
                 res.status(200);
                 res.json({docs});
+
+                //res.redirect('http://localhost/......');
                 return;
             } else {
                 res.status(401);
                 res.json({
                     error: "invalid username/password"
                 });
+
+                //res.redirect('http://localhost/....../login.html');
                 return;
             }
         } else {
