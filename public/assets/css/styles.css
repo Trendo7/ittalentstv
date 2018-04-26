@@ -54,6 +54,9 @@ body {
 	border-bottom-left-radius: 3px;
 	border-style: none;
 	border: 1px solid #D6D6D6;
+	padding: 0 10px;
+	font-family: 'Helvetica', sans-serif;
+	font-weight: 200;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -81,3 +84,4 @@ body {
 		
     }
 }
+
