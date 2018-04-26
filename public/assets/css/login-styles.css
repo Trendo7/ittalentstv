@@ -17,7 +17,8 @@
 
 .form img {
   display: block;
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   margin-bottom: 40px;
 }
 .form input {

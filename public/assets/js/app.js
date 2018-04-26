@@ -6,13 +6,13 @@ app.config(function ($routeProvider) {
             templateUrl: 'assets/js/videos/videos.htm',
             controller: 'VideosController'
         })
+        .when('/signin', {
+            templateUrl: 'signin.html',
+            controller: 'SigninController'
+        })
         .when('/upload', {
             templateUrl: 'assets/js/videos/upload.htm',
             controller: 'VideosController'
-        })
-        .when('/signin', {
-            templateUrl: 'assets/js/signin/signin.html',
-            controller: 'SigninController'
         })
         .when('/:videoID', {
             templateUrl: 'assets/js/videos/selectedVideo.htm',
