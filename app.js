@@ -12,6 +12,7 @@ const session = require('express-session');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
 const videosRouter = require('./routes/videos');
 const accountRouter = require('./routes/account');
 const resultsRouter = require('./routes/results');
@@ -52,6 +53,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/login', loginRouter);
+app.use('/register', registerRouter);
 app.use('/videos', videosRouter);
 app.use('/account', accountRouter);
 app.use('/results', resultsRouter);
