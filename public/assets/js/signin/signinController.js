@@ -45,7 +45,7 @@ const OK = 200;
 
 		console.log($scope.newUser)
 
-		$http.post('http://localhost:3000/login', $scope.newUser)
+		$http.post('http://localhost:3000/register', $scope.newUser)
 		.then(function (response){
 			if (response.status == OK) {
 				console.log('OK')
