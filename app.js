@@ -10,7 +10,7 @@ const cors = require('cors');
 const session = require('express-session');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
+// const usersRouter = require('./routes/users');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const videosRouter = require('./routes/videos');
@@ -30,7 +30,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //session Middleware
-app.use(session({secret: '3d#0L1sD'}));
+app.use(session({
+    secret: '3d#0L1sD'
+    // resave: false,
+    // saveUninitialized: true
+}));
 
 //CORS Middleware
 app.use(cors());
@@ -51,7 +55,7 @@ app.use(function (req, res, next) {
 // }
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/videos', videosRouter);

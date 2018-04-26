@@ -4,7 +4,7 @@ const sha1 = require('sha1');
 
 
 //Login
-router.post('/login', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var user = req.body;
 
