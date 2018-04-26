@@ -29,9 +29,35 @@ router.post('/register', function (req, res, next) {
 
     newUser.password = sha1(newUser.password);
 
-    usersCollection.insert(newUser, function (err, data) {
-        res.json({id: data._id});
+    usersCollection.find({username: newUser.username}, {}, function (err, docs) {
+        if (!err) {
+            if (docs.length > 0) {
+                res.status(409);
+                res.json({
+                    error: "there is already such username"
+                });
+                return;
+            } else {
+                registerUser();
+            }
+        } else {
+            res.status(500);
+            res.json({err: err});
+        }
     });
+
+    function registerUser() {
+        usersCollection.insert(newUser, function (err, data) {
+            if (!err) {
+                res.status(200);
+                res.json({id: data._id});
+            } else {
+                res.status(500);
+                res.json({err: err});
+            }
+        });
+    }
+
 });
 
 module.exports = router;
