@@ -49,6 +49,7 @@ const OK = 200;
 		.then(function (response){
 			if (response.status == OK) {
 				console.log('OK')
+				$window.location.href = "/signin"
 			}else {
 				console.log('SHIT!')
 			}
