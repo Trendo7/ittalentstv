@@ -11,8 +11,8 @@ app.config(function ($routeProvider) {
             controller: 'VideosController'
         })
         .when('/signin', {
-            templateUrl: 'signin.html',
-            controller: 'VideosController'
+            templateUrl: 'assets/js/signin/signin.html',
+            controller: 'SigninController'
         })
         .when('/:videoID', {
             templateUrl: 'assets/js/videos/selectedVideo.htm',
