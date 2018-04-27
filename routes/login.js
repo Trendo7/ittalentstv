@@ -16,7 +16,10 @@ router.post('/', function (req, res, next) {
                 //returns the user
                 req.session.user = docs[0];
                 res.status(200);
-                res.json({docs});
+                res.json({
+                    userId: docs[0]._id,
+                    username: docs[0].username
+                });
 
                 //res.redirect('http://localhost/......');
                 return;

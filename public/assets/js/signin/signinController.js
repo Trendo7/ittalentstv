@@ -23,8 +23,8 @@ const OK = 200;
 		$http.post('http://localhost:3000/login', $scope.user)
 		.then(function (response){
 			if (response.status == OK) {
-				console.log(response.data.docs)
-				localStorage.setItem('logged', JSON.stringify(response.data.docs[0]));
+				console.log(response.data);
+				localStorage.setItem('logged', JSON.stringify(response.data));
 				alert('Zapisano v localStorage')
 
 				// redirect to home page	

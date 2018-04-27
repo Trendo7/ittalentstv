@@ -1,5 +1,5 @@
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to ITTalents TV</title>
@@ -10,35 +10,42 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 
 
-  </head>
-  <body ng-app="app">
-    
+</head>
+<body ng-app="app">
+<div ng-controller="MainController">
     <!--  Navbar -->
     <nav class="navbar navbar-expand-md navbar-light bg-faded fixed-top">
-      <a href="/" class="navbar-brand ml-lg-3 ml-sm-3 ml-2"><img id="logo" src="assets/img/dark-logo.png" alt="logo" width="150px"></a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+        <a href="/" class="navbar-brand ml-lg-3 ml-sm-3 ml-2"><img id="logo" src="assets/img/dark-logo.png" alt="logo"
+                                                                   width="150px"></a>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
             <span> </span>
             <span> </span>
             <span> </span>
         </button>
-      <div class="navbar-collapse collapse" id="collapsingNavbar">
-        
-        <form class="mx-auto my-auto">
-          <div class="input-group align-content-sm-center">
-            <input class="search" placeholder="Search..." type="text">
-            <span class="input-group-append">
+        <div class="navbar-collapse collapse" id="collapsingNavbar">
+
+            <form class="mx-auto my-auto">
+                <div class="input-group align-content-sm-center">
+                    <input class="search" placeholder="Search..." type="text">
+                    <span class="input-group-append">
               <button class="btn btn-outline-secondary border border-left-0" type="button">
               <i class="fa fa-search"></i>
               </button>
             </span>
-          </div>
-        </form>
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="signin#login">SIGN IN</a>
-          </li>
-        </ul>
-      </div>
+                </div>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item" ng-if="!logged">
+                    <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="signin#login" >SIGN IN</a>
+                </li>
+                <li class="nav-item" ng-if="logged">
+                    <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="account" >{{logged.username}}</a>
+                </li>
+                <li class="nav-item" ng-if="logged">
+                    <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" ng-click="">LOGOUT</a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div class="welcome-header">
@@ -47,22 +54,24 @@
     <!-- Main Content -->
     <main ng-view role="main" class="container">
 
-    
+
     </main>
 
     <div class="test">Scroll Tester</div>
     <!--  Scripts  -->
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+</div>
 
-    <script src="assets/js/app.js"></script>
-    <script src="assets/js/videos/videosService.js"></script>
-    <script src="assets/js/videos/videosController.js"></script>
-    <script src="assets/js/signin/signinController.js"></script>
-    
-  </body>
-  </html>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.13.0/umd/popper.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/mainController.js"></script>
+<script src="assets/js/videos/videosService.js"></script>
+<script src="assets/js/videos/videosController.js"></script>
+<script src="assets/js/signin/signinController.js"></script>
+
+</body>
+</html>
