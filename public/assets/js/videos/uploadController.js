@@ -1,5 +1,7 @@
-app.controller('UploadController', function ($scope, $http) {
-
+app.controller('UploadController', function ($scope, $http, $window) {
+	if (!$scope.logged) {
+        $window.location.href = '/signin.html#!/#login';
+	}
 
 	$scope.video = {
 		title: '',
