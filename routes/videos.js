@@ -48,4 +48,30 @@ router.delete('/:id', function (req, res, next) {
 
 });
 
+//Add  video
+router.post('/', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var newVideo = req.body;
+    // newVideo.uploadedBy = {
+    //     userId: req.session.user._id,
+    //     username: req.session.user.username
+    // };
+    newVideo.comments = [];
+    newVideo.viewCount = 0;
+    newVideo.likeCount = 0;
+    newVideo.dislikeCount = 0;
+
+    console.log(newVideo);
+
+    videosCollection.insert(newVideo, function (err, data) {
+        if (!err) {
+            res.status(200);
+            res.json(data);
+        } else {
+            res.status(500);
+            res.json({err: err});
+        }
+    });
+});
+
 module.exports = router;
