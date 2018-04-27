@@ -21,6 +21,7 @@
   margin: 0 auto;
   margin-bottom: 40px;
 }
+
 .form input {
   outline: 0;
   background: #f2f2f2;
@@ -35,6 +36,7 @@
   box-sizing: border-box;
   font-size: 14px;
 }
+
 .form button {
   outline: 0;
   background: rgb(75, 180, 232);
@@ -50,29 +52,29 @@
   transition: all 0.3 ease;
   cursor: pointer;
 }
+
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;
   font-size: 12px;
 }
+
 .form .message a {
   color: rgb(75, 180, 232);
   text-decoration: none;
 }
+
 .form .register-form {
   display: none;
 }
 
-
-
-/* END Form */
-/* Demo Purposes */
 body {
   background: rgb(250, 250, 250);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 body:before {
   content: "";
   position: fixed;

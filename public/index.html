@@ -15,14 +15,16 @@
     
     <!--  Navbar -->
     <nav class="navbar navbar-expand-md navbar-light bg-faded fixed-top">
-      <a href="/" class="navbar-brand"><img id="logo" src="assets/img/black-logo.png" alt="logo" width="150px"></a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbar5" aria-expanded="false">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse collapse" id="navbar5">
+      <a href="/" class="navbar-brand ml-lg-3 ml-sm-3 ml-2"><img id="logo" src="assets/img/dark-logo.png" alt="logo" width="150px"></a>
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+            <span> </span>
+            <span> </span>
+            <span> </span>
+        </button>
+      <div class="navbar-collapse collapse" id="collapsingNavbar">
         
         <form class="mx-auto my-auto">
-          <div class="input-group">
+          <div class="input-group align-content-sm-center">
             <input class="search" placeholder="Search..." type="text">
             <span class="input-group-append">
               <button class="btn btn-outline-secondary border border-left-0" type="button">
@@ -33,13 +35,15 @@
         </form>
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="signin#login">SIGN IN</a>
+            <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="signin#login">SIGN IN</a>
           </li>
         </ul>
       </div>
     </nav>
 
+    <div class="welcome-header">
 
+    </div>
     <!-- Main Content -->
     <main ng-view role="main" class="container">
 
