@@ -20,6 +20,15 @@ body {
 	margin-left: 25px;
 }
 
+#upload-ico {
+	width: 35px;
+	opacity: 0.6;
+}
+
+#upload-ico:hover {
+	opacity: 0.9;
+}
+
 .navbar-toggler:focus, .navbar-toggler:active {
 	outline: 0;
 }

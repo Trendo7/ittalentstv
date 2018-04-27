@@ -14,7 +14,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
-
+    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
 </head>
 <body ng-app="app">
 <div ng-controller="MainController">
@@ -43,7 +43,10 @@
                 <li class="nav-item" ng-if="!logged">
                     <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="signin#login">SIGN IN</a>
                 </li>
-                <li class="nav-item" ng-if="logged">
+                <li class="nav-item my-auto mr-2" ng-if="logged">
+                    <a href="#!/upload"><img src="assets/img/upload-ico.png" id="upload-ico" alt="upload"></a>
+                </li>
+                <li class="nav-item my-auto" ng-if="logged">
                     <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="account">{{logged.username}}</a>
                 </li>
                 <li class="nav-item" ng-if="logged">
@@ -53,9 +56,9 @@
         </div>
     </nav>
 
-    <div class="welcome-header">
+    <!-- <div class="welcome-header">
 
-    </div>
+    </div> -->
     <!-- Main Content -->
     <main ng-view role="main" class="container">
 
@@ -71,6 +74,7 @@
 <script src="assets/js/mainController.js"></script>
 <script src="assets/js/videos/videosService.js"></script>
 <script src="assets/js/videos/videosController.js"></script>
+<script src="assets/js/videos/uploadController.js"></script>
 <script src="assets/js/signin/signinController.js"></script>
 <script src="assets/js/logout/logoutController.js"></script>
 
