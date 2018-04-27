@@ -7,8 +7,6 @@ const sha1 = require('sha1');
 router.post('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var newUser = req.body;
-    console.log(newUser)
-    newUser.email = '';
     newUser.playlists = [];
     newUser.uploadedVideos = [];
     newUser.history = [];

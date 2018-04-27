@@ -45,21 +45,22 @@ app.use(function (req, res, next) {
     next();
 });
 
-// //Middlewate for isLogged
-// function checkLogin(req, res, next) {
-//     if ((req.session) && (req.session.user)) {
-//         next();
-//     } else {
-//         res.redirect('http://localhost/....../login.html');
-//     }
-// }
+//Middlewate for isLogged
+function checkLogin(req, res, next) {
+    if ((req.session) && (req.session.user)) {
+        next();
+    } else {
+        res.status(401);
+        res.json({status: 'not authorized'});
+    }
+}
 
 app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/videos', videosRouter);
-app.use('/account', accountRouter);
+app.use('/account', checkLogin, accountRouter);
 app.use('/results', resultsRouter);
 
 // catch 404 and forward to error handler
