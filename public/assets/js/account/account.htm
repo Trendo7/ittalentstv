@@ -4,34 +4,39 @@
     <div class="account-info-row">
         <span class="account-info-row">Profile picture</span>
         <div class="account-info">
-            <img ng-src="" />
+            <img ng-src=""/>
         </div>
     </div>
 
     <div class="account-info-row">
         <span class="account-info-row">Username</span>
         <div class="account-info">
-            <input type=text ng-model="user.username" ng-disabled="!isBeingEdited" />
+            <input type=text ng-model="user.username" ng-disabled="!isBeingEdited"/>
         </div>
     </div>
 
     <div class="account-info-row">
         <span class="account-info-row">email</span>
         <div class="account-info">
-            <input type=email ng-model="user.email" ng-disabled="!isBeingEdited" />
+            <input type=email ng-model="user.email" ng-disabled="!isBeingEdited"/>
         </div>
     </div>
 
     <div class="account-info-row">
         <span class="account-info-row">Password</span>
         <div class="account-info">
-            <input type=password ng-model="user.password" ng-disabled="!isBeingEdited" />
+            <input type=password ng-model="user.password" ng-disabled="!isBeingEdited"/>
         </div>
     </div>
 
     <div>
         <button ng-click="editAccount()" ng-if="!isBeingEdited">Edit</button>
         <button ng-click="saveChanges()" ng-if="isBeingEdited">Save changes</button>
+    </div>
+
+    <div class="message">
+        <p class="account-success-message" ng-if="successMessage">{{successMessage}}</p>
+        <p class="account-error-message"  ng-if="errorMessage">{{errorMessage}}</p>
     </div>
 
 </div>

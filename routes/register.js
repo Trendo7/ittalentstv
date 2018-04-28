@@ -14,7 +14,7 @@ router.post('/', function (req, res, next) {
     if (newUser.username.trim() == '') {
         res.status(412);
         res.json({
-            error: "please enter username"
+            error: 'Please enter username!'
         });
         return;
     }
@@ -22,7 +22,7 @@ router.post('/', function (req, res, next) {
     if (String(newUser.password).trim().length < 8) {
         res.status(412);
         res.json({
-            error: "the password must have at least 8 characters"
+            error: 'Your password must be at least 8 characters long!'
         });
         return;
     }
@@ -34,7 +34,7 @@ router.post('/', function (req, res, next) {
             if (docs.length > 0) {
                 res.status(409);
                 res.json({
-                    error: "there is already such username"
+                    error: "This username is already in use! Please choose another one!"
                 });
                 return;
             } else {

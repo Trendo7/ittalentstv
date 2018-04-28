@@ -18,7 +18,7 @@ router.put('/', function (req, res, next) {
     if (user.username.trim() == '') {
         res.status(412);
         res.json({
-            error: "please enter username"
+            error: 'Please enter username!'
         });
         return;
     }
@@ -26,26 +26,45 @@ router.put('/', function (req, res, next) {
     if (String(user.password).trim().length < 8) {
         res.status(412);
         res.json({
-            error: "the password must have at least 8 characters"
+            error: 'Your password must be at least 8 characters long!'
         });
         return;
     }
 
     user.password = sha1(user.password);
 
-
-    usersCollection.update({_id: user._id}, user, function (err, docs) {
+    usersCollection.find({username: user.username}, {}, function (err, docs) {
         if (!err) {
-            res.status(200);
-            res.json({
-                userId: user._id,
-                username: user.username
-            });
+            console.log(docs[0]);
+            if ((docs.length > 0) && (req.session.user.username != user.username)) {
+                res.status(409);
+                res.json({
+                    error: "This username is already in use! Please choose another one!"
+                });
+                return;
+            } else {
+                updateUser();
+            }
         } else {
             res.status(500);
             res.json({err: err});
         }
     });
+
+    function updateUser() {
+        usersCollection.update({_id: user._id}, user, function (err, docs) {
+            if (!err) {
+                res.status(200);
+                res.json({
+                    userId: user._id,
+                    username: user.username
+                });
+            } else {
+                res.status(500);
+                res.json({err: err});
+            }
+        });
+    }
 });
 
 module.exports = router;

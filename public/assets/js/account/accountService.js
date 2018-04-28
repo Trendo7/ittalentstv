@@ -18,7 +18,7 @@ app.service('AccountService', function ($http) {
                     localStorage.setItem('logged', JSON.stringify(response.data));
                     
                 })
-                .catch(err => reject(err));
+                .catch(err => reject(err.data));
         });
     };
 
