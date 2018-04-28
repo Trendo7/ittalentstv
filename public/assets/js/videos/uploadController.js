@@ -1,5 +1,7 @@
 app.controller('UploadController', function ($scope, $http) {
 
+const STATUS_OK = 200;
+const STATUS_ERR = 400;
 
 	$scope.video = {
 		title: '',
@@ -29,26 +31,31 @@ var file = document.getElementById('fileButton');
 var deleteBtn = document.getElementById('delete-btn');
 var id;
 
+
 fileButton.addEventListener('change', function(e) {
+	 
 	//get file
 	var file = e.target.files[0];
 	//create storage ref
-	id = Date.now();
-	var storageRef = firebase.storage().ref('videos/' + id + '.mp4')
+	
 	//upload file
 	var metadata = {
 		contentType: 'video/mp4',
 	};
 
+	
+
 	upload.addEventListener('click', function () {
+		id = Date.now();
+	var storageRef = firebase.storage().ref('videos/' + id + '.mp4')
 		var task = storageRef.put(file, metadata);
 	//update progss bar
 	task.on('state_changed',
 		function progress(snapshot) {
 			var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 			uploader.value = percentage;
-			var latest = document.querySelector('#latest');
-			latest.innerHTML = `<h3 class="mx-auto">${percentage.toFixed(0)}%</h3>`;
+			var latest = document.querySelector('#prog');
+			latest.innerText = `${percentage.toFixed(0)}%`;
 		},
 		function error(err) {
 			console.log('error');
@@ -57,8 +64,6 @@ fileButton.addEventListener('change', function(e) {
 			
 			var downloadURL = task.snapshot.downloadURL;
 
-			console.log(task.snapshot)
-			
 
 			$scope.video = {
 				title: $scope.title,
@@ -68,22 +73,36 @@ fileButton.addEventListener('change', function(e) {
 				thumbnailUrl: 'http://videopromotion.club/assets/images/default-video-thumbnail.jpg'
 			}
 
-			console.log($scope.video)
 
 			var newVideo = $scope.video
 
 
-
+			console.log($scope.tags)
 			$http.post('http://localhost:3000/videos', newVideo)
 			.then(function (response) {
-				if (response.status == 200) {
+				if (response.status >= STATUS_OK) {
 					console.log('zapisano v bazata')
+					var latest = document.querySelector('#prog');
+					latest.innerText = "Your clip was successfully uploaded!";
 				}
 			})
-
+			.catch(function(err){
+				console.log(id)
+				
+				var storageRef = firebase.storage().ref('videos')			
+				// Create a reference to the file to delete
+				var desertRef = storageRef.child(id.toString() + ".mp4");
+				console.log(desertRef)
+				// Delete the file
+				setTimeout(function(){
+				desertRef.delete()
+					.then(function() {
+						var latest = document.querySelector('#prog');
+						latest.innerText = 'Sign in first!'
+					})
+				}, 1000)	
+			})
 			
-			var latest = document.querySelector('#latest');
-			latest.innerHTML = "<h1> UPLOADED </h1>";
 		});
 	})
 	

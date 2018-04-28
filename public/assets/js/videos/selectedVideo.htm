@@ -1,14 +1,19 @@
 <div class="row">
+
 	<div class="col-lg-8 col-md-12 embed-responsive embed-responsive-16by9">
 	<video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" controls controlsList="nodownload"></video>
 </div>
-<br>
+<div class="bg-warning col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto"></div>	
+
+
 	<div class="row">
 		<div class="col-xl-8 col-lg-8 col-md"> 
 			<h3 class="video-title">&nbsp;&nbsp;{{currentVideo.title}}</h3>
-			<h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy}}</h6>
+			<h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy.username}}</h6>
 
 			<h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
 		</div>
 	</div>
+
+
 </div> 
