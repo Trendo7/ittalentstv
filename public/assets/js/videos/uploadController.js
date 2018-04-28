@@ -78,7 +78,7 @@ fileButton.addEventListener('change', function(e) {
 				uploadedBy: {},
 				description: $scope.description,
 				videoUrl: downloadURL,
-				tags: $scope.tags,
+				tags: $scope.tags.split(','),
 				thumbnailUrl: 'http://videopromotion.club/assets/images/default-video-thumbnail.jpg'
 			}
 
