@@ -11,14 +11,13 @@ body {
 }
 
 textarea {
-    resize: none;
+	resize: none;
 	height: 170px;
 }
 
-
 .side-clips {
-  height: 430px;
-  overflow-y: scroll;
+	height: 430px;
+	overflow-y: scroll;
 }
 
 .side-clip {
@@ -31,22 +30,21 @@ textarea {
 
 #upload {
 	outline: 0;
-  background: rgb(75, 180, 232);
-  width: 30%;
-  border: 0;
-  padding: 10px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
-  color: #FFFFFF;
-  font-size: 14px;
-  letter-spacing: 1px;
-  font-weight: 300;
-  transition: all 0.3 ease;
-  cursor: pointer;
+	background: rgb(75, 180, 232);
+	width: 30%;
+	border: 0;
+	padding: 10px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	color: #FFFFFF;
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 300;
+	transition: all 0.3 ease;
+	cursor: pointer;
 }
-
 
 #upload:hover {
 	background: #3E95C0;
@@ -186,35 +184,41 @@ textarea {
 	display: none;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width:1200px) {
 	.side-clips {
 		display: none;
-
-  height: 315px;
-
-}
-}
-
-@media only screen and (max-width:1024px) {
-	.search {
-		width: 20em;
+		height: 315px;
 	}
-	
 
 }
 
-@media only screen and (max-width:768px) {
+@media only screen and (max-width:1050px) {
 	.search {
-		width: 19em;
+		width: 18em;
+	}
+
+}
+
+@media only screen and (max-width:792px) {
+	.search {
+		width: 16em;
+	}
+
+}
+
+@media only screen and (max-width:765px) {
+	.search {
+		width: 25em;
 	}
 
 	.input-group {
 		margin-top: 5px;
 	}
-	
+
 	#upload-ico {
 		display: none;
 	}
+
 	#upload-txt {
 		display: block;
 	}
@@ -223,7 +227,7 @@ textarea {
 
 @media only screen and (max-width:500px) {
 	.search {
-		width: 15em;
+		width: 18em;
 	}
 
 	.welcome-header {
@@ -234,7 +238,6 @@ textarea {
 		padding-top: 60px;
 	}
 
-	
-	}
+}
 
 }
