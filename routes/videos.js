@@ -52,10 +52,7 @@ router.delete('/:id', function (req, res, next) {
 router.post('/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var newVideo = req.body;
-    newVideo.uploadedBy = {
-        userId: req.session.user._id,
-        username: req.session.user.username
-    };
+    newVideo.uploadedBy = req.session.user.username;
     console.log(req.session.user);
     console.log(1);
     newVideo.comments = [];

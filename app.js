@@ -17,6 +17,7 @@ const logoutRouter = require('./routes/logout');
 const videosRouter = require('./routes/videos');
 const accountRouter = require('./routes/account');
 const resultsRouter = require('./routes/results');
+const myVideosRouter = require('./routes/myVideos');
 
 const app = express();
 
@@ -64,6 +65,7 @@ app.use('/logout', logoutRouter);
 app.use('/videos', videosRouter);
 app.use('/account', accountRouter);
 app.use('/results', resultsRouter);
+app.use('/myVideos', myVideosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
