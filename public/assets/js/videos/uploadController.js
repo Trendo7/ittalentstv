@@ -1,5 +1,5 @@
 
-app.controller('UploadController', function ($scope, $http, $window) {
+app.controller('UploadController', function ($scope, $http, $window, $route) {
 
 
 if (!$scope.logged) {
@@ -14,6 +14,7 @@ const STATUS_ERR = 400;
 		uploadedBy: {},
 		description: '',
 		videoUrl: '',
+		tags: null,
 		thumbnailUrl: ''
 	}
 
@@ -60,6 +61,7 @@ fileButton.addEventListener('change', function(e) {
 		function progress(snapshot) {
 			var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
 			uploader.value = percentage;
+
 			var latest = document.querySelector('#prog');
 			latest.innerText = `${percentage.toFixed(0)}%`;
 		},
@@ -76,20 +78,37 @@ fileButton.addEventListener('change', function(e) {
 				uploadedBy: {},
 				description: $scope.description,
 				videoUrl: downloadURL,
+				tags: $scope.tags,
 				thumbnailUrl: 'http://videopromotion.club/assets/images/default-video-thumbnail.jpg'
 			}
 
-
+			console.log(document.getElementById('tags').value)
 			var newVideo = $scope.video
 
 
-			console.log($scope.tags)
+			console.log(newVideo)
 			$http.post('http://localhost:3000/videos', newVideo)
 			.then(function (response) {
 				if (response.status >= STATUS_OK) {
 					console.log('zapisano v bazata')
 					var latest = document.querySelector('#prog');
 					latest.innerText = "Your clip was successfully uploaded!";
+					setTimeout(function(){
+
+
+						// трябва да препратим юзъра директно към видеото след 3 сек и да му го отвори в 
+						// нов прозорец чрез смяна на URL при който да се задейства CurrentVideoController 
+						// (трябва ни IDто на видеото от монго)
+					        // $window.location.href = '/signin.html#!/#login';
+						
+
+
+
+					latest.innerHTML = `<div class="row mt-2"><div class="col-lg-8 col-md-12 embed-responsive embed-responsive-16by9 mx-auto">
+										<video class="embed-responsive-item" src="${downloadURL}" controls controlsList="nodownload"></video></div>`	
+					},3000)
+					
+					
 				}
 			})
 			.catch(function(err){

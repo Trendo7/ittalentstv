@@ -145,12 +145,6 @@ textarea {
 	margin-bottom: 0;
 }
 
-.test {
-	height: 900px;
-	width: 50px;
-	background-color: #CCCCCC;
-}
-
 .welcome-header {
 	background-image: url("../img/bg.jpg");
 	background-repeat: no-repeat;
@@ -174,6 +168,10 @@ textarea {
 	font-weight: 200;
 }
 
+#upload-txt {
+	display: none;
+}
+
 @media only screen and (max-width:1024px) {
 	.search {
 		width: 20em;
@@ -189,7 +187,13 @@ textarea {
 	.input-group {
 		margin-top: 5px;
 	}
-
+	
+	#upload-ico {
+		display: none;
+	}
+	#upload-txt {
+		display: block;
+	}
 }
 
 @media only screen and (max-width:500px) {

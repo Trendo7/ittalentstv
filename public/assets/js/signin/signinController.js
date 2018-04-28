@@ -25,11 +25,14 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
                 if (response.status == OK) {
                     console.log(response.data);
                     localStorage.setItem('logged', JSON.stringify(response.data));
-                    alert('Zapisano v localStorage')
+                    // alert('Zapisano v localStorage')
 
                     // redirect to home page
                     $window.location.href = '/'
                 }
+            })
+            .catch(function (response) {
+                alert(response.data.error)
             })
     };
 

@@ -15,13 +15,13 @@ app.controller('AccountController', function ($scope, $http, $window, AccountSer
 
     $scope.editAccount = function () {
         $scope.isBeingEdited = true;
-        $scope.user.password = '';
+        $scope.user.password;
     };
 
     $scope.saveChanges = function () {
         $scope.isBeingEdited = false;
         AccountService.saveChanges($scope.user).then(function (d) {
-
+            $window.location.reload().apply()
         });
     }
 
