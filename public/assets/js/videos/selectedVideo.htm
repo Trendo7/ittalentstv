@@ -3,10 +3,10 @@
 	<div class="col-lg-8 col-md-12 embed-responsive embed-responsive-16by9">
 	<video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" controls controlsList="nodownload"></video>
 </div>
-<div class="side-clip col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto ">
+<div class="side-clips col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto ">
 
 	<div ng-click="openLink(video)" ng-repeat="video in videos | limitTo:9">
-	<div class="row side-clipmb-2">
+	<div class="row side-clip mb-2">
 		<div class="col-lg-5 my-auto">
 		 <img class="img-fluid"  ng-src="{{video.thumbnailUrl}}"  alt=""></a>
 		 </div>

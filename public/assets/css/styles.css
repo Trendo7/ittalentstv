@@ -16,9 +16,13 @@ textarea {
 }
 
 
-.side-clip {
+.side-clips {
   height: 430px;
   overflow-y: scroll;
+}
+
+.side-clip {
+	cursor: pointer;
 }
 
 #upload {

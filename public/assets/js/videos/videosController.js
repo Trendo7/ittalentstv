@@ -49,6 +49,11 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
                     $scope.videos = videos;
                 });
             });
-
+                $scope.openLink = function (video) {
+        // $window.location.href = video.id;
+        // $scope.currentVideo = video;
+        // console.log($scope.currentVideo);
+        $location.path(video._id);
+    };
             
 });
