@@ -10,6 +10,37 @@ body {
 	background-color: rgb(250, 250, 250);
 }
 
+textarea {
+    resize: none;
+	height: 170px;
+}
+
+#upload {
+	outline: 0;
+  background: rgb(75, 180, 232);
+  width: 30%;
+  border: 0;
+  padding: 10px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: #FFFFFF;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+#upload:hover {
+	background: #3E95C0;
+}
+
+#prog {
+	font-size: 14px;
+}
+
 .navbar {
 	background-color: white;
 	box-shadow: 0 0 15px #999999;

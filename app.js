@@ -62,7 +62,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
 app.use('/videos', videosRouter);
-app.use('/account', checkLogin, accountRouter);
+app.use('/account', accountRouter);
 app.use('/results', resultsRouter);
 
 // catch 404 and forward to error handler
