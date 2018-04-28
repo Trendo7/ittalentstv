@@ -18,7 +18,7 @@
   color: #555;
   vertical-align: middle;
   border-radius: 4px;
-
+  text-transform:lowercase;
   line-height: 26px;
   cursor: text;
   margin-bottom: 15px;
