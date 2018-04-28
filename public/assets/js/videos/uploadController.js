@@ -22,13 +22,13 @@ const STATUS_ERR = 400;
 
 	// Initialize Firebase
 var config = {
-	apiKey: "AIzaSyA0knIwOFNWkJDRcxSwL6n6uXj3C-LqcpI",
-	authDomain: "simple-upload-prj.firebaseapp.com",
-	databaseURL: "https://simple-upload-prj.firebaseio.com",
-	projectId: "simple-upload-prj",
-	storageBucket: "simple-upload-prj.appspot.com",
-	messagingSenderId: "221421093893"
-};
+    apiKey: "AIzaSyCIhpw08oRhdBRaSIma-2h96d_BRYQ0QMA",
+    authDomain: "videotalents-d652e.firebaseapp.com",
+    databaseURL: "https://videotalents-d652e.firebaseio.com",
+    projectId: "videotalents-d652e",
+    storageBucket: "videotalents-d652e.appspot.com",
+    messagingSenderId: "200617454566"
+  };
 firebase.initializeApp(config);
 
 var database = firebase.database();
