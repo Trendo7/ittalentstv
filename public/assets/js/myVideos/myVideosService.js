@@ -1,6 +1,6 @@
 app.service('MyVideosService', function ($http) {
-
-    this.getVideos = function () {
+    //gets all videos that are uploaded by the logged user
+    this.getMyVideos = function () {
         return new Promise(function (resolve, reject) {
             $http.get('http://localhost:3000/myVideos')
                 .then(function (response) {
@@ -11,6 +11,7 @@ app.service('MyVideosService', function ($http) {
     };
 
 
+    //deletes selected video
     this.deleteVideo = function (id) {
         return new Promise(function (resolve, reject) {
             $http.delete('http://localhost:3000/myVideos/' + id)
@@ -21,26 +22,9 @@ app.service('MyVideosService', function ($http) {
                     } else {
                         throw new Error('There is no such ID');
                     }
-
                 })
                 .catch(err => reject(err));
         });
     };
 
-
-    // this.deleteVideo = function (id) {
-    //     return new Promise(function (resolve, reject) {
-    //         $http.delete('http://localhost:3000/videos/' + id)
-    //             .then(function (response) {
-    //                 var deletedVideo = response;
-    //                 if (!!deletedVideo) {
-    //                     resolve(deletedVideo);
-    //                 } else {
-    //                     throw new Error('There is no such ID');
-    //                 }
-    //
-    //             })
-    //             .catch(err => reject(err));
-    //     });
-    // };
 });
