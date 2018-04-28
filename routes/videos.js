@@ -66,13 +66,32 @@ router.post('/', function (req, res, next) {
 
     videosCollection.insert(newVideo, function (err, data) {
         if (!err) {
-            res.status(200);
-            res.json(data);
+            var videoId = data._id;
+            updateUserUploadedVideos(videoId);
         } else {
             res.status(500);
             res.json({err: err});
         }
     });
+
+    function updateUserUploadedVideos(videoId) {
+        var usersCollection = req.db.get('users');
+        var user = req.session.user;
+        user.uploadedVideos.push(videoId);
+
+        usersCollection.update({_id: user._id}, user, function (err, docs) {
+            if (!err) {
+                res.status(200);
+                res.json({
+                    message: 'Video has been uploaded and user uploadedVideo collection has been updated successfully!'
+                });
+            } else {
+                res.status(500);
+                res.json({err: err});
+            }
+        });
+    }
+
 });
 
 module.exports = router;
