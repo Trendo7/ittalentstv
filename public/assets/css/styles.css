@@ -24,9 +24,17 @@ textarea {
 	cursor: pointer;
 }
 
-.side-clip h5 {
+.side-clip-title {
 	font-size: 3px;
+	word-wrap: break-word; 
+	max-height: 25px; 
+	max-width: 100%; 
+	overflow:hidden;
+	white-space: nowrap; 
+	text-overflow: ellipsis;
 }
+
+
 
 #upload {
 	outline: 0;
