@@ -22,8 +22,10 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
     $scope.deleteVideo = function (video) {
         var videoId = video._id;
         console.log(videoId);
-        VideosService.deleteVideo(videoId).then(function(){
-            VideosService.getVideos().then(function (videos) {
+        VideosService.deleteVideo(videoId)
+        .then(function(){
+            VideosService.getVideos()
+            .then(function (videos) {
                 $scope.$apply(function () {
                     $scope.videos = videos;
                 });
@@ -34,9 +36,19 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
 
 app.controller('CurrentVideoController', function ($scope, $location, VideosService) {
     var videoID = $location.path().substring(1);
-    VideosService.loadVideo(videoID).then(function (currentVideo) {
+    VideosService.loadVideo(videoID)
+    .then(function (currentVideo) {
         $scope.$apply(function () {
             $scope.currentVideo = currentVideo;
         });
     });
+
+    VideosService.getVideos()
+            .then(function (videos) {
+                $scope.$apply(function () {
+                    $scope.videos = videos;
+                });
+            });
+
+            
 });
