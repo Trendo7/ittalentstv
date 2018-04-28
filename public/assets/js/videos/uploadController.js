@@ -1,4 +1,10 @@
-app.controller('UploadController', function ($scope, $http) {
+
+app.controller('UploadController', function ($scope, $http, $window) {
+
+
+// if (!$scope.logged) {
+//         $window.location.href = '/signin.html#!/#login';
+// 	}
 
 const STATUS_OK = 200;
 const STATUS_ERR = 400;
