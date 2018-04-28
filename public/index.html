@@ -47,7 +47,7 @@
                     <a href="#!/upload"><img src="assets/img/upload-ico.png" id="upload-ico" alt="upload"></a>
                 </li>
                 <li class="nav-item my-auto" ng-if="logged">
-                    <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="account">{{logged.username}}</a>
+                    <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="#!/account">{{logged.username}}</a>
                 </li>
                 <li class="nav-item" ng-if="logged">
                     <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" ng-click="logout()">LOGOUT</a>
@@ -77,6 +77,8 @@
 <script src="assets/js/videos/uploadController.js"></script>
 <script src="assets/js/signin/signinController.js"></script>
 <script src="assets/js/logout/logoutController.js"></script>
+<script src="assets/js/account/accountService.js"></script>
+<script src="assets/js/account/accountController.js"></script>
 
 </body>
 </html>

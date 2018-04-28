@@ -1,0 +1,37 @@
+<div>
+    <p>Account information</p>
+
+    <div class="account-info-row">
+        <span class="account-info-row">Profile picture</span>
+        <div class="account-info">
+            <img ng-src="" />
+        </div>
+    </div>
+
+    <div class="account-info-row">
+        <span class="account-info-row">Username</span>
+        <div class="account-info">
+            <input type=text ng-model="user.username" ng-disabled="!isBeingEdited" />
+        </div>
+    </div>
+
+    <div class="account-info-row">
+        <span class="account-info-row">email</span>
+        <div class="account-info">
+            <input type=email ng-model="user.email" ng-disabled="!isBeingEdited" />
+        </div>
+    </div>
+
+    <div class="account-info-row">
+        <span class="account-info-row">Password</span>
+        <div class="account-info">
+            <input type=password ng-model="user.password" ng-disabled="!isBeingEdited" />
+        </div>
+    </div>
+
+    <div>
+        <button ng-click="editAccount()" ng-if="!isBeingEdited">Edit</button>
+        <button ng-click="saveChanges()" ng-if="isBeingEdited">Save changes</button>
+    </div>
+
+</div>

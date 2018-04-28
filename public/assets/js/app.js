@@ -14,6 +14,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'assets/js/videos/upload.htm',
             controller: 'UploadController'
         })
+        .when('/account', {
+            templateUrl: 'assets/js/account/account.htm',
+            controller: 'AccountController'
+        })
         .when('/:videoID', {
             templateUrl: 'assets/js/videos/selectedVideo.htm',
             controller: 'CurrentVideoController'
