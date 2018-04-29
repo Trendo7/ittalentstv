@@ -4,50 +4,55 @@
     <div ng-repeat="video in myVideos">
         <div class="row mb-3 ">
             <div class="col-lg-3 col-md-4 my-auto" ng-click="openLink(video)">
-            <img class="img-fluid  img-vid"  ng-src="{{video.thumbnailUrl}}"  alt=""></a>
+                <img class="img-fluid  img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
+            </div>
+            <div ng-click="openLink(video)" class="col-lg-7 col-md-6 my-auto">
+                <h5>{{video.title}}</h5>
+                <!--   <h6 class="text-muted">{{video.uploadedBy}}</h6> -->
+                <p class="text-muted">{{video.viewCount}}</p>
+            </div>
+            <div class="my-auto col-lg-2 col-md-2">
+                <i ng-click="deleteVideo(video)" class="fas fa-trash cl-lg-12 mr-4"></i>
+                <i class="fas fa-pen-square" ng-click="editVideo(video)" data-toggle="modal"
+                   data-target="#editModal"></i>
+            </div>
         </div>
-        <div ng-click="openLink(video)" class="col-lg-7 col-md-6 my-auto">
-            <h5 >{{video.title}}</h5>
-            <!--   <h6 class="text-muted">{{video.uploadedBy}}</h6> -->
-            <p class="text-muted">{{video.viewCount}}</p>
-        </div>
-        <div class="my-auto col-lg-2 col-md-2">
-            <i ng-click="deleteVideo(video)" class="fas fa-trash cl-lg-12 mr-4"></i>
-            <i class="fas fa-pen-square" ng-click="editVideo(video)" data-toggle="modal" data-target="#editModal"></i>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header p-2 ">
+                    <h5 class="modal-title ml-3" id="exampleModalLabel">Edit Video</h5>
+                    <button type="button" class="close mr-2" data-dismiss="modal" aria-label="Close">
+                        <span id="close-edit-modal" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group mb-1">
+                            <label for="title-edit" class="col-form-label">Title:</label>
+                            <input ng-model="editedVideo.title" type="text" class="form-control" id="title-edit"/>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="description-edit" class="col-form-label">Description:</label>
+                            <textarea ng-model="editedVideo.description" class="form-control"
+                                      id="description-edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tags-edit" class="col-form-label">Tags:</label>
+                            <br>
+                            <input ng-model="editedVideo.tags" class="form-control" id="tags-edit"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="saveChanges(editedVideo)" type="button" id="save"
+                            class="btn save-btn btn-primary">Save
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-    
-</div>
-<!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog"  role="document">
-        <div class="modal-content">
-            <div class="modal-header p-2 ">
-                <h5 class="modal-title ml-3" id="exampleModalLabel">Edit Video</h5>
-                <button type="button" class="close mr-2" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group mb-1">
-                        <label for="title-edit" class="col-form-label">Title:</label>
-                        <input type="text" class="form-control" id="title-edit">
-                    </div>
-                    <div class="form-group mb-1">
-                        <label for="description-edit" class="col-form-label">Description:</label>
-                        <textarea class="form-control" id="description-edit"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="tags-edit" class="col-form-label">Tags:</label>
-                        <br>
-                        <input class="form-control" id="tags-edit"></input>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="save" class="btn save-btn btn-primary">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
