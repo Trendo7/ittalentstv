@@ -21,22 +21,17 @@ app.service('MyVideosService', function ($http) {
                 .catch(err => reject(err));
         });
     };
-    //
-    //
-    // //updates selected video
-    // this.updateVideo = function (id) {
-    //     return new Promise(function (resolve, reject) {
-    //         $http.put('http://localhost:3000/myVideos/' + id)
-    //             .then(function (response) {
-    //                 var updatedVideo = response;
-    //                 if (!!updatedVideo) {
-    //                     resolve(updatedVideo);
-    //                 } else {
-    //                     throw new Error('There is no such ID');
-    //                 }
-    //             })
-    //             .catch(err => reject(err));
-    //     });
-    // };
+
+
+    //updates selected video
+    this.updateVideo = function (video) {
+        return new Promise(function (resolve, reject) {
+            $http.put('http://localhost:3000/myVideos/' + video._id, video)
+                .then(function (response) {
+                    resolve(response);
+                })
+                .catch(err => reject(err));
+        });
+    };
 
 });

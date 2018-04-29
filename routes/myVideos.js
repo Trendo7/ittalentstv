@@ -22,13 +22,12 @@ router.get('/', function (req, res, next) {
 //Update my video
 router.put('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
-    var videoToUpdated = req.body;
-    console.log(videoToUpdated);
-    var videoToUpdatedID = req.params.id;
+    var videoToUpdate = req.body;
+    var videoToUpdateID = req.params.id;
     var user = req.session.user;
 
     var isMyVideo = user.uploadedVideos.find(function (videoId) {
-        return videoId === videoToUpdatedID;
+        return videoId === videoToUpdateID;
     });
 
     if (!isMyVideo) {
@@ -37,8 +36,7 @@ router.put('/:id', function (req, res, next) {
         return;
     }
 
-    //*****************   add video to update in {}      ************
-    videosCollection.update({_id: videoToUpdatedID}, {}, function (err, docs) {
+    videosCollection.update({_id: videoToUpdateID}, {$set: videoToUpdate}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
