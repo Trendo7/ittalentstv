@@ -79,9 +79,7 @@ router.post('/', function (req, res, next) {
         usersCollection.update({_id: user._id}, user, function (err, docs) {
             if (!err) {
                 res.status(200);
-                res.json({
-                    message: 'Video has been uploaded and user uploadedVideo collection has been updated successfully!'
-                });
+                res.json(videoId);
             } else {
                 res.status(500);
                 res.json({err: err});

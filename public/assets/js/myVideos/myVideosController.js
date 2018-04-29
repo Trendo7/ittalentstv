@@ -21,16 +21,15 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
     };
 
 
-    $scope.openLink = function(video){
+    $scope.openLink = function (video) {
         $location.path(video._id);
     };
 
-    $scope.editVideo = function (video){
-        angular.element('#title-edit').val(video.title)
-        angular.element('#description-edit').val(video.description)
-        angular.element('#tags-edit').val(video.tags)
+    $scope.editVideo = function (video) {
+        angular.element('#title-edit').val(video.title);
+        angular.element('#description-edit').val(video.description);
+        angular.element('#tags-edit').val(video.tags);
     }
 
-    
 
 });
