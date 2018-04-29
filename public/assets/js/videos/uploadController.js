@@ -8,6 +8,7 @@ if (!$scope.logged) {
 
 const STATUS_OK = 200;
 const STATUS_ERR = 400;
+const MAX_FILE_SIZE = 5e+6;
 
 	$scope.video = {
 		title: '',
@@ -44,7 +45,10 @@ fileButton.addEventListener('change', function(e) {
 	//get file
 	var file = e.target.files[0];
 	//create storage ref
-	
+	if (file.size > MAX_FILE_SIZE) {
+		alert('MAX FILE SIZE IS 5MB! THIS IS ONLY ALERT!')
+		
+	}
 	//upload file
 	var metadata = {
 		contentType: 'video/mp4',
