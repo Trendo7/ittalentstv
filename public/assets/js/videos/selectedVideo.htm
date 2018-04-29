@@ -1,15 +1,16 @@
 <div class="row">
 
-	<div class="col-lg-8 col-md-12 col-12 embed-responsive embed-responsive-16by9" >
+	<div class="col-lg-8 col-md-12 col-12 embed-responsive embed-responsive-16by9 videoDisplay" >
 	<video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" poster="{{currentVideo.thumbnailUrl}}" controls controlsList="nodownload"></video>
 	</div>
 
 <div class="side-clips col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto mt-md-1">
-
+	<h6 class="mb-0">Recomended videos</h6>
+    <hr/>
 	<div ng-click="openLink(video)" ng-repeat="video in videos | limitTo:9">
-	<div class="row side-clip mb-1 ">
+	<div class="row side-clip mb-3 ">
 		<div class="col-lg-5 my-auto">
-		 <img class="img-fluid"  ng-src="{{video.thumbnailUrl}}"  alt=""></a>
+		 <img class="img-fluid img-vid"  ng-src="{{video.thumbnailUrl}}"  alt=""></a>
 		 </div>
 		 <div class="clip my-auto col-lg-6 p-1">
             <h6 class="side-clip-title">{{video.title}}</h6>
@@ -25,7 +26,8 @@
 
 	<div class="col-xl-8 col-lg-8 col-md-12 col-12 " style="word-break: break-word; ">
 		
-			<h3 class="video-title">&nbsp;&nbsp;{{currentVideo.title}}</h3>
+			<h3 class="video-title mt-3">&nbsp;&nbsp;{{currentVideo.title}}</h3>
+			<hr/>
 			<h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy}}</h6>
 
 			<h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
