@@ -16,15 +16,27 @@ app.service('MyVideosService', function ($http) {
         return new Promise(function (resolve, reject) {
             $http.delete('http://localhost:3000/myVideos/' + id)
                 .then(function (response) {
-                    var deletedVideo = response;
-                    if (!!deletedVideo) {
-                        resolve(deletedVideo);
-                    } else {
-                        throw new Error('There is no such ID');
-                    }
+                    resolve(response);
                 })
                 .catch(err => reject(err));
         });
     };
+    //
+    //
+    // //updates selected video
+    // this.updateVideo = function (id) {
+    //     return new Promise(function (resolve, reject) {
+    //         $http.put('http://localhost:3000/myVideos/' + id)
+    //             .then(function (response) {
+    //                 var updatedVideo = response;
+    //                 if (!!updatedVideo) {
+    //                     resolve(updatedVideo);
+    //                 } else {
+    //                     throw new Error('There is no such ID');
+    //                 }
+    //             })
+    //             .catch(err => reject(err));
+    //     });
+    // };
 
 });

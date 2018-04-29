@@ -19,6 +19,38 @@ router.get('/', function (req, res, next) {
 });
 
 
+//Update my video
+router.put('/:id', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var videoToUpdated = req.body;
+    console.log(videoToUpdated);
+    var videoToUpdatedID = req.params.id;
+    var user = req.session.user;
+
+    var isMyVideo = user.uploadedVideos.find(function (videoId) {
+        return videoId === videoToUpdatedID;
+    });
+
+    if (!isMyVideo) {
+        res.status(401);
+        res.json({err: "You are not authorized to edit the selected video!"});
+        return;
+    }
+
+    //*****************   add video to update in {}      ************
+    videosCollection.update({_id: videoToUpdatedID}, {}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json({message: "The video has been updated successfully."});
+        }
+    });
+
+});
+
+
 //Delete my video
 router.delete('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
@@ -32,10 +64,9 @@ router.delete('/:id', function (req, res, next) {
 
     if (!isMyVideo) {
         res.status(401);
-        res.json({err: "There is no such video in your upload list"});
+        res.json({err: "You are not authorized to delete the selected video!"});
         return;
     }
-
 
     videosCollection.remove({_id: videoToDeleteID}, {}, function (err, docs) {
         if (err) {
