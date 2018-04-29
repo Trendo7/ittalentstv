@@ -209,6 +209,10 @@ textarea {
 	border-radius: 4px;
 }
 
+.modal-body {
+	background-color: rgb(250, 250, 250);
+}
+
 .save-btn {
 	border: none;
 	background: rgb(75, 180, 232);
