@@ -34,21 +34,6 @@ textarea {
 	text-overflow: ellipsis;
 }
 
-.fas {
-	font-size: 1.5em; 
-	color: #999999;
-}
-
-.fa-trash:hover {
-	color: #CC0000;
-	cursor: pointer;
-}
-
-.fa-pen-square:hover {
-	color: #339933;
-	cursor: pointer;
-}
-
 
 #upload {
 	outline: 0;
@@ -204,6 +189,35 @@ textarea {
 
 #upload-txt {
 	display: none;
+}
+
+.modal-content {
+	border: none; 
+	border-radius: 4px;
+}
+
+.save-btn {
+	border: none;
+	background: rgb(75, 180, 232);
+}
+
+.save-btn:hover {
+	background: rgb(75, 180, 232);
+}
+
+.fas {
+	font-size: 1.5em; 
+	color: #999999;
+}
+
+.fa-trash:hover {
+	color: #CC0000;
+	cursor: pointer;
+}
+
+.fa-pen-square:hover {
+	color: #339933;
+	cursor: pointer;
 }
 
 @media only screen and (max-width:1200px) {
