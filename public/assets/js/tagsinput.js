@@ -23,7 +23,7 @@
     freeInput: true,
     addOnBlur: true,
     maxTags: 5,
-    maxChars: undefined,
+    maxChars: 20,
     confirmKeys: [13, 44],
     delimiter: ',',
     delimiterRegex: null,
@@ -31,7 +31,7 @@
     onTagExists: function(item, $tag) {
       // $tag.hide().fadeIn();
     },
-    trimValue: false,
+    trimValue: true,
     allowDuplicates: false,
     triggerChange: true
   };
