@@ -56,8 +56,8 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
                     .then(function (videos) {
                         $scope.$apply(function () {
                             $scope.myVideos = videos;
-                            angular.element('#close-edit-modal').triggerHandler('click');
-                            // $scope.editedVideo = {};
+                            angular.element('#close-edit-modal').trigger('click');
+                            $scope.editedVideo = {};
                         });
                     })
                     .catch(err => alert(err.data.err));
