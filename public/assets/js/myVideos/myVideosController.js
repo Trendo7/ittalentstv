@@ -35,6 +35,8 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
         angular.element('#title-edit').val(video.title);
         angular.element('#description-edit').val(video.description);
         angular.element('#tags-edit').val(video.tags.toString());
+        angular.element('#tags-edit').tagsinput('refresh');
+
 
         angular.element('#save').on('click', function () {
             video.title = angular.element('#title-edit').val();
