@@ -30,12 +30,8 @@ app.service('VideosService', function ($http) {
         return new Promise(function (resolve, reject) {
             $http.get('http://localhost:3000/videos/' + id)
                 .then(function (response) {
-                    var currentVideo = response.data.find(video => video._id == id);
-                    if (!!currentVideo) {
-                        resolve(currentVideo);
-                    } else {
-                        throw new Error('There is no such ID');
-                    }
+                    var currentVideo = response.data[0];
+                    resolve(currentVideo);
                 })
                 .catch(err => reject(err));
         });

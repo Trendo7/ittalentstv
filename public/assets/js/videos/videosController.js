@@ -26,8 +26,10 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
                     $scope.$apply(function () {
                         $scope.currentVideo = currentVideo;
                     });
-                });
-            });
+                })
+                //must redirect to not found page
+                .catch(err => console.log(err));
+        });
 
 
     VideosService.getVideos().then(function (videos) {

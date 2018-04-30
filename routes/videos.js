@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const MONGO_ID_LENGTH = 24;
 
 //Get all videos
 router.get('/', function (req, res, next) {
@@ -22,18 +23,29 @@ router.get('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var videoToGetID = req.params.id;
 
+    if (videoToGetID.trim().length != MONGO_ID_LENGTH) {
+        res.status(404);
+        res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
+        return;
+    }
+
     videosCollection.find({_id: videoToGetID}, {}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
         } else {
-            res.status(200);
-            res.json(docs);
+            if (docs.length === 0) {
+                res.status(404);
+                res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
+            } else {
+                res.status(200);
+                res.json(docs);
+            }
         }
     });
 });
 
-//needs improments
+//needs improvements
 //Update view count of watched video
 router.put('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
@@ -58,10 +70,13 @@ router.delete('/:id', function (req, res, next) {
     var videoToDeleteID = req.params.id;
 
     videosCollection.remove({_id: videoToDeleteID}, {}, function (err, docs) {
-        // console.log(docs);
-        // console.log(err);
-        res.status(200);
-        res.json({message: "success"});
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json({message: "success"});
+        }
     });
 
 });
@@ -71,8 +86,6 @@ router.post('/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var newVideo = req.body;
     newVideo.uploadedBy = req.session.user.username;
-    console.log(req.session.user);
-    console.log(1);
     newVideo.comments = [];
     newVideo.viewCount = 0;
     newVideo.likeCount = 0;
