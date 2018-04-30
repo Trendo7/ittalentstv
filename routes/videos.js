@@ -28,7 +28,7 @@ router.get('/:id', function (req, res, next) {
         res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
         return;
     }
-
+    
     videosCollection.findOneAndUpdate({_id: videoToGetID}, {$inc: {viewCount: 1}}, function (err, docs) {
         if (err) {
             res.status(500);

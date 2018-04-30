@@ -37,7 +37,7 @@ textarea {
 label {
 	overflow: hidden;
 	white-space: nowrap; 
-	text-overflow: ellipsis;
+	text-overflow: ellip§
 }
 
 .editAccBtn {
@@ -263,19 +263,35 @@ label {
 }
 
 .selected-video-tag:hover {
-	color: dodgerblue;
+
 	font-weight: bold;
-	cursor: pointer;
+
 }
 
 .selected-video-tag {
-	text-decoration: underline;
+	margin-right: 2px;
+  color: white;
+  background-color:rgb(75, 180, 232);
+  padding:3px 8px;
+  border-radius:6px;
+  font-size: 14px;
+  cursor: pointer;
 }
+
+#like-button {
+		font-size: 25px;
+}
+
+#dislike-button {
+		font-size: 25px;
+}
+
 
 #like-button:hover {
 	color: #339933;
 	font-weight: bold;
 	cursor: pointer;
+
 }
 
 #dislike-button:hover {

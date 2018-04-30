@@ -25,18 +25,27 @@
     </div>
 
 
-    <div class="col-xl-8 col-lg-8 col-md-12 col-12 " style="word-break: break-word; ">
+    <div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 " style="word-break: break-word;" >
+        <div class="row ">
+        <div class="col-lg-6 mt-3">
+        <h3 class="video-title">{{currentVideo.title}}</h3>
+        <p class="text-muted">{{currentVideo.viewCount}} views</p>
+        </div>
 
-        <h3 class="video-title mt-3">&nbsp;&nbsp;{{currentVideo.title}}</h3>
-        <p class="text-muted ml-3">{{currentVideo.viewCount}} views</p>
-        <p class="text-muted ml-3"><button id="like-button">Like</button>{{currentVideo.likeCount}} likes</p>
-        <p class="text-muted ml-3"><button id="dislike-button">Dislike</button>{{currentVideo.dislikeCount}} dislikes</p>
+        <div class="col-lg-6 my-auto">
+        <span class="text-muted mt-1 float-right "><i class="far fa-thumbs-down " id="dislike-button"></i>&nbsp;{{currentVideo.dislikeCount}}</span>
+        <span class="text-muted mr-3 float-right"><i class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likeCount}}</span>
+
+        </div>
+       </div>
         <hr/>
+        
         <h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy}}</h6>
 
         <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
 
-        <h6><i><strong>Tags: </strong></i><span ng-repeat="tag in currentVideo.tags">&nbsp; <span class="selected-video-tag">{{tag}}</span> &nbsp;</span></h6>
+        <h6><i><strong>Tags: &nbsp;</strong></i><span ng-repeat="tag in currentVideo.tags"><span class="selected-video-tag">{{tag}}</span> &nbsp;</span></h6>
+
 
     </div>
 

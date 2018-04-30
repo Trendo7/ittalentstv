@@ -50,7 +50,7 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
             .then(function (response) {
                 if (response.status == OK) {
                     console.log('OK')
-                    angular.element('#back').triggerHandler('click');
+                    angular.element('#back').trigger('click');
                     // $window.location.href = "/signin"
                 } else {
                     console.log('SHIT!')
