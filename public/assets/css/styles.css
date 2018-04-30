@@ -15,6 +15,10 @@ textarea {
 	height: 170px;
 }
 
+canvas {
+	display: none;
+}
+
 .side-clips {
 	height: 430px;
 	overflow-y: scroll;
