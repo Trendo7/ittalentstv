@@ -28,8 +28,70 @@ router.get('/:id', function (req, res, next) {
         res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
         return;
     }
-    
+
     videosCollection.findOneAndUpdate({_id: videoToGetID}, {$inc: {viewCount: 1}}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            if (docs === null) {
+                res.status(404);
+                res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
+            } else {
+                res.status(200);
+                res.json(docs);
+            }
+        }
+    });
+});
+
+
+//Update video rate
+router.put('/:id', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var videoToUpdateID = req.params.id;
+    var vote = req.body;
+    var user = req.session.user;
+
+    if (!user) {
+        res.status(401);
+        res.json({err: "Please login to rate this video!"});
+        return;
+    }
+
+    var isMyVideo = !!user.uploadedVideos.find(v => v === videoToUpdateID);
+    if (isMyVideo) {
+        res.status(403);
+        res.json({err: "You can not rate this video as you are the uploader!"});
+        return;
+    }
+
+    var isLikedByMe = !!user.likedVideos.find(videoId => videoId === videoToUpdateID);
+    var isDislikedByMe = !!user.dislikedVideos.find(videoId => videoId === videoToUpdateID);
+
+    var likeC = 0;
+    var dislikeC = 0;
+    if (vote) {
+        if (isLikedByMe) {
+            likeC = -1;
+        } else {
+            if (isDislikedByMe) {
+                dislikeC = -1;
+            }
+            likeC = 1;
+        }
+    } else {
+        if (isDislikedByMe) {
+            dislikeC = -1;
+        } else {
+            if (isLikedByMe) {
+                likeC = -1;
+            }
+            dislikeC = 1;
+        }
+    }
+
+    videosCollection.findOneAndUpdate({_id: videoToUpdateID}, {$inc: {likeCount: likeC, dislikeCount: dislikeC}}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
@@ -73,7 +135,6 @@ router.post('/', function (req, res, next) {
     newVideo.viewCount = 0;
     newVideo.likeCount = 0;
     newVideo.dislikeCount = 0;
-
 
     videosCollection.insert(newVideo, function (err, data) {
         if (!err) {
