@@ -262,6 +262,28 @@ label {
 	cursor: pointer;
 }
 
+.selected-video-tag:hover {
+	color: dodgerblue;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.selected-video-tag {
+	text-decoration: underline;
+}
+
+#like-button:hover {
+	color: #339933;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#dislike-button:hover {
+	color: #CC0000;
+	font-weight: bold;
+	cursor: pointer;
+}
+
 @media only screen and (max-width:1200px) {
 	.side-clips {
 		display: none;
@@ -318,4 +340,3 @@ label {
 
 }
 
-}
