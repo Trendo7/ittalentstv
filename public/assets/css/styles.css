@@ -34,6 +34,30 @@ textarea {
 	text-overflow: ellipsis;
 }
 
+label {
+	overflow: hidden;
+	white-space: nowrap; 
+	text-overflow: ellipsis;
+}
+
+.editAccBtn {
+	outline: 0;
+	background: rgb(75, 180, 232);
+	width: 30%;
+	border: 0;
+	padding: 10px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	color: #FFFFFF;
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 300;
+	transition: all 0.3 ease;
+	cursor: pointer;
+}
+
 
 #upload {
 	outline: 0;
@@ -215,6 +239,7 @@ textarea {
 
 .save-btn {
 	border: none;
+	letter-spacing: 1px;
 	background: rgb(75, 180, 232);
 }
 

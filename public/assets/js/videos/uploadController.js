@@ -44,6 +44,13 @@ fileButton.addEventListener('change', function(e) {
 	 
 	//get file
 	var file = e.target.files[0];
+
+    //get the file name
+    var fileName = angular.element(this).val().slice(12);
+
+    //replace the "Choose a file" label
+    angular.element(this).next('.custom-file-label').html(fileName);
+            
 	//create storage ref
 	if (file.size > MAX_FILE_SIZE) {
 		alert('MAX FILE SIZE IS 5MB! THIS IS ONLY ALERT!')

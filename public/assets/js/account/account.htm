@@ -1,43 +1,43 @@
-<div class="col-lg-10 mx-md-auto mt-md-3">
+<div class="col-lg-10 mx-md-auto">
     <h5>Your profile</h5>
     <hr/>
-
-    <div class="account-info-row">
-        <span class="account-info-row">Profile picture</span>
-        <div class="account-info">
-            <img ng-src=""/>
-        </div>
+    <div class="row">
+        <div class="col-6">
+            <form>
+            <div class="form-group col-10 ">
+                <label for="editUsername">Username:</label>
+                <input type="text" class="form-control" id="editUsername" ng-model="user.username" ng-disabled="!isBeingEdited" placeholder="Username"/>
+            </div>
+            <div class="form-group col-10">
+                <label for="editEmail">Email:</label>
+                <input type="email" class="form-control" id="editEmail" ng-model="user.email" ng-disabled="!isBeingEdited" placeholder="Email"/>
+            </div>
+            <div class="form-group col-10">
+                <label for="editPassword">Password:</label>
+                <input type="password" class="form-control was-validated" id="editPassword" ng-model="user.password" ng-disabled="!isBeingEdited" placeholder="Password"/>
+            </div>
+        </form>     
     </div>
-
-    <div class="account-info-row">
-        <span class="account-info-row">Username</span>
-        <div class="account-info">
-            <input type=text ng-model="user.username" ng-disabled="!isBeingEdited"/>
-        </div>
+        <div class="col-6">
+            <div class="col-12">
+                <label for="editPhoto">Profile picture:</label>
+            <div class="custom-file" id="customFile" lang="en">
+                    <input type="file" class="custom-file-input  col-lg-6 col-md-7 col-10 ml-5 mt-3" id="editPhoto" ng-model="user.photoUrl" ng-disabled="!isBeingEdited" accept="image/*">
+                    <label class="custom-file-label" id="fileName" for="editPhoto">
+                        Select file...
+                    </label>
+                </div>
+            <img class="col-lg-6 col-md-7 col-10 ml-5 mt-2" src="https://www.headstart.co.il/images/userspics/636396859410665564.jpg" alt="" />
+            </div>
+         </div>
+     </div>
+    <div class="row mt-3">
+        <button ng-click="editAccount()" class=" editAccBtn text-white  mx-auto" ng-if="!isBeingEdited">edit</button>
+        <button ng-click="saveChanges()" class=" editAccBtn text-white  mx-auto" ng-if="isBeingEdited">save</button>
     </div>
-
-    <div class="account-info-row">
-        <span class="account-info-row">email</span>
-        <div class="account-info">
-            <input type=email ng-model="user.email" ng-disabled="!isBeingEdited"/>
-        </div>
+    <div class="row">
+        <small id="passHelp" class="form-text account-error-message text-danger mx-auto mt-3" ng-if="isBeingEdited" ng-if="errorMessage">{{errorMessage}}</small>
+        <small id="emailHelp" class="form-text account-success-message text-success mx-auto mt-3" ng-if="successMessage">{{successMessage}}</small>
     </div>
-
-    <div class="account-info-row">
-        <span class="account-info-row">Password</span>
-        <div class="account-info">
-            <input type=password ng-model="user.password" ng-disabled="!isBeingEdited"/>
-        </div>
-    </div>
-
-    <div>
-        <button ng-click="editAccount()" ng-if="!isBeingEdited">Edit</button>
-        <button ng-click="saveChanges()" ng-if="isBeingEdited">Save changes</button>
-    </div>
-
-    <div class="message">
-        <p class="account-success-message" ng-if="successMessage">{{successMessage}}</p>
-        <p class="account-error-message"  ng-if="errorMessage">{{errorMessage}}</p>
-    </div>
-
+    
 </div>
