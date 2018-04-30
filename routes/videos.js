@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
 });
 
 
-//Get single video
+//Get selected video (by its ID) and increment the viewCount
 router.get('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var videoToGetID = req.params.id;
@@ -29,12 +29,12 @@ router.get('/:id', function (req, res, next) {
         return;
     }
 
-    videosCollection.find({_id: videoToGetID}, {}, function (err, docs) {
+    videosCollection.findOneAndUpdate({_id: videoToGetID}, {$inc: {viewCount: 1}}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
         } else {
-            if (docs.length === 0) {
+            if (docs === null) {
                 res.status(404);
                 res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
             } else {
@@ -43,24 +43,6 @@ router.get('/:id', function (req, res, next) {
             }
         }
     });
-});
-
-//needs improvements
-//Update view count of watched video
-router.put('/:id', function (req, res, next) {
-    var videosCollection = req.db.get('videos');
-    var videoToUpdateID = req.params.id;
-
-    videosCollection.update({_id: videoToUpdateID}, {$inc: {viewCount: 1}}, function (err, docs) {
-        if (err) {
-            res.status(500);
-            res.json(err);
-        } else {
-            res.status(200);
-            res.json({message: "The video has been updated successfully."});
-        }
-    });
-
 });
 
 
@@ -80,6 +62,7 @@ router.delete('/:id', function (req, res, next) {
     });
 
 });
+
 
 //Add  video
 router.post('/', function (req, res, next) {

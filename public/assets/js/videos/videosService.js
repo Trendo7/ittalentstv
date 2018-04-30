@@ -30,23 +30,23 @@ app.service('VideosService', function ($http) {
         return new Promise(function (resolve, reject) {
             $http.get('http://localhost:3000/videos/' + id)
                 .then(function (response) {
-                    var currentVideo = response.data[0];
+                    var currentVideo = response.data;
                     resolve(currentVideo);
                 })
                 .catch(err => reject(err));
         });
     };
 
-    //needs improvement
-    //Update view count of watched video
-    this.updateViewCount = function (id) {
-        return new Promise(function (resolve, reject) {
-            $http.put('http://localhost:3000/videos/' + id)
-                .then(function (response) {
-                    resolve(response);
-                })
-                .catch(err => reject(err));
-        });
-    };
+    // //needs improvement
+    // //Update view count of watched video
+    // this.updateViewCount = function (id) {
+    //     return new Promise(function (resolve, reject) {
+    //         $http.put('http://localhost:3000/videos/' + id)
+    //             .then(function (response) {
+    //                 resolve(response);
+    //             })
+    //             .catch(err => reject(err));
+    //     });
+    // };
 
 });
