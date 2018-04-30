@@ -47,7 +47,7 @@ router.get('/:id', function (req, res, next) {
 
 
 //Update video rate
-router.put('/:id', function (req, res, next) {
+router.put('/rate/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var usersCollection = req.db.get('users');
     var videoToUpdateID = req.params.id;
@@ -70,41 +70,50 @@ router.put('/:id', function (req, res, next) {
     var isLikedByMe = !!user.likedVideos.find(videoId => videoId === videoToUpdateID);
     var isDislikedByMe = !!user.dislikedVideos.find(videoId => videoId === videoToUpdateID);
 
+    var userID = user._id;
     var likeC = 0;
     var dislikeC = 0;
+    var videoOptions = {};
     var userOptions = {};
     if (vote) {
         if (isLikedByMe) {
             likeC = -1;
+            videoOptions = {$pull: {likedByUserIDs: user._id}};
             userOptions = {$pull: {likedVideos: videoToUpdateID}};
         } else {
             if (isDislikedByMe) {
                 dislikeC = -1;
                 likeC = 1;
+                videoOptions = {$pull: {dislikedByUserIDs: userID}, $push: {likedByUserIDs: userID}};
                 userOptions = {$pull: {dislikedVideos: videoToUpdateID}, $push: {likedVideos: videoToUpdateID}};
             } else {
                 likeC = 1;
+                videoOptions = {$push: {likedByUserIDs: userID}};
                 userOptions = {$push: {likedVideos: videoToUpdateID}};
             }
         }
     } else {
         if (isDislikedByMe) {
             dislikeC = -1;
+            videoOptions = {$pull: {dislikedByUserIDs: userID}};
             userOptions = {$pull: {dislikedVideos: videoToUpdateID}};
         } else {
             if (isLikedByMe) {
                 likeC = -1;
                 dislikeC = 1;
+                videoOptions = {$pull: {likedByUserIDs: userID}, $push: {dislikedByUserIDs: userID}};
                 userOptions = {$pull: {likedVideos: videoToUpdateID}, $push: {dislikedVideos: videoToUpdateID}};
             } else {
                 dislikeC = 1;
+                videoOptions = {$push: {dislikedByUserIDs: userID}};
                 userOptions = {$push: {dislikedVideos: videoToUpdateID}};
             }
         }
     }
-
-    videosCollection.findOneAndUpdate({_id: videoToUpdateID}, {$inc: {likeCount: likeC, dislikeCount: dislikeC}}, function (err, docs) {
+    //before setting videoOptions we used this argument ->>> {$inc: {likeCount: likeC, dislikeCount: dislikeC}}
+    videosCollection.findOneAndUpdate({_id: videoToUpdateID}, videoOptions, function (err, docs) {
         if (err) {
+            console.log(9090909090);
             res.status(500);
             res.json(err);
         } else {
@@ -112,12 +121,11 @@ router.put('/:id', function (req, res, next) {
                 res.status(404);
                 res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
             } else {
-                usersCollection.findOneAndUpdate({_id: user._id}, userOptions, function (errU, docsU) {
+                usersCollection.findOneAndUpdate({_id: userID}, userOptions, function (errU, docsU) {
                     if (errU) {
                         res.status(500);
                         res.json(err);
                     } else {
-                        // console.log(docsU);
                         req.session.user = docsU;
                         res.status(200);
                         res.json(docs);
@@ -156,6 +164,9 @@ router.post('/', function (req, res, next) {
     newVideo.viewCount = 0;
     newVideo.likeCount = 0;
     newVideo.dislikeCount = 0;
+    newVideo.likedByUserIDs = [];
+    newVideo.dislikedByUserIDs = [];
+
 
     videosCollection.insert(newVideo, function (err, data) {
         if (!err) {

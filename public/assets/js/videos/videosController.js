@@ -39,13 +39,13 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
     });
 
 
-    //update video rate count of watched video
-    $scope.updateRateCount = function (vote) {
-        VideosService.updateRateCount($scope.videoID, {vote: vote})
+    //update video rate (like/dislike) of watched video
+    $scope.updateVideoRate = function (vote) {
+        VideosService.updateVideoRate($scope.videoID, {vote: vote})
             .then(function (response){
                 $scope.$apply(function () {
-                    $scope.currentVideo.likeCount = response.data.likeCount;
-                    $scope.currentVideo.dislikeCount = response.data.dislikeCount;
+                    $scope.currentVideo.likedByUserIDs = response.data.likedByUserIDs;
+                    $scope.currentVideo.dislikedByUserIDs = response.data.dislikedByUserIDs;
                 });
             });
     };
