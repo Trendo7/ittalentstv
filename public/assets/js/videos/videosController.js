@@ -16,12 +16,18 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
 
 app.controller('CurrentVideoController', function ($scope, $location, VideosService) {
     var videoID = $location.path().substring(1);
-    VideosService.loadVideo(videoID)
-        .then(function (currentVideo) {
-            $scope.$apply(function () {
-                $scope.currentVideo = currentVideo;
+
+
+    //needs improvement
+    VideosService.updateViewCount(videoID)
+        .then(function () {
+            VideosService.loadVideo(videoID)
+                .then(function (currentVideo) {
+                    $scope.$apply(function () {
+                        $scope.currentVideo = currentVideo;
+                    });
+                });
             });
-        });
 
 
     VideosService.getVideos().then(function (videos) {

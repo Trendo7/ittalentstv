@@ -33,6 +33,24 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+//needs improments
+//Update view count of watched video
+router.put('/:id', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var videoToUpdateID = req.params.id;
+
+    videosCollection.update({_id: videoToUpdateID}, {$inc: {viewCount: 1}}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json({message: "The video has been updated successfully."});
+        }
+    });
+
+});
+
 
 //Delete  video
 router.delete('/:id', function (req, res, next) {
