@@ -29,7 +29,7 @@
     delimiterRegex: null,
     cancelConfirmKeysOnEmpty: false,
     onTagExists: function(item, $tag) {
-      // $tag.hide().fadeIn();
+      $tag.hide().fadeIn();
     },
     trimValue: true,
     allowDuplicates: false,
