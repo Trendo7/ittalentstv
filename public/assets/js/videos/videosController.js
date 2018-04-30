@@ -15,13 +15,13 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
 });
 
 app.controller('CurrentVideoController', function ($scope, $location, VideosService) {
-    var videoID = $location.path().substring(1);
+    $scope.videoID = $location.path().substring(1);
     $scope.currentVideo = {};
     $scope.videos = [];
 
 
     //loads selected video
-    VideosService.loadVideo(videoID)
+    VideosService.loadVideo($scope.videoID)
         .then(function (currentVideo) {
             $scope.$apply(function () {
                 $scope.currentVideo = currentVideo;
@@ -37,6 +37,18 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
             $scope.videos = videos;
         });
     });
+
+
+    //update video rate count of watched video
+    $scope.updateRateCount = function (vote) {
+        VideosService.updateRateCount($scope.videoID, {vote: vote})
+            .then(function (response){
+                $scope.$apply(function () {
+                    $scope.currentVideo.likeCount = response.data.likeCount;
+                    $scope.currentVideo.dislikeCount = response.data.dislikeCount;
+                });
+            });
+    };
 
 
     $scope.openLink = function (video) {

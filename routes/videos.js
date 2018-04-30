@@ -49,8 +49,9 @@ router.get('/:id', function (req, res, next) {
 //Update video rate
 router.put('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
+    var usersCollection = req.db.get('users');
     var videoToUpdateID = req.params.id;
-    var vote = req.body;
+    var vote = req.body.vote;
     var user = req.session.user;
 
     if (!user) {
@@ -71,23 +72,34 @@ router.put('/:id', function (req, res, next) {
 
     var likeC = 0;
     var dislikeC = 0;
+    var userOptions = {};
     if (vote) {
         if (isLikedByMe) {
             likeC = -1;
+            userOptions = {$pull: {likedVideos: videoToUpdateID}};
         } else {
             if (isDislikedByMe) {
                 dislikeC = -1;
+                likeC = 1;
+                userOptions = {$pull: {dislikedVideos: videoToUpdateID}, $push: {likedVideos: videoToUpdateID}};
+            } else {
+                likeC = 1;
+                userOptions = {$push: {likedVideos: videoToUpdateID}};
             }
-            likeC = 1;
         }
     } else {
         if (isDislikedByMe) {
             dislikeC = -1;
+            userOptions = {$pull: {dislikedVideos: videoToUpdateID}};
         } else {
             if (isLikedByMe) {
                 likeC = -1;
+                dislikeC = 1;
+                userOptions = {$pull: {likedVideos: videoToUpdateID}, $push: {dislikedVideos: videoToUpdateID}};
+            } else {
+                dislikeC = 1;
+                userOptions = {$push: {dislikedVideos: videoToUpdateID}};
             }
-            dislikeC = 1;
         }
     }
 
@@ -100,8 +112,17 @@ router.put('/:id', function (req, res, next) {
                 res.status(404);
                 res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
             } else {
-                res.status(200);
-                res.json(docs);
+                usersCollection.findOneAndUpdate({_id: user._id}, userOptions, function (errU, docsU) {
+                    if (errU) {
+                        res.status(500);
+                        res.json(err);
+                    } else {
+                        // console.log(docsU);
+                        req.session.user = docsU;
+                        res.status(200);
+                        res.json(docs);
+                    }
+                });
             }
         }
     });

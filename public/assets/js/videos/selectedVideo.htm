@@ -33,8 +33,8 @@
         </div>
 
         <div class="col-lg-6 my-auto">
-        <span class="text-muted mt-1 float-right "><i class="far fa-thumbs-down " id="dislike-button"></i>&nbsp;{{currentVideo.dislikeCount}}</span>
-        <span class="text-muted mr-3 float-right"><i class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likeCount}}</span>
+        <span class="text-muted mt-1 float-right "><i ng-click="updateRateCount(false)" class="far fa-thumbs-down " id="dislike-button"></i>&nbsp;{{currentVideo.dislikeCount}}</span>
+        <span class="text-muted mr-3 float-right"><i ng-click="updateRateCount(true)" class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likeCount}}</span>
 
         </div>
        </div>
