@@ -349,14 +349,14 @@ option {
 
 @media only screen and (max-width:1050px) {
 	.search {
-		width: 18em;
+		width: 20em;
 	}
 
 }
 
 @media only screen and (max-width:792px) {
 	.search {
-		width: 16em;
+		width: 17em;
 	}
 
 }
