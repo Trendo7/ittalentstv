@@ -19,10 +19,10 @@
 	<div ng-repeat="video in myVideos">
 		<div class="row mb-3 " >
 			<div class="col-lg-3 col-md-4 my-auto" >
-			<img class="img-fluid  img-vid" ng-src="{{video.thumbnailUrl}}" ng-click="openLink(video)" alt=""></a>
+			<img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openLink(video)" alt=""></a>
 		</div>
 		<div  class="clip col-lg-6 col-md-6 my-auto" ng-click="openLink(video)">
-			<h5>{{video.title}}</h5>
+			<h5 class="mb-2">{{video.title}}</h5>
 			<h6 class="text-muted">{{video.uploadedBy}}</h6>
 			<p class="text-muted">{{video.viewCount}} views</p>
 		</div>
