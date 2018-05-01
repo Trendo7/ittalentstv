@@ -312,9 +312,31 @@ label {
 	background-color: rgb(75, 180, 232);
 }
 
+.fa-user-circle {
+	opacity: 0.7;
+}
+
+.fa-user-circle:hover {
+	opacity: 1;
+}
+
+
+.fa-upload {
+opacity: 0.7;
+
+	font-size: 21px;
+}
+
+.fa-upload:hover {
+	opacity: 1;
+}
 textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
 	outline: 0px !important;
 	-webkit-appearance: none;
+}
+
+option {
+	border: 1px solid red !important;
 }
 
 @media only screen and (max-width:1200px) {
@@ -350,6 +372,10 @@ textarea:hover, input:hover, textarea:active, input:active, textarea:focus, inpu
 
 	#upload-ico {
 		display: none;
+	}
+
+	.fa-upload {
+		font-size: 18px;
 	}
 
 	#upload-txt {
