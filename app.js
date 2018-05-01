@@ -18,6 +18,7 @@ const videosRouter = require('./routes/videos');
 const accountRouter = require('./routes/account');
 const resultsRouter = require('./routes/results');
 const myVideosRouter = require('./routes/myVideos');
+const searchOptionsRouter = require('./routes/searchOptions');
 
 const app = express();
 
@@ -62,6 +63,7 @@ app.use('/', indexRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
+app.use('/searchOptions', searchOptionsRouter);
 app.use('/videos', videosRouter);
 app.use('/account', accountRouter);
 app.use('/results', resultsRouter);

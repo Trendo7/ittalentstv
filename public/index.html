@@ -35,9 +35,12 @@
         <div class="navbar-collapse collapse" id="collapsingNavbar">
 
             <form class="mx-auto my-auto">
-                <div class="input-group align-content-center">
-                    <input class="search" placeholder="Search..." type="text">
+                <div class="input-group align-content-center" ng-controller="SearchOptionsController">
+                    <input list="searchOptions" name="searchOptions" class="search" placeholder="Search..." type="text" ng-model="searchStr">
                     <span class="input-group-append">
+                        <datalist id="searchOptions" ng-repeat="searchOption in searchOptions">
+                            <option value="{{searchOption}}"/>
+                        </datalist>
               <button class="btn btn-outline-secondary border border-left-0" type="button">
               <i class="fa fa-search"></i>
               </button>
@@ -54,7 +57,7 @@
                 <li id="upload-ico-li" class="nav-item my-auto mr-2" ng-if="logged">
                     <a href="#!/upload">
                         <img src="assets/img/upload-ico.png" id="upload-ico" alt="upload">
-                        <a id="upload-txt" class="nav-link mt-sm-1 mt-*-1 text-center" >UPLOAD</a>
+                        <a id="upload-txt" class="nav-link mt-sm-1 mt-*-1 text-center">UPLOAD</a>
                     </a>
                 </li>
                 <li class="nav-item my-auto" ng-if="logged">
@@ -83,6 +86,8 @@
 <script src="assets/js/app.js"></script>
 <script src="assets/js/tagsinput.js"></script>
 <script src="assets/js/mainController.js"></script>
+<script src="assets/js/searchOptions/searchOptionsService.js"></script>
+<script src="assets/js/searchOptions/searchOptionsController.js"></script>script>
 <script src="assets/js/videos/videosService.js"></script>
 <script src="assets/js/videos/videosController.js"></script>
 <script src="assets/js/videos/uploadController.js"></script>
