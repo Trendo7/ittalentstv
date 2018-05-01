@@ -38,8 +38,8 @@
                 <div class="input-group align-content-center" ng-controller="SearchOptionsController">
                     <input list="searchOptions" name="searchOptions" class="search" placeholder="Search..." type="text" ng-model="searchStr">
                     <span class="input-group-append">
-                        <datalist id="searchOptions" ng-repeat="searchOption in searchOptions track by $index">
-                            <option value="{{searchOption}}"/>
+                        <datalist id="searchOptions" >
+                            <option ng-repeat="searchOption in searchOptions track by $index" value="{{searchOption}}"/>
                         </datalist>
               <button class="btn btn-outline-secondary border border-left-0" type="button">
               <i class="fa fa-search"></i>
