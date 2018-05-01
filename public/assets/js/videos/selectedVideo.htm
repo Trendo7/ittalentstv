@@ -33,8 +33,8 @@
         </div>
 
         <div class="col-lg-6 my-auto">
-        <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)"  ng-class='isDislikedByMe ? "liked" : "disliked"' class=" far fa-thumbs-down" id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
-        <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)"  ng-class='isLikedByMe ? "liked" : "disliked"' class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
+        <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)"  ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
+        <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)"  ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
 
         </div>
         </div>
