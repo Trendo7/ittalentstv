@@ -291,11 +291,11 @@ label {
 	font-size: 25px;
 }
 
-.liked {
+.isVotedByUser {
 	opacity: 1;
 }
 
-.disliked {
+.isNotVotedByUser {
 	opacity: 0.4;
 }
 
