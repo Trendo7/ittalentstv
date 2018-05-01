@@ -38,7 +38,7 @@
                 <div class="input-group align-content-center" ng-controller="SearchOptionsController">
                     <input list="searchOptions" name="searchOptions" class="search" placeholder="Search..." type="text" ng-model="searchStr">
                     <span class="input-group-append">
-                        <datalist id="searchOptions" ng-repeat="searchOption in searchOptions">
+                        <datalist id="searchOptions" ng-repeat="searchOption in searchOptions track by $index">
                             <option value="{{searchOption}}"/>
                         </datalist>
               <button class="btn btn-outline-secondary border border-left-0" type="button">
@@ -87,7 +87,7 @@
 <script src="assets/js/tagsinput.js"></script>
 <script src="assets/js/mainController.js"></script>
 <script src="assets/js/searchOptions/searchOptionsService.js"></script>
-<script src="assets/js/searchOptions/searchOptionsController.js"></script>script>
+<script src="assets/js/searchOptions/searchOptionsController.js"></script>
 <script src="assets/js/videos/videosService.js"></script>
 <script src="assets/js/videos/videosController.js"></script>
 <script src="assets/js/videos/uploadController.js"></script>
