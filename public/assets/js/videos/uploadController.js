@@ -49,16 +49,15 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 
 	// Initialize Firebase
 	// Initialize Firebase
-	var config = {
-		apiKey: "AIzaSyAUHckBJlquo3NQzXQ88Trhs6P-gFo_4SM",
-		authDomain: "videotalentstv-2.firebaseapp.com",
-		databaseURL: "https://videotalentstv-2.firebaseio.com",
-		projectId: "videotalentstv-2",
-		storageBucket: "videotalentstv-2.appspot.com",
-		messagingSenderId: "165285487985"
-	};
-	
-	firebase.initializeApp(config);
+  var config = {
+    apiKey: "AIzaSyCIhpw08oRhdBRaSIma-2h96d_BRYQ0QMA",
+    authDomain: "videotalents-d652e.firebaseapp.com",
+    databaseURL: "https://videotalents-d652e.firebaseio.com",
+    projectId: "videotalents-d652e",
+    storageBucket: "videotalents-d652e.appspot.com",
+    messagingSenderId: "200617454566"
+  };
+  firebase.initializeApp(config);
 
 	var database = firebase.database();
 
@@ -179,9 +178,7 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 				});
 
 		})
-if (!firebase.apps.length) {
-    firebase.initializeApp({});
-	}
+
 	})
 
 	// deleteBtn.addEventListener('click', function(event) {

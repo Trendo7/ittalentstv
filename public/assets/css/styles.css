@@ -290,17 +290,22 @@ label {
 	font-size: 25px;
 }
 
+.liked {
+	opacity: 1;
+}
+
+.disliked {
+	opacity: 0.3;
+}
+
 
 #like-button:hover {
-	color: #339933;
-	font-weight: bold;
 	cursor: pointer;
-
 }
 
 #dislike-button:hover {
-	color: #CC0000;
-	font-weight: bold;
+
+
 	cursor: pointer;
 }
 
