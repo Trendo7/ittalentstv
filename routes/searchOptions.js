@@ -7,7 +7,7 @@ router.get('/:searchWords', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var searchPhrase = req.params.searchWords.toLowerCase().trim();
 
-    videosCollection.find({title: new RegExp('^' + searchPhrase, 'i')}, {title: 1, tags: 1, _id: 0}, function (err, docs) {
+    videosCollection.find({title: new RegExp(searchPhrase, 'i')}, {title: 1, tags: 1, _id: 0}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
