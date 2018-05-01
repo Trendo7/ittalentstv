@@ -33,13 +33,13 @@
         </div>
 
         <div class="col-lg-6 my-auto">
-        <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)" class="far fa-thumbs-down " id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
-        <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)" class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
+        <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)"  ng-class='isDislikedByMe ? "show-thumbs-down" : ""' class="fas fa-thumbs-down" id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
+        <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)"  ng-class='isLikedByMe ? "show-thumbs-up" : ""' class="fas fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
 
         </div>
-       </div>
+        </div>
         <hr/>
-        
+
         <h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy}}</h6>
 
         <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>

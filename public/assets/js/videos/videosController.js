@@ -20,6 +20,25 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
     $scope.videoID = $location.path().substring(1);
     $scope.currentVideo = {};
     $scope.videos = [];
+    $scope.isLikedByMe = false;
+    $scope.isDislikedByMe = false;
+
+    function checkIsRatedByMe() {
+        var user = JSON.parse(localStorage.getItem('logged'));
+        if (!!user) {
+            if (!!$scope.currentVideo.likedByUserIDs.find(id => id === user.userId)) {
+                $scope.isLikedByMe = true;
+            } else {
+                $scope.isLikedByMe = false;
+            }
+
+            if (!!$scope.currentVideo.dislikedByUserIDs.find(id => id === user.userId)) {
+                $scope.isDislikedByMe = true;
+            } else {
+                $scope.isDislikedByMe = false;
+            }
+        }
+    }
 
 
     //loads selected video
@@ -27,6 +46,7 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
         .then(function (currentVideo) {
             $scope.$apply(function () {
                 $scope.currentVideo = currentVideo;
+                checkIsRatedByMe();
             });
         })
         //--->>> must redirect to not found page <<<---
@@ -50,6 +70,7 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
                 $scope.$apply(function () {
                     $scope.currentVideo.likedByUserIDs = response.data.likedByUserIDs;
                     $scope.currentVideo.dislikedByUserIDs = response.data.dislikedByUserIDs;
+                    checkIsRatedByMe();
                 });
             })
             //--->>> if error is 401 must show option for login <<<---

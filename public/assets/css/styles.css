@@ -283,11 +283,11 @@ label {
 }
 
 #like-button {
-		font-size: 25px;
+	font-size: 25px;
 }
 
 #dislike-button {
-		font-size: 25px;
+	font-size: 25px;
 }
 
 
@@ -302,6 +302,16 @@ label {
 	color: #CC0000;
 	font-weight: bold;
 	cursor: pointer;
+}
+
+.show-thumbs-up {
+	color: #339933;
+	font-weight: bold;
+}
+
+.show-thumbs-down {
+	color: #CC0000;
+	font-weight: bold;
 }
 
 @media only screen and (max-width:1200px) {
