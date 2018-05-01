@@ -10,20 +10,16 @@ app.controller('SearchOptionsController', function ($scope, $timeout, SearchOpti
         $timeout(function () {
             if (tmpStr === $scope.searchStr) {
 
-                SearchOptionsService.showSearchProposals(tmpStr)
+                SearchOptionsService.showSearchSuggestions(tmpStr)
                     .then(function (results) {
-                        console.log(results);
                         $scope.$apply(function () {
-                            $scope.searchOptions = [];
-                            results.forEach(function (r) {
-                                $scope.searchOptions.push(r.title);
-                            });
-                            console.log($scope.searchOptions);
+                            $scope.searchOptions = results;
+                            console.log(results);
                         });
                     })
-                    .catch(err => alert(err.data.err));
+                    .catch(err => console.log(err.data));
             }
-        }, 500);
+        }, 300);
     });
 
 
