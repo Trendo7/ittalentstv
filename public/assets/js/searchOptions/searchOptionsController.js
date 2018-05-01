@@ -14,6 +14,7 @@ app.controller('SearchOptionsController', function ($scope, $timeout, SearchOpti
                     .then(function (results) {
                         console.log(results);
                         $scope.$apply(function () {
+                            $scope.searchOptions = [];
                             results.forEach(function (r) {
                                 $scope.searchOptions.push(r.title);
                             });
