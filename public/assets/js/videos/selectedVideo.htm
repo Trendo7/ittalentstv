@@ -1,53 +1,39 @@
 <div class="row">
-
     <div class="col-lg-8 col-md-12 col-12 embed-responsive embed-responsive-16by9 videoDisplay">
         <video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" poster="{{currentVideo.thumbnailUrl}}"
-               controls controlsList="nodownload"></video>
+        controls controlsList="nodownload"></video>
     </div>
-
     <div class="side-clips col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto mt-md-1">
         <h6 class="mb-0">Recomended videos</h6>
         <hr/>
         <div ng-click="openLink(video)" ng-repeat="video in videos | limitTo:9">
             <div class="row side-clip mb-3 ">
                 <div class="col-lg-5 my-auto">
-                    <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
-                </div>
-                <div class="clip my-auto col-lg-6 p-1">
-                    <h6 class="side-clip-title">{{video.title}}</h6>
-                    <h6 class="text-muted">{{video.uploadedBy}}</h6>
-                    <p class="text-muted">{{video.viewCount}} views</p>
-                </div>
+                <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
             </div>
+            <div class="clip my-auto col-lg-6 p-1">
+                <h6 class="side-clip-title">{{video.title}}</h6>
+                <h6 class="text-muted">{{video.uploadedBy}}</h6>
+                <p class="text-muted">{{video.viewCount}} views</p>
+            </div>
+            
         </div>
-
-
     </div>
-
-
-    <div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 " style="word-break: break-word;" >
-        <div class="row ">
-        <div class="col-lg-6 mt-3">
-        <h3 class="video-title">{{currentVideo.title}}</h3>
-        <p class="text-muted">{{currentVideo.viewCount}} views</p>
+</div>
+<div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 " style="word-break: break-word;" >
+    <div class="row ">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-8 mt-3">
+            <h3 class="video-title">{{currentVideo.title}}</h3>
+            <p class="text-muted">{{currentVideo.viewCount}} views</p>
         </div>
-
-        <div class="col-lg-6 my-auto">
-        <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)"  ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
-        <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)"  ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
-
+        <div class="col-xl-6 col-lg-6  col-md-6 col-4 my-auto">
+            <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)"  ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
+            <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)"  ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
         </div>
-        </div>
-        <hr style="margin-top: 0;" />
-
-        <h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy}}</h6>
-
-        <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
-
-        <h6><i><strong>Tags: &nbsp;</strong></i><span ng-repeat="tag in currentVideo.tags"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span> </span></h6>
-
-
     </div>
-
-
-</div> 
+    <hr style="margin-top: 0;" />
+    <h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy}}</h6>
+    <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
+    <h6><i><strong>Tags: &nbsp;</strong></i><span ng-repeat="tag in currentVideo.tags"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span> </span></h6>
+</div>
+</div>
