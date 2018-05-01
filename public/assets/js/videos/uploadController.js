@@ -45,19 +45,11 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 		});
 	};
 
-	
+
 
 	// Initialize Firebase
 	// Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCIhpw08oRhdBRaSIma-2h96d_BRYQ0QMA",
-    authDomain: "videotalents-d652e.firebaseapp.com",
-    databaseURL: "https://videotalents-d652e.firebaseio.com",
-    projectId: "videotalents-d652e",
-    storageBucket: "videotalents-d652e.appspot.com",
-    messagingSenderId: "200617454566"
-  };
-  firebase.initializeApp(config);
+
 
 	var database = firebase.database();
 
@@ -114,66 +106,72 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 					var newVideo;
 					var downloadImgUrl;
 					var downloadURL = task.snapshot.downloadURL;
-					
+
 
 					var latest = document.querySelector('#prog');
 					var result = document.querySelector('#result')
-					latest.innerText = "Your clip was successfully uploaded!";
+					latest.innerText = "We are almost ready! Please wait a moment!";
 
 					result.innerHTML = `<div class="row mt-2"><div class="col-lg-8 col-md-12 embed-responsive embed-responsive-16by9 mx-auto">
-										<video id="videoId" crossorigin="anonymous" class="embed-responsive-item" src="${downloadURL}" controls controlsList="nodownload"></video></div>`
+										<video id="videoId" crossorigin="anonymous" style="display:none;" class="embed-responsive-item" src="${downloadURL}" controls controlsList="nodownload"></video></div></div>`
 
 					var video = document.getElementById('videoId')
 					var canvas = document.getElementById('canvasId');
 					var img = document.getElementById('imgId');
 
-					video.currentTime = 10;
-					
+					video.onloadedmetadata = function() {
+						video.currentTime = Math.floor(Math.random() * video.duration);
 
-					setTimeout(() => {
-					
-						var file = draw()
-						id = 'image' + Date.now()
-						let storageRef = firebase.storage().ref('thumbnails/' + id + '.png')
-						storageRef.put(file)
-							.then(function(snapshot) {
-								var downloadImgUrl = snapshot.downloadURL
-								console.log(downloadImgUrl)
-								$scope.video = {
-									title: $scope.title,
-									uploadedBy: {},
-									description: $scope.description,
-									videoUrl: downloadURL,
-									tags: $scope.tags.split(','),
-									thumbnailUrl: downloadImgUrl
-								}
-								newVideo = $scope.video;
 
-								$http.post('http://localhost:3000/videos', newVideo)
-									.then(function(response) {
-										if (response.status >= STATUS_OK) {
-											console.log('zapisano v bazata')
 
-										}
-									})
-									.catch(function(err) {
-										console.log(id)
+						setTimeout(() => {
 
-										var storageRef = firebase.storage().ref('videos')
-										// Create a reference to the file to delete
-										var desertRef = storageRef.child(id.toString() + ".mp4");
-										console.log(desertRef)
-										// Delete the file
-										setTimeout(function() {
-											desertRef.delete()
-												.then(function() {
-													var latest = document.querySelector('#prog');
-													latest.innerText = 'Sign in first!'
-												})
-										}, 3000)
-									})
-							});
-					}, 4000)
+							var file = draw()
+							id = 'image' + Date.now()
+							let storageRef = firebase.storage().ref('thumbnails/' + id + '.png')
+							storageRef.put(file)
+								.then(function(snapshot) {
+									var downloadImgUrl = snapshot.downloadURL
+									console.log(downloadImgUrl)
+									$scope.video = {
+										title: $scope.title,
+										uploadedBy: {},
+										description: $scope.description,
+										videoUrl: downloadURL,
+										tags: $scope.tags.split(','),
+										thumbnailUrl: downloadImgUrl
+									}
+									newVideo = $scope.video;
+
+									$http.post('http://localhost:3000/videos', newVideo)
+										.then(function(response) {
+											if (response.status >= STATUS_OK) {
+										
+												console.log('zapisano v bazata')
+												latest.innerText = "Your video has been successfully uploaded! Yey!";
+												
+											}
+										})
+										.catch(function(err) {
+											console.log(id)
+
+											var storageRef = firebase.storage().ref('videos')
+											// Create a reference to the file to delete
+											var desertRef = storageRef.child(id.toString() + ".mp4");
+											console.log(desertRef)
+											// Delete the file
+											setTimeout(function() {
+												desertRef.delete()
+													.then(function() {
+														var latest = document.querySelector('#prog');
+														latest.innerText = 'Sign in first!'
+													})
+											}, 3000)
+										})
+								});
+
+						}, 1500)
+					};
 
 				});
 

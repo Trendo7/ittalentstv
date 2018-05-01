@@ -273,10 +273,11 @@ label {
 }
 
 .selected-video-tag {
+	font-weight: 900;
 	margin-right: 2px;
   color: white;
   background-color:rgb(75, 180, 232);
-  padding:3px 8px;
+  padding:3px 10px;
   border-radius:6px;
   font-size: 14px;
   cursor: pointer;
@@ -295,7 +296,7 @@ label {
 }
 
 .disliked {
-	opacity: 0.3;
+	opacity: 0.4;
 }
 
 
