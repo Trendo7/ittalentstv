@@ -30,18 +30,18 @@ canvas {
 
 .side-clip-title {
 	font-size: 3px;
-	word-wrap: break-word; 
-	max-height: 25px; 
-	max-width: 100%; 
-	overflow:hidden;
-	white-space: nowrap; 
+	word-wrap: break-word;
+	max-height: 25px;
+	max-width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
 	text-overflow: ellipsis;
 }
 
 label {
 	overflow: hidden;
-	white-space: nowrap; 
-	text-overflow: ellip§
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .editAccBtn {
@@ -61,7 +61,6 @@ label {
 	transition: all 0.3 ease;
 	cursor: pointer;
 }
-
 
 #upload {
 	outline: 0;
@@ -233,7 +232,7 @@ label {
 }
 
 .modal-content {
-	border: none; 
+	border: none;
 	border-radius: 4px;
 }
 
@@ -252,7 +251,7 @@ label {
 }
 
 .fas {
-	font-size: 1.5em; 
+	font-size: 1.5em;
 	color: #999999;
 }
 
@@ -267,20 +266,18 @@ label {
 }
 
 .selected-video-tag:hover {
-
 	font-weight: bold;
-
 }
 
 .selected-video-tag {
 	font-weight: 900;
 	margin-right: 2px;
-  color: white;
-  background-color:rgb(75, 180, 232);
-  padding:3px 10px;
-  border-radius:6px;
-  font-size: 14px;
-  cursor: pointer;
+	color: white;
+	background-color: rgb(75, 180, 232);
+	padding: 3px 10px;
+	border-radius: 6px;
+	font-size: 14px;
+	cursor: pointer;
 }
 
 #like-button {
@@ -299,17 +296,13 @@ label {
 	opacity: 0.4;
 }
 
-
 #like-button:hover {
 	cursor: pointer;
 }
 
 #dislike-button:hover {
-
-
 	cursor: pointer;
 }
-
 
 #search-filter {
 	cursor: pointer;
@@ -317,6 +310,11 @@ label {
 
 .dropdown-item:active {
 	background-color: rgb(75, 180, 232);
+}
+
+textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
+	outline: 0px !important;
+	-webkit-appearance: none;
 }
 
 @media only screen and (max-width:1200px) {
@@ -374,4 +372,3 @@ label {
 	}
 
 }
-
