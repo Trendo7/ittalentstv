@@ -310,6 +310,15 @@ label {
 	cursor: pointer;
 }
 
+
+#search-filter {
+	cursor: pointer;
+}
+
+.dropdown-item:active {
+	background-color: rgb(75, 180, 232);
+}
+
 @media only screen and (max-width:1200px) {
 	.side-clips {
 		display: none;
