@@ -9,7 +9,7 @@
         <img class="img-fluid img-vid"  ng-src="{{video.thumbnailUrl}}" alt="">
         <div class="">
             <h5>{{video.title}}</h5>
-            <h6 class="text-muted uploaded-by" ng-click="openVideoLink(video)">{{video.uploadedBy}}</h6>
+            <h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
             <p class="text-muted">{{video.viewCount}} views</p>
             <p class="text-muted"> {{video.uploadDate | date:'MMM d, y'}}</p>
         </div>
