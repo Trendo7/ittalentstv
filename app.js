@@ -10,6 +10,7 @@ const cors = require('cors');
 const session = require('express-session');
 
 const indexRouter = require('./routes/index');
+const userCheckRouter = require('./routes/userCheck');
 const userVideosRouter = require('./routes/userVideos');
 // const userPlayslistsRouter = require('./routes/userPlayslists');
 const loginRouter = require('./routes/login');
@@ -60,6 +61,7 @@ function checkLogin(req, res, next) {
 }
 
 app.use('/', indexRouter);
+app.use('/userCheck', userCheckRouter);
 app.use('/userVideos', userVideosRouter);
 // app.use('/userPlayslists', userPlayslistsRouter);
 app.use('/login', loginRouter);

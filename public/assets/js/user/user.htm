@@ -1,7 +1,7 @@
-<div class="col-lg-10 mx-md-auto mt-md-3">
+<div ng-if="isValidUser" class="col-lg-10 mx-md-auto mt-md-3">
     <div class="row">
         <div class="col-lg-8 col-md-8 col-10">
-            <h5 ng-if="hasVideos">{{uploadedBy}}'s videos</h5>
+            <h5>{{user.username}}'s videos</h5>
             <p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
         </div>
         <div class="clearfix"></div>
@@ -16,12 +16,12 @@
     </div>
     <hr/>
     <div ng-if="hasVideos" ng-repeat="video in userVideos | orderBy: sortSelect">
-        <div class="row mb-3 ">
+        <div  ng-click="openVideoLink(video)" class="row mb-3 ">
             <div class="col-lg-3 col-md-4 my-auto">
-                <img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openVideoLink(video)" alt="" />
+                <img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" alt="" />
             </div>
 
-            <div class="clip col-lg-6 col-md-6 my-auto" ng-click="openLink(video)">
+            <div class="clip col-lg-6 col-md-6 my-auto">
                 <h5 class="mb-2">{{video.title}}</h5>
                 <h6 class="text-muted">{{video.uploadedBy}}</h6>
                 <p>{{video.tags.length}} TEST TAGS LENGTH</p>
@@ -34,4 +34,8 @@
     <div ng-if="!hasVideos">
         <h1 class="mb-2">The selected user doesn't have videos</h1>
     </div>
+</div>
+
+<div ng-if="!isValidUser">
+    <h1 class="mb-2">{{errMsg}}</h1>
 </div>
