@@ -160,6 +160,7 @@ router.post('/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var newVideo = req.body;
     newVideo.uploadedBy = req.session.user.username;
+    newVideo.uploadedByID = req.session.user._id;
     newVideo.comments = [];
     newVideo.viewCount = 0;
     newVideo.likeCount = 0;

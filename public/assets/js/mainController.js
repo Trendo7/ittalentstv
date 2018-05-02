@@ -3,7 +3,7 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
         if ($rootScope.logged != JSON.parse(localStorage.getItem('logged'))) {
             $rootScope.logged = JSON.parse(localStorage.getItem('logged'));
         }
-        console.log($rootScope.logged);
+
         // Initialize Firebase
         var config = {
             apiKey: "AIzaSyCIsC29eahBX2CgCAscvwj_9Z08mdAFHeI",

@@ -10,7 +10,8 @@ const cors = require('cors');
 const session = require('express-session');
 
 const indexRouter = require('./routes/index');
-// const usersRouter = require('./routes/users');
+const userVideosRouter = require('./routes/userVideos');
+// const userPlayslistsRouter = require('./routes/userPlayslists');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const logoutRouter = require('./routes/logout');
@@ -59,7 +60,8 @@ function checkLogin(req, res, next) {
 }
 
 app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/userVideos', userVideosRouter);
+// app.use('/userPlayslists', userPlayslistsRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/logout', logoutRouter);
