@@ -6,6 +6,7 @@ app.controller('SearchController', function ($scope, $window, $location, MyVideo
     $scope.sortSelect = '';
 
     $scope.changeOption = function(option){
+        console.log(option);
         $scope.sortSelect = option;
     }
 

@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var user = req.session.user;
 
-    videosCollection.find({uploadedBy: user.username}, {title: 1, description: 1, thumbnailUrl: 1, uploadedBy: 1, viewCount: 1, tags: 1}, function (err, docs) {
+    videosCollection.find({uploadedBy: user.username}, {title: 1, description: 1, thumbnailUrl: 1, uploadedBy: 1, viewCount: 1, likedByUserIDs: 1, tags: 1}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
