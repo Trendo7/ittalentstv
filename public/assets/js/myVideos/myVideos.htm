@@ -6,11 +6,11 @@
             <div class="col-lg-3 col-md-4 my-auto" ng-click="openLink(video)">
                 <img class="img-fluid  img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
             </div>
-            <div ng-click="openLink(video)" class="col-lg-7 col-md-6 my-auto">
+            <div ng-click="openVideoLink(video)" class="col-lg-7 col-md-6 my-auto">
                 <h5>{{video.title}}</h5>
                 <!--   <h6 class="text-muted">{{video.uploadedBy}}</h6> -->
                 <p class="text-muted">{{video.viewCount}} views</p>
-                <p class="text-muted">Published on {{video.uploadDate}}</p>
+                <p class="text-muted">Published on {{video.uploadDate | date:'MMM d, y'}}</p>
             </div>
             <div class="my-auto col-lg-2 col-md-2">
                 <i ng-click="deleteVideo(video)" class="fas fa-trash cl-lg-12 mr-4"></i>

@@ -331,6 +331,12 @@ opacity: 0.7;
 .fa-upload:hover {
 	opacity: 1;
 }
+
+.uploaded-by:hover {
+	font-weight: bold;
+	cursor: pointer;
+}
+
 textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
 	outline: 0px !important;
 	-webkit-appearance: none;

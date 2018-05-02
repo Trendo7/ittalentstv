@@ -9,10 +9,14 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
         })
         .catch(err => console.log(err));
 
-
-    $scope.openLink = function (video) {
-        $location.path(video._id);
-    };
+    //moved to main controller
+    // $scope.openVideoLink = function (video) {
+    //     $location.path(video._id);
+    // };
+    //
+    // $scope.openUserLink = function (video) {
+    //     $location.path('user/' + video.uploadedByID);
+    // };
 
 });
 
@@ -78,9 +82,13 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
             .catch(err => console.log(err));
     };
 
-
-    $scope.openLink = function (video) {
-        $location.path(video._id);
-    };
+    //moved to main controller
+    // $scope.openVideoLink = function (video) {
+    //     $location.path(video._id);
+    // };
+    //
+    // $scope.openUserLink = function (video) {
+    //     $location.path('user/' + video.uploadedByID);
+    // };
 
 });

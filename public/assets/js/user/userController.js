@@ -22,9 +22,9 @@ app.controller('UserController', function ($scope, $window, $location, UserServi
         })
         .catch(err => console.log(err.data));
 
-
-    $scope.openLink = function (video) {
-        $location.path(video._id);
-    };
+    //moved to mainController
+    // $scope.openVideoLink = function (video) {
+    //     $location.path(video._id);
+    // };
 
 });

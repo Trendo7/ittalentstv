@@ -10,10 +10,11 @@
 			<div class="dropdown-menu mt-3 mr-1" ng-model="sortSelect">
 				<h6 class="dropdown-header">Sort by:</h6>
 				<ul>
-					<li class="dropdown-item" ng-click="changeOption('-viewCount')" href="">Most Popular</li>
+					<li value="100" class="dropdown-item" ng-click="changeOption('-viewCount')" href="">Most Popular</li>
 					<li class="dropdown-item" ng-click="changeOption('title')" href="">Title</li>
 					<li class="dropdown-item" ng-click="changeOption('-tags.length')" href="">tags</li>
 					<li class="dropdown-item" ng-click="changeOption('-likedByUserIDs.length')" href="">Likes</li>
+					<li class="dropdown-item" ng-click="changeOption('-uploadDate')" href="">Upload Date</li>
 				</ul>
 
 			</div>
@@ -24,7 +25,7 @@
 	<div ng-repeat="video in userVideos | orderBy: sortSelect">
 		<div class="row mb-3 ">
 			<div class="col-lg-3 col-md-4 my-auto" >
-			<img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openLink(video)" alt=""></a>
+			<img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openVideoLink(video)" alt=""></a>
 		</div>
 		<div  class="clip col-lg-6 col-md-6 my-auto" ng-click="openLink(video)">
 			<h5 class="mb-2">{{video.title}}</h5>

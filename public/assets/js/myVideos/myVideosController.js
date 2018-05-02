@@ -30,10 +30,10 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
             .catch(err => alert(err.data.err));
     };
 
-
-    $scope.openLink = function (video) {
-        $location.path(video._id);
-    };
+    //moved to mainController
+    // $scope.openVideoLink = function (video) {
+    //     $location.path(video._id);
+    // };
 
 
     //loads video title, description and tags in the edit form
@@ -64,6 +64,7 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
             })
             .catch(err => alert(err.data.err));
     };
+
 
     // angular.element('#tags-edit').tagsinput('refresh');
 

@@ -6,7 +6,7 @@ const MONGO_ID_LENGTH = 24;
 router.get('/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
 
-    videosCollection.find({}, {title: 1, thumbnailUrl: 1, uploadedBy: 1, viewCount: 1, uploadDate: 1}, function (err, docs) {
+    videosCollection.find({}, {title: 1, thumbnailUrl: 1, uploadedBy: 1, uploadedByID: 1, viewCount: 1, uploadDate: 1}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);

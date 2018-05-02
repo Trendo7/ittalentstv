@@ -1,30 +1,17 @@
-<!-- <div class="row">
-    <div ng-click="openLink(video)" ng-repeat="video in videos" class="col-lg-3 col-md-6 mb-4">
-        <div  class="card h-80">
-            <a href="#"><img class="card-img-top" ng-src="{{video.thumbnailUrl}}" alt=""></a>
-            <div class="card-body">
-                <h5 class="card-title">{{video.title}}</h5>
-                <h6>{{video.uploadedBy}}</h6>
-                <h6>{{video.viewCount}}</h6>
-            </div>
-        </div>
-    </div>
-</div>
--->
 <div class="row">
     <div class="col-12">
     <h5>Recently added</h5>
     <hr/>
     </div>
-    <div ng-click="openLink(video)" ng-repeat="video in videos" class="col-lg-3 col-md-6 col-sm-6 col-* mb-4">
+    <div ng-click="openVideoLink(video)" ng-repeat="video in videos" class="col-lg-3 col-md-6 col-sm-6 col-* mb-4">
         
         <div class="clip container-fluid align-items-center">
-        <img class="img-fluid img-vid"  ng-src="{{video.thumbnailUrl}}" alt=""></a>
+        <img class="img-fluid img-vid"  ng-src="{{video.thumbnailUrl}}" alt="">
         <div class="">
             <h5>{{video.title}}</h5>
-            <h6 class="text-muted">{{video.uploadedBy}}</h6>
+            <h6 class="text-muted uploaded-by" ng-click="openVideoLink(video)">{{video.uploadedBy}}</h6>
             <p class="text-muted">{{video.viewCount}} views</p>
-            <p class="text-muted"> {{video.uploadDate | date:'MM/dd/yyyy'}}</p>
+            <p class="text-muted"> {{video.uploadDate | date:'MMM d, y'}}</p>
         </div>
         
     </div>

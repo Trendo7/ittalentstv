@@ -28,5 +28,15 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
                     $window.location.href = '/';
                 }
             })
-    }
+    };
+
+    //opens selected video
+    $scope.openVideoLink = function (video) {
+        $location.path(video._id);
+    };
+
+    //opens list with videos uploaded by selected user
+    $scope.openUserLink = function (video) {
+        $location.path('user/' + video.uploadedByID);
+    };
 });
