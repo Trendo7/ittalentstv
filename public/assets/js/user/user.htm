@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-10">
 			<h5>Search results</h5>
-			<p>Sorted by: {{sortSelect}}</p>
+			<p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
 		</div>
 		<div class="clearfix"></div>
 		<div class="dropleft col-lg-4 col-md-4 col-2">
@@ -10,11 +10,7 @@
 			<div class="dropdown-menu mt-3 mr-1" ng-model="sortSelect">
 				<h6 class="dropdown-header">Sort by:</h6>
 				<ul>
-					<li value="100" class="dropdown-item" ng-click="changeOption('-viewCount')" href="">Most Popular</li>
-					<li class="dropdown-item" ng-click="changeOption('title')" href="">Title</li>
-					<li class="dropdown-item" ng-click="changeOption('-tags.length')" href="">tags</li>
-					<li class="dropdown-item" ng-click="changeOption('-likedByUserIDs.length')" href="">Likes</li>
-					<li class="dropdown-item" ng-click="changeOption('-uploadDate')" href="">Upload Date</li>
+					<li ng-repeat="option in options" class="dropdown-item" ng-click="changeOption(option)">{{option.description}}</li>
 				</ul>
 
 			</div>

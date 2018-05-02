@@ -1,15 +1,21 @@
 app.controller('UserController', function ($scope, $window, $location, UserService) {
     $scope.userVideos = [];
     $scope.userID = $location.path().substring($location.path().lastIndexOf('/') + 1);
-    console.log($scope.userID);
-    console.log(111);
+    $scope.options = [
+        {description: 'Most Popular', value: '-viewCount'},
+        {description: 'Title', value: '-title'},
+        {description: 'Tags', value: '-tags.length'},
+        {description: 'Likes', value: '-likedByUserIDs.length'},
+        {description: 'Upload Date', value: '-uploadDate'}
+    ];
 
 
     $scope.sortSelect = '';
+    $scope.sortedBy = '';
 
     $scope.changeOption = function(option){
-        console.log(option);
-        $scope.sortSelect = option;
+        $scope.sortedBy = option.description;
+        $scope.sortSelect = option.value;
     };
 
 
