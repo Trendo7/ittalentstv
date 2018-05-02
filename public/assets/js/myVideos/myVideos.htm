@@ -2,11 +2,11 @@
     <h5>Your videos</h5>
     <hr/>
     <div ng-repeat="video in myVideos">
-        <div class="row mb-3 ">
+        <div ng-click="openVideoLink(video)" class="row mb-3 ">
             <div class="col-lg-3 col-md-4 my-auto" ng-click="openLink(video)">
                 <img class="img-fluid  img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
             </div>
-            <div ng-click="openVideoLink(video)" class="col-lg-7 col-md-6 my-auto">
+            <div class="col-lg-7 col-md-6 my-auto">
                 <h5>{{video.title}}</h5>
                 <!--   <h6 class="text-muted">{{video.uploadedBy}}</h6> -->
                 <p class="text-muted">{{video.viewCount}} views</p>
