@@ -3,7 +3,7 @@ app.controller('UserController', function ($scope, $window, $location, UserServi
     $scope.userID = $location.path().substring($location.path().lastIndexOf('/') + 1);
     $scope.options = [
         {description: 'Most Popular', value: '-viewCount'},
-        {description: 'Title', value: '-title'},
+        {description: 'Title', value: 'title'},
         {description: 'Tags', value: '-tags.length'},
         {description: 'Likes', value: '-likedByUserIDs.length'},
         {description: 'Upload Date', value: '-uploadDate'}

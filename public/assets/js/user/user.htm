@@ -9,10 +9,7 @@
 			<i class="float-right fas fa-sliders-h" id="search-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 			<div class="dropdown-menu mt-3 mr-1" ng-model="sortSelect">
 				<h6 class="dropdown-header">Sort by:</h6>
-				<ul>
-					<li ng-repeat="option in options" class="dropdown-item" ng-click="changeOption(option)">{{option.description}}</li>
-				</ul>
-
+				<span ng-repeat="option in options" class="dropdown-item" ng-click="changeOption(option)">{{option.description}}</span>
 			</div>
 			
 		</div>
