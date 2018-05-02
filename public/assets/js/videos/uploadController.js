@@ -140,7 +140,7 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 										videoUrl: downloadURL,
 										tags: $scope.tags.split(','),
 										thumbnailUrl: downloadImgUrl,
-										firebaseId: id
+                                        uploadDate: id
 									}
 									newVideo = $scope.video;
 

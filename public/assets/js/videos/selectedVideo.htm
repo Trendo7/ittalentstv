@@ -34,6 +34,7 @@
     <hr style="margin-top: 0;" />
     <h6><i><strong>Uploaded by: </strong></i> {{currentVideo.uploadedBy}}</h6>
     <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
+    <h6><i><strong>Published on: </strong></i> {{currentVideo.uploadDate | date:'MM/dd/yyyy'}}</h6>
     <h6><i><strong>Tags: &nbsp;</strong></i><span ng-repeat="tag in currentVideo.tags"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span> </span></h6>
 </div>
 </div>
