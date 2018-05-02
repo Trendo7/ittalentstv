@@ -18,7 +18,8 @@ router.post('/', function (req, res, next) {
                 res.status(200);
                 res.json({
                     userId: docs[0]._id,
-                    username: docs[0].username
+                    username: docs[0].username,
+                    imageUrl: docs[0].imageUrl
                 });
 
                 //res.redirect('http://localhost/......');
