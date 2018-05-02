@@ -127,8 +127,8 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 						setTimeout(() => {
 
 							var file = draw()
-							id = 'image' + Date.now()
-							let storageRef = firebase.storage().ref('thumbnails/' + id + '.png')
+							imageId = 'image' + Date.now()
+							let storageRef = firebase.storage().ref('thumbnails/' + imageId + '.png')
 							storageRef.put(file)
 								.then(function(snapshot) {
 									var downloadImgUrl = snapshot.downloadURL
@@ -139,7 +139,8 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 										description: $scope.description,
 										videoUrl: downloadURL,
 										tags: $scope.tags.split(','),
-										thumbnailUrl: downloadImgUrl
+										thumbnailUrl: downloadImgUrl,
+										firebaseId: id
 									}
 									newVideo = $scope.video;
 
