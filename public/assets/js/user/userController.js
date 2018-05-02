@@ -1,6 +1,8 @@
 app.controller('UserController', function ($scope, $window, $location, UserService) {
     $scope.userVideos = [];
     $scope.userID = $location.path().substring($location.path().lastIndexOf('/') + 1);
+    $scope.uploadedBy = '';
+    $scope.hasVideos = true;
     $scope.options = [
         {description: 'Most Popular', value: '-viewCount'},
         {description: 'Title', value: 'title'},
@@ -22,8 +24,15 @@ app.controller('UserController', function ($scope, $window, $location, UserServi
     //load all videos that are uploaded by the selected user
     UserService.getUserVideos($scope.userID)
         .then(function (videos) {
+
             $scope.$apply(function () {
-                $scope.userVideos = videos;
+                if (videos.length > 0) {
+                    $scope.hasVideos = true;
+                    $scope.uploadedBy = videos[0].uploadedBy;
+                    $scope.userVideos = videos;
+                } else {
+                    $scope.hasVideos = false;
+                }
             });
         })
         .catch(err => console.log(err.data));

@@ -1,34 +1,37 @@
 <div class="col-lg-10 mx-md-auto mt-md-3">
-	<div class="row">
-		<div class="col-lg-8 col-md-8 col-10">
-			<h5>Search results</h5>
-			<p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
-		</div>
-		<div class="clearfix"></div>
-		<div class="dropleft col-lg-4 col-md-4 col-2">
-			<i class="float-right fas fa-sliders-h" id="search-filter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-			<div class="dropdown-menu mt-3 mr-1" ng-model="sortSelect">
-				<h6 class="dropdown-header">Sort by:</h6>
-				<span ng-repeat="option in options" class="dropdown-item" ng-click="changeOption(option)">{{option.description}}</span>
-			</div>
-			
-		</div>
-	</div>
-	<hr/>
-	<div ng-repeat="video in userVideos | orderBy: sortSelect">
-		<div class="row mb-3 ">
-			<div class="col-lg-3 col-md-4 my-auto" >
-			<img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openVideoLink(video)" alt=""></a>
-		</div>
-		<div  class="clip col-lg-6 col-md-6 my-auto" ng-click="openLink(video)">
-			<h5 class="mb-2">{{video.title}}</h5>
-			<h6 class="text-muted">{{video.uploadedBy}}</h6>
-			<p>{{video.tags.length}} TEST TAGS LENGTH</p>
-			<p class="text-muted">{{video.viewCount}} views</p>
-			<p class="text-muted">{{video.likedByUserIDs.length}} likes</p>
-			<p class="text-muted">{{video.uploadDate | date:'MM/dd/yyyy'}}</p>
-		</div>
-		
-	</div>
-	
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-10">
+            <h5 ng-if="hasVideos">{{uploadedBy}}'s videos</h5>
+            <p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
+        </div>
+        <div class="clearfix"></div>
+        <div class="dropleft col-lg-4 col-md-4 col-2">
+            <i class="float-right fas fa-sliders-h" id="search-filter" data-toggle="dropdown" aria-haspopup="true"
+               aria-expanded="false"></i>
+            <div class="dropdown-menu mt-3 mr-1" ng-model="sortSelect">
+                <h6 class="dropdown-header">Sort by:</h6>
+                <span ng-repeat="option in options" class="dropdown-item" ng-click="changeOption(option)">{{option.description}}</span>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <div ng-if="hasVideos" ng-repeat="video in userVideos | orderBy: sortSelect">
+        <div class="row mb-3 ">
+            <div class="col-lg-3 col-md-4 my-auto">
+                <img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openVideoLink(video)" alt="" />
+            </div>
+
+            <div class="clip col-lg-6 col-md-6 my-auto" ng-click="openLink(video)">
+                <h5 class="mb-2">{{video.title}}</h5>
+                <h6 class="text-muted">{{video.uploadedBy}}</h6>
+                <p>{{video.tags.length}} TEST TAGS LENGTH</p>
+                <p class="text-muted">{{video.viewCount}} views</p>
+                <p class="text-muted">{{video.likedByUserIDs.length}} likes</p>
+                <p class="text-muted">{{video.uploadDate | date:'MM/dd/yyyy'}}</p>
+            </div>
+        </div>
+    </div>
+    <div ng-if="!hasVideos">
+        <h1 class="mb-2">The selected user doesn't have videos</h1>
+    </div>
 </div>
