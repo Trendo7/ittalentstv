@@ -25,28 +25,27 @@ app.controller('UserController', function ($scope, $window, $location, UserVideo
 
     UserCheckService.checkUser($scope.userID)
         .then(function (user) {
-            // $scope.$apply(function () {
-            //
-            // });
-            $scope.user = user;
-            $scope.isValidUser = true;
-            if (user.uploadedVideos.length > 0) {
-                $scope.hasVideos = true;
-                getUserVideos(user._id);
-            } else {
-                $scope.hasVideos = false;
-            }
-
+            $scope.$apply(function () {
+                $scope.user = user;
+                $scope.isValidUser = true;
+                if (user.uploadedVideos.length > 0) {
+                    $scope.hasVideos = true;
+                    getUserVideos(user._id);
+                } else {
+                    $scope.hasVideos = false;
+                }
+            });
         })
         //if 404 it means that there is no such user if 500 server error
         .catch(err => {
             console.log(err);
             if (err.status === NOT_FOUND) {
-                $scope.isValidUser = false;
-                $scope.errMsg = err;
+                $scope.$apply(function () {
+                    $scope.isValidUser = false;
+                    $scope.errMsg = err.data.err;
+                });
             }
         });
-
 
 
 
@@ -57,7 +56,7 @@ app.controller('UserController', function ($scope, $window, $location, UserVideo
             .then(function (videos) {
                 $scope.$apply(function () {
                     $scope.userVideos = videos;
-                });
+                })
             })
             .catch(err => console.log(err.data));
     }

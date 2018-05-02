@@ -14,7 +14,6 @@ router.get('/:id', function (req, res, next) {
         } else {
             res.status(200);
             res.json(docs);
-            console.log(docs);
         }
     });
 });
