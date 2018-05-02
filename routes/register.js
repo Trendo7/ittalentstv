@@ -10,6 +10,8 @@ router.post('/', function (req, res, next) {
     newUser.playlists = [];
     newUser.uploadedVideos = [];
     newUser.history = [];
+    newUser.likedVideos = [];
+    newUser.dislikedVideos = [];
 
     if (newUser.username.trim() == '') {
         res.status(412);
