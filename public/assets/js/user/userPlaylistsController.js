@@ -1,12 +1,12 @@
-app.controller('UserVideosController', function ($scope, $window, $location, UserVideosService, UserCheckService) {
+app.controller('UserPlaylistsController', function ($scope, $window, $location, UserPlaylistsService, UserCheckService) {
     const NOT_FOUND = 404;
-    $scope.userVideos = [];
+    $scope.userPlaylists = [];
     // $scope.userID = $location.path().substring($location.path().lastIndexOf('/') + 1);
     $scope.userID = $location.path().split('/')[2];
     $scope.user = {};
     $scope.errMsg = {};
     $scope.isValidUser = true;
-    $scope.hasVideos = true;
+    $scope.hasPlaylists = true;
     $scope.options = [
         {description: 'Most Popular', value: '-viewCount'},
         {description: 'Title', value: 'title'},
@@ -28,11 +28,12 @@ app.controller('UserVideosController', function ($scope, $window, $location, Use
             $scope.$apply(function () {
                 $scope.user = user;
                 $scope.isValidUser = true;
-                if (user.uploadedVideos.length > 0) {
-                    $scope.hasVideos = true;
-                    getUserVideos(user._id);
+                if (user.playlists.length > 0) {
+                    $scope.hasPlaylists = true;
+                    getUserPlaylists(user._id);
+                    console.log($scope.isValidUser);
                 } else {
-                    $scope.hasVideos = false;
+                    $scope.hasPlaylists = false;
                 }
             });
         })
@@ -51,11 +52,11 @@ app.controller('UserVideosController', function ($scope, $window, $location, Use
 
 
     //get all videos that are uploaded by the selected user
-    function getUserVideos (userID) {
-        UserVideosService.getUserVideos(userID)
-            .then(function (videos) {
+    function getUserPlaylists (userID) {
+        UserPlaylistsService.getUserPlaylists(userID)
+            .then(function (playlists) {
                 $scope.$apply(function () {
-                    $scope.userVideos = videos;
+                    $scope.userPlaylists = playlists;
                 })
             })
             .catch(err => console.log(err.data));

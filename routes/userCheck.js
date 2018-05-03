@@ -14,7 +14,7 @@ router.get('/:id', function (req, res, next) {
         return;
     }
 
-    usersCollection.findOne({_id: userID}, {username: 1, imageUrl: 1, uploadedVideos: 1}, function (err, docs) {
+    usersCollection.findOne({_id: userID}, {username: 1, imageUrl: 1, uploadedVideos: 1, playlists: 1}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);

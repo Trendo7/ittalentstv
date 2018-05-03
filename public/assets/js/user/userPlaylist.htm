@@ -1,9 +1,9 @@
 <div ng-if="isValidUser" class="col-lg-10 mx-md-auto mt-md-3">
     <div class="row">
         <div class="col-lg-8 col-md-8 col-10">
-            <h5>{{user.username}}'s videos</h5>
+            <h5>{{user.username}}'s playlist</h5>
             <p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
-            <a>Videos</a>&nbsp; &nbsp; &nbsp;<a>Playlists</a>
+            <a href="/#!/user/{{user._id}}/videos">Videos</a>&nbsp; &nbsp; &nbsp;<a href="/#!/user/{{user._id}}/playlists">Playlists</a>
         </div>
         <div class="clearfix"></div>
         <div class="dropleft col-lg-4 col-md-4 col-2">
@@ -16,24 +16,20 @@
         </div>
     </div>
     <hr/>
-    <div ng-if="hasVideos" ng-repeat="video in userVideos | orderBy: sortSelect">
+    <div ng-if="hasPlaylists" ng-repeat="playlist in userPlaylists | orderBy: sortSelect">
         <div  ng-click="openVideoLink(video)" class="row mb-3 ">
             <div class="col-lg-3 col-md-4 my-auto">
-                <img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" alt="" />
+                <img class="img-fluid  img-vid mb-2" ng-src="{{playlist.imgUrl}}" alt="" />
             </div>
 
             <div class="clip col-lg-6 col-md-6 my-auto">
-                <h5 class="mb-2">{{video.title}}</h5>
-                <h6 class="text-muted">{{video.uploadedBy}}</h6>
-                <p>{{video.tags.length}} TEST TAGS LENGTH</p>
-                <p class="text-muted">{{video.viewCount}} views</p>
-                <p class="text-muted">{{video.likedByUserIDs.length}} likes</p>
-                <p class="text-muted">{{video.uploadDate | date:'MM/dd/yyyy'}}</p>
+                <h5 class="mb-2">{{playlist.title}}</h5>
+                <h5 class="mb-2">{{playlist.videos.length}} video</h5>
             </div>
         </div>
     </div>
-    <div ng-if="!hasVideos">
-        <h1 class="mb-2">The selected user doesn't have videos</h1>
+    <div ng-if="!hasPlaylists">
+        <h1 class="mb-2">The selected user doesn't have playlists</h1>
     </div>
 </div>
 

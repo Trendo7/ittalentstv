@@ -27,16 +27,16 @@ app.config(function ($routeProvider) {
             controller: 'SearchController'
         })
         .when('/user/:userID', {
-            templateUrl: 'assets/js/user/user.htm',
-            controller: 'UserController'
+            templateUrl: 'assets/js/user/userVideos.htm',
+            controller: 'UserVideosController'
         })
         .when('/user/:userID/videos', {
-            templateUrl: 'assets/js/user/user.htm',
-            controller: 'UserController'
+            templateUrl: 'assets/js/user/userVideos.htm',
+            controller: 'UserVideosController'
         })
         .when('/user/:userID/playlists', {
-            templateUrl: 'assets/js/user/user.htm',
-            controller: 'UserController'
+            templateUrl: 'assets/js/user/userPlaylist.htm',
+            controller: 'UserPlaylistsController'
         })
         .when('/:videoID', {
             templateUrl: 'assets/js/videos/selectedVideo.htm',
