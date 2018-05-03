@@ -41,7 +41,8 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
         $scope.newUser = {
             username: $scope.rUsername,
             password: $scope.rPassword,
-            email: $scope.rEmail
+            email: $scope.rEmail,
+            imageUrl: ''
         };
 
         console.log($scope.newUser);

@@ -57,7 +57,8 @@ router.put('/', function (req, res, next) {
                 res.status(200);
                 res.json({
                     userId: user._id,
-                    username: user.username
+                    username: user.username,
+                    imageUrl: user.imageUrl
                 });
             } else {
                 res.status(500);
