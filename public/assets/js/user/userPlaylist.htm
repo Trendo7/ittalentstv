@@ -1,20 +1,21 @@
-<div ng-if="isValidUser" class="col-lg-10 mx-md-auto mt-md-3">
-    <div class="row">
-        <div class="col-lg-8 col-md-8 col-10">
-            <h5 style="animation: riseUp 0.5s ease-in">{{user.username}}'s playlist</h5>
-            <p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
-            <a href="/#!/user/{{user._id}}/videos">Videos</a>&nbsp; &nbsp; &nbsp;<a href="/#!/user/{{user._id}}/playlists">Playlists</a>
-        </div>
-        <div class="clearfix"></div>
-        <div class="dropleft col-lg-4 col-md-4 col-2">
-            <i class="float-right fas fa-sliders-h" id="search-filter" data-toggle="dropdown" aria-haspopup="true"
-               aria-expanded="false"></i>
-            <div class="dropdown-menu mt-3 mr-1" ng-model="sortSelect">
-                <h6 class="dropdown-header">Sort by:</h6>
-                <span ng-repeat="option in options" class="dropdown-item" ng-click="changeOption(option)">{{option.description}}</span>
+<div ng-if="isValidUser" class="col-lg-12 mx-md-auto mt-md-3">
+    
+
+    <div class="row" >
+            <div class="mx-auto my-auto">
+            <img class="rounded-circle d-inline" src="{{user.imageUrl}}" width="80vh" height="80vh" style="animation: riseUp 0.5s linear" alt="">
+            <h3 class="col-lg-8 col-md-8 col-7 align-middle d-inline" style="animation: riseUp 0.4s ease-in">{{user.username}}'s profile</h3>
             </div>
-        </div>
-    </div>
+    </div> 
+        <div class="row " >
+            <ul>
+                <li><a href="/#!/user/{{user._id}}/videos">VIDEOS</a></li>
+                <li><a href="/#!/user/{{user._id}}/playlists">PLAYLISTS</a></li>
+            </ul>
+            
+            
+    </div>           
+            
     <hr/>
     <div ng-if="hasPlaylists" ng-repeat="playlist in userPlaylists | orderBy: sortSelect" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
         <div  ng-click="openVideoLink(video)" class="row mb-3 ">

@@ -3,7 +3,7 @@
     <h5>Recently added</h5>
     <hr/>
     </div>
-    <div ng-click="openVideoLink(video)" ng-repeat="video in videos track by $index | limitTo:5" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in" class="col-lg-3 col-md-6 col-sm-6 col-* mb-4">
+    <div ng-click="openVideoLink(video)" ng-repeat="video in videos track by $index | limitTo:5" style="animation: riseUp {{ (0.3 + 0.1 * $index) + 's' }} ease-in" class="col-lg-3 col-md-6 col-sm-6 col-* mb-4">
         
         <div class="clip container-fluid align-items-center">
         <img class="img-fluid img-vid"  ng-src="{{video.thumbnailUrl}}" alt="">

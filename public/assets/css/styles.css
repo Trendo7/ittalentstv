@@ -209,7 +209,7 @@ label {
 	background-image: url("../img/bg.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 40vh;
+	height: 20vh;
 	box-shadow: 0 0 10px #999999;
 }
 
@@ -420,5 +420,25 @@ option {
   }
   100% {
     opacity: 1;
+  }
+}
+
+
+
+
+@-webkit-keyframes moveUp {
+  0% {
+    top: 500px;
+  }
+  100% {
+    top: 0px;
+  }
+}
+@keyframes moveUp {
+  0% {
+    top: 500px;
+  }
+  100% {
+    top: 0px;
   }
 }
