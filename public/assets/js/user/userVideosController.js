@@ -1,4 +1,5 @@
 app.controller('UserVideosController', function ($scope, $window, $location, UserVideosService, UserCheckService) {
+
     const NOT_FOUND = 404;
     $scope.userVideos = [];
     // $scope.userID = $location.path().substring($location.path().lastIndexOf('/') + 1);

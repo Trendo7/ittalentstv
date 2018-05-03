@@ -1,7 +1,7 @@
 <div ng-if="isValidUser" class="col-lg-10 mx-md-auto mt-md-3">
     <div class="row">
         <div class="col-lg-8 col-md-8 col-10">
-            <h5>{{user.username}}'s videos</h5>
+            <h5 style="animation: riseUp 0.4s ease-in">{{user.username}}'s videos</h5>
             <p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
             <a href="/#!/user/{{user._id}}/videos">Videos</a>&nbsp; &nbsp; &nbsp;<a href="/#!/user/{{user._id}}/playlists">Playlists</a>
         </div>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <hr/>
-    <div ng-if="hasVideos" ng-repeat="video in userVideos | orderBy: sortSelect">
+    <div ng-if="hasVideos" ng-repeat="video in userVideos | orderBy: sortSelect" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
         <div  ng-click="openVideoLink(video)" class="row mb-3 ">
             <div class="col-lg-3 col-md-4 my-auto">
                 <img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" alt="" />
@@ -25,10 +25,9 @@
             <div class="clip col-lg-6 col-md-6 my-auto">
                 <h5 class="mb-2">{{video.title}}</h5>
                 <h6 class="text-muted">{{video.uploadedBy}}</h6>
-                <p>{{video.tags.length}} TEST TAGS LENGTH</p>
-                <p class="text-muted">{{video.viewCount}} views</p>
-                <p class="text-muted">{{video.likedByUserIDs.length}} likes</p>
-                <p class="text-muted">{{video.uploadDate | date:'MM/dd/yyyy'}}</p>
+                
+                <p class="text-muted">{{video.viewCount}} views &nbsp;<i class="fas fa-circle align-middle" style="font-size:4px;"></i> &nbsp; {{video.uploadDate}}</p>
+                <p class="text-muted"></p>
             </div>
         </div>
     </div>

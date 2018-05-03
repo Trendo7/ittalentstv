@@ -1,22 +1,26 @@
 <div class="col-lg-10 mx-md-auto mt-md-3">
     <h5>Your videos</h5>
     <hr/>
-    <div ng-repeat="video in myVideos">
-        <div ng-click="openVideoLink(video)" class="row mb-3 ">
-            <div class="col-lg-3 col-md-4 my-auto" ng-click="openLink(video)">
-                <img class="img-fluid  img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
+    <div ng-repeat="video in myVideos track by $index" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
+        <div  class="row mb-3 ">
+
+            <div class="col-lg-3 col-md-4 my-auto" >
+                <img class="img-fluid  img-vid" ng-click="openVideoLink(video)"ng-src="{{video.thumbnailUrl}}" alt=""></a>
             </div>
-            <div class="col-lg-7 col-md-6 my-auto">
+
+            <div class="col-lg-7 col-md-6 my-auto" ng-click="openVideoLink(video)">
                 <h5>{{video.title}}</h5>
                 <!--   <h6 class="text-muted">{{video.uploadedBy}}</h6> -->
                 <p class="text-muted">{{video.viewCount}} views</p>
                 <p class="text-muted">Published on {{video.uploadDate | date:'MMM d, y'}}</p>
             </div>
+
             <div class="my-auto col-lg-2 col-md-2">
                 <i ng-click="deleteVideo(video)" class="fas fa-trash cl-lg-12 mr-4"></i>
                 <i class="fas fa-pen-square" ng-click="editVideo(video)" data-toggle="modal"
                    data-target="#editModal"></i>
             </div>
+
         </div>
     
     </div>

@@ -16,7 +16,6 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
         firebase.initializeApp(config);
     })();
 
-
     const OK = 200;
 
     $rootScope.logout = function() {

@@ -1,7 +1,7 @@
 <div ng-if="isValidUser" class="col-lg-10 mx-md-auto mt-md-3">
     <div class="row">
         <div class="col-lg-8 col-md-8 col-10">
-            <h5>{{user.username}}'s playlist</h5>
+            <h5 style="animation: riseUp 0.5s ease-in">{{user.username}}'s playlist</h5>
             <p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
             <a href="/#!/user/{{user._id}}/videos">Videos</a>&nbsp; &nbsp; &nbsp;<a href="/#!/user/{{user._id}}/playlists">Playlists</a>
         </div>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <hr/>
-    <div ng-if="hasPlaylists" ng-repeat="playlist in userPlaylists | orderBy: sortSelect">
+    <div ng-if="hasPlaylists" ng-repeat="playlist in userPlaylists | orderBy: sortSelect" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
         <div  ng-click="openVideoLink(video)" class="row mb-3 ">
             <div class="col-lg-3 col-md-4 my-auto">
                 <img class="img-fluid  img-vid mb-2" ng-src="{{playlist.imgUrl}}" alt="" />
