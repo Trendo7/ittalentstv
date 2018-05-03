@@ -1,4 +1,5 @@
 app.controller('VideosController', function ($scope, $window, $location, VideosService) {
+    
     $scope.videos = [];
 
     VideosService.getVideos()
@@ -8,6 +9,11 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
             });
         })
         .catch(err => console.log(err));
+
+    $scope.getDate = function (date){
+        console.log(moment(date).fromNow())    
+
+    }   
 
     //moved to main controller
     // $scope.openVideoLink = function (video) {
