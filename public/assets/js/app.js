@@ -11,7 +11,7 @@ app.config(function ($routeProvider) {
             controller: 'SigninController'
         })
         .when('/upload', {
-            templateUrl: 'assets/js/videos/upload.htm',
+            templateUrl: 'assets/js/upload/upload.htm',
             controller: 'UploadController'
         })
         .when('/account', {

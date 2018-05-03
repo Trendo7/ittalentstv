@@ -259,6 +259,10 @@ label {
 	background: rgb(75, 180, 232);
 }
 
+.save-btn:active {
+	color: rgb(75, 180, 232);
+}
+
 .fas {
 	font-size: 1.5em;
 	color: #999999;
@@ -345,6 +349,24 @@ opacity: 0.7;
 	cursor: pointer;
 }
 
+.custom-links {
+	text-decoration: none;
+	all: unset;
+	color: #666666;
+	cursor: pointer;
+	opacity: 0.7;
+	
+}
+
+.custom-links:hover {
+	text-decoration: none;
+	color: #4E4E4E;
+	opacity: 1;
+}
+
+
+
+
 textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
 	outline: 0px !important;
 	-webkit-appearance: none;
@@ -430,8 +452,6 @@ option {
     opacity: 1;
   }
 }
-
-
 
 
 @-webkit-keyframes moveUp {

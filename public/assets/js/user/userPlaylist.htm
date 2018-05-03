@@ -1,24 +1,22 @@
 <div ng-if="isValidUser" class="col-lg-12 mx-md-auto mt-md-3">
     
-
     <div class="row" >
-            <div class="mx-auto my-auto">
+        <div class="mx-auto my-auto">
             <img class="rounded-circle d-inline" src="{{user.imageUrl}}" width="80vh" height="80vh" style="animation: riseUp 0.5s linear" alt="">
             <h3 class="col-lg-8 col-md-8 col-7 align-middle d-inline" style="animation: riseUp 0.4s ease-in">{{user.username}}'s profile</h3>
-            </div>
-    </div> 
-        <div class="row " >
-            <a class="" href="/#!/user/{{user._id}}/videos">VIDEOS</a>
-            <a href="/#!/user/{{user._id}}/playlists">PLAYLISTS</a>
-    </div>           
-            
+        </div>
+    </div>
+    <div class="row mt-3" >
+        <a class="custom-links mx-auto" href="/#!/user/{{user._id}}/videos">VIDEOS</a>
+        <a class="custom-links mx-auto active" href="/#!/user/{{user._id}}/playlists">PLAYLISTS</a>
+    </div>
+    
     <hr/>
     <div ng-if="hasPlaylists" ng-repeat="playlist in userPlaylists | orderBy: sortSelect" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
         <div  ng-click="openVideoLink(video)" class="row mb-3 ">
             <div class="col-lg-3 col-md-4 my-auto">
                 <img class="img-fluid  img-vid mb-2" ng-src="{{playlist.imgUrl}}" alt="" />
             </div>
-
             <div class="clip col-lg-6 col-md-6 my-auto">
                 <h5 class="mb-2">{{playlist.title}}</h5>
                 <h5 class="mb-2">{{playlist.videos.length}} video</h5>
@@ -26,10 +24,9 @@
         </div>
     </div>
     <div ng-if="!hasPlaylists">
-        <h1 class="mb-2">The selected user doesn't have playlists</h1>
+        <h1 class="mt-5 text-center">{{user.username}} doesn't have any playlists.</h1>
     </div>
 </div>
-
 <div ng-if="!isValidUser">
     <h1 class="mb-2">{{errMsg}}</h1>
 </div>

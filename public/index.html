@@ -48,9 +48,6 @@
                             <li class="nav-item" ng-if="!logged" ">
                                 <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="signin.html#!/#login">SIGN IN</a>
                             </li>
-                            <!--   <li class="nav-item my-auto" ng-if="logged">
-                                <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="#!/my_videos">My Videos</a>
-                            </li> -->
                             <li id="upload-ico-li" class="nav-item my-auto mr-0" ng-if="logged">
                                 <a href="#!/upload">
                                     <i id="upload-ico" class="fas fa-upload mt-1"></i>
@@ -59,21 +56,9 @@
                             </li>
                             <li class="dropleft nav-item my-auto" ng-if="logged">
                                 <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-
                                     <img id="navbar-avatar" ng-if="logged.imageUrl" ng-src="{{logged.imageUrl}}" alt="" style=" height: 24px; width: 24px; border-radius: 50%;">
-
                                     <i ng-if="!logged.imageUrl" class="fas fa-user-circle"></i>
-
-
                                 </a>
-
-                                
-
-                                
-
-
-
-
                                 <div class="dropdown-menu mt-2 text-center" style="animation: riseUp 0.2s ease-in">
                                     <h6 class="dropdown-header">{{logged.username}}</h6>
                                     <a class="dropdown-item" href="#!/my_videos">My Videos</a>
@@ -95,29 +80,24 @@
                 <!--  Scripts  -->
             </div>
             <script src="assets/js/app.js"></script>
-            <script src="assets/js/tagsinput.js"></script>
+            <script src="assets/js/vendor/tagsinput.js"></script>
             <script src="assets/js/mainController.js"></script>
             <script src="assets/js/searchOptions/searchOptionsService.js"></script>
             <script src="assets/js/searchOptions/searchOptionsController.js"></script>
             <script src="assets/js/videos/videosService.js"></script>
             <script src="assets/js/videos/videosController.js"></script>
-            <script src="assets/js/videos/uploadController.js"></script>
-
+            <script src="assets/js/upload/uploadController.js"></script>
             <script src="assets/js/search/searchController.js"></script>
-
-
             <script src="assets/js/signin/signinController.js"></script>
             <script src="assets/js/logout/logoutController.js"></script>
             <script src="assets/js/account/accountService.js"></script>
             <script src="assets/js/account/accountController.js"></script>
             <script src="assets/js/myVideos/myVideosService.js"></script>
             <script src="assets/js/myVideos/myVideosController.js"></script>
-
             <script src="assets/js/user/userCheckService.js"></script>
             <script src="assets/js/user/userVideosService.js"></script>
             <script src="assets/js/user/userVideosController.js"></script>
             <script src="assets/js/user/userPlaylistsService.js"></script>
             <script src="assets/js/user/userPlaylistsController.js"></script>
-
         </body>
     </html>
