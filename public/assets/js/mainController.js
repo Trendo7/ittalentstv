@@ -29,6 +29,10 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
             })
     };
 
+    $scope.go = function(path) {
+        $location.path(path + "="); //here we should get search parameters
+    };
+    
     //opens selected video
     $scope.openVideoLink = function (video) {
         $location.path(video._id);

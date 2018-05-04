@@ -1,20 +1,19 @@
-app.controller('SearchController', function ($scope, $window, $location, MyVideosService, $timeout) {
+app.controller('SearchController', function($scope, $window, $location, MyVideosService, $timeout) {
     $scope.myVideos = [];
     $scope.editedVideo = {};
 
 
     $scope.sortSelect = '';
 
-    $scope.changeOption = function(option){
+    $scope.changeOption = function(option) {
         console.log(option);
         $scope.sortSelect = option;
     }
 
-
     //loads all user videos
     MyVideosService.getMyVideos()
-        .then(function (videos) {
-            $scope.$apply(function () {
+        .then(function(videos) {
+            $scope.$apply(function() {
                 $scope.myVideos = videos;
             });
         })
@@ -22,10 +21,9 @@ app.controller('SearchController', function ($scope, $window, $location, MyVideo
 
 
 
-    $scope.openLink = function (video) {
+    $scope.openLink = function(video) {
         $location.path(video._id);
     };
-
 
 
 

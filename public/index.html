@@ -41,7 +41,7 @@
                                 <datalist id="searchOptions" >
                                 <option ng-repeat="searchOption in searchOptions track by $index" value="{{searchOption}}"/>
                                     </datalist>
-                                    <button class="btn btn-outline-secondary border border-left-0" type="button">
+                                    <button class="btn btn-outline-secondary border border-left-0" ng-click="go('/search')" type="button">
                                     <i class="fa fa-search"></i>
                                     </button>
                                 </span>
