@@ -3,7 +3,6 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
     $scope.isImageSaved = true;
     var database = firebase.database();
     var file = document.getElementById('fileButton');
-    var avatarUploaded = false;
 
     if (!$scope.logged) {
         $window.location.href = '/signin.html#!/#login';
@@ -91,6 +90,7 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
                 $scope.$apply(function() {
                     $scope.isBeingEdited = false;
                     $scope.errorMessage = '';
+                    $scope.logged.username = user.username;
                     $scope.logged.imageUrl = user.imageUrl;
                     $scope.successMessage = 'Your account details have been changed successfully!';
                 });

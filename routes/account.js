@@ -4,10 +4,18 @@ const sha1 = require('sha1');
 
 //Get account details
 router.get('/', function (req, res, next) {
+    var usersCollection = req.db.get('users');
     var user = req.session.user;
 
-    res.status(200);
-    res.json(user);
+    usersCollection.findOne({_id: user._id}, {}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    });
 });
 
 //Modify account details
@@ -33,10 +41,9 @@ router.put('/', function (req, res, next) {
 
     user.password = sha1(user.password);
 
-    usersCollection.find({username: user.username}, {}, function (err, docs) {
+    usersCollection.findOne({username: user.username}, {}, function (err, docs) {
         if (!err) {
-            console.log(docs[0]);
-            if ((docs.length > 0) && (req.session.user.username != user.username)) {
+            if ((docs != null) && (req.session.user.username != user.username)) {
                 res.status(409);
                 res.json({
                     error: "This username is already in use! Please choose another one!"
@@ -52,13 +59,14 @@ router.put('/', function (req, res, next) {
     });
 
     function updateUser() {
-        usersCollection.update({_id: user._id}, user, function (err, docs) {
+        usersCollection.findOneAndUpdate({_id: user._id}, user, function (err, docs) {
             if (!err) {
+                req.session.user = docs;
                 res.status(200);
                 res.json({
-                    userId: user._id,
-                    username: user.username,
-                    imageUrl: user.imageUrl
+                    userId: docs._id,
+                    username: docs.username,
+                    imageUrl: docs.imageUrl
                 });
             } else {
                 res.status(500);

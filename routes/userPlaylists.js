@@ -55,8 +55,10 @@ router.post('/', function (req, res, next) {
     function createPlaylist() {
         playlistsCollection.insert(newPlaylist, function (err, data) {
             if (!err) {
-                var playlistId = data._id;
-                updateUserPlaylists(playlistId);
+                console.log('createPlaylist function');
+                console.log(data);
+                console.log();
+                updateUserPlaylists(newPlaylist);
             } else {
                 res.status(500);
                 res.json({err: err});
@@ -64,13 +66,16 @@ router.post('/', function (req, res, next) {
         });
     }
 
-    function updateUserPlaylists(playlistId) {
-        user.playlists.push(playlistId);
+    function updateUserPlaylists(playlist) {
+        user.playlists.push(playlist._id);
 
         usersCollection.update({_id: user._id}, user, function (err, docs) {
             if (!err) {
                 res.status(200);
-                res.json(videoId);
+                console.log('usersCollection.update');
+                console.log(docs);
+                console.log();
+                res.json(playlist);
             } else {
                 res.status(500);
                 res.json({err: err});

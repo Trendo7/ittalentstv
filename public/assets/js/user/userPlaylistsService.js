@@ -10,4 +10,16 @@ app.service('UserPlaylistsService', function ($http) {
         });
     };
 
+
+    //needs to be updated and to decide what arguments will be provided also what will be posted to Server
+    //creates new playlist
+    this.createUserPlaylists = function (id) {
+        return new Promise(function (resolve, reject) {
+            $http.post('/api/userPlaylists', newPlaylist)
+                .then(function (response) {
+
+                })
+                .catch(err => reject(err));
+        });
+    }
 });
