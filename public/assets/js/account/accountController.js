@@ -1,5 +1,6 @@
 app.controller('AccountController', function($scope, $http, $route, $window, AccountService) {
     $scope.isBeingEdited = false;
+    $scope.isImageSaved = true;
     var database = firebase.database();
     var file = document.getElementById('fileButton');
     var avatarUploaded = false;
@@ -24,21 +25,27 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
         $scope.successMessage = '';
     };
 
-    fileButton.addEventListener('change', function(e) {
-        avatarUploaded = true;
+    file.addEventListener('click', function() {
+        $scope.isImageSaved = false;
+
+    });
+
+    file.addEventListener('change', function(e) {
+        console.log(e.target.files[0]);
         var file = e.target.files[0];
-        var id = 'pic' + Date.now()
+        var id = 'pic' + Date.now();
         var metadata = {
             contentType: 'image/*',
         };
         var storageRef = firebase.storage().ref('avatars/' + id)
         storageRef.put(file, metadata)
             .then(function(snapshot) {
-                var imageURL = snapshot.downloadURL
-                console.log(imageURL)
-                $scope.user.imageUrl = imageURL;
-
-
+                var imageURL = snapshot.downloadURL;
+                console.log(imageURL);
+                $scope.$apply(function() {
+                    $scope.user.imageUrl = imageURL;
+                    $scope.isImageSaved = true;
+                });
             })
             .catch(function(data) {
                 alert(data)
@@ -46,7 +53,7 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
     })
 
     $scope.saveChanges = function() {
-        console.log('click')
+        console.log('click');
         if ($scope.user.username.trim() == '') {
             $scope.errorMessage = 'Please enter username!';
             return;
@@ -58,17 +65,12 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
         }
 
         AccountService.saveChanges($scope.user)
-            .then(function(d) {
+            .then(function(user) {
                 $scope.$apply(function() {
-                    console.log(d)
-
-                    avatarUploaded = false;
                     $scope.isBeingEdited = false;
                     $scope.errorMessage = '';
+                    $scope.logged.imageUrl = user.imageUrl;
                     $scope.successMessage = 'Your account details have been changed successfully!';
-                    localStorage.setItem('logged', JSON.stringify(d))
-                    $window.location.reload();
-
                 });
 
             })

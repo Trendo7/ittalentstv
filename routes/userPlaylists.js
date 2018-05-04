@@ -18,6 +18,70 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+//Create playlist
+router.post('/', function (req, res, next) {
+    var playlistsCollection = req.db.get('playlists');
+    var usersCollection = req.db.get('users');
+    var newPlaylist = req.body;
+    var user = req.session.user;
+    newPlaylist.title = '';
+    newPlaylist.createdByID = user._id;
+    newPlaylist.videos = [];
+    newPlaylist.imgUrl = '';
+
+    if (!user) {
+        res.status(401);
+        res.json({err: "Please login to create your own playlist!"});
+        return;
+    }
+
+    playlistsCollection.find({title: newPlaylist.title, createdByID: newPlaylist.title}, {}, function (err, docs) {
+        if (!err) {
+            if (docs.length > 0) {
+                res.status(409);
+                res.json({
+                    error: "You already have playlist with such name!"
+                });
+                return;
+            } else {
+                createPlaylist();
+            }
+        } else {
+            res.status(500);
+            res.json({err: err});
+        }
+    });
+
+    function createPlaylist() {
+        playlistsCollection.insert(newPlaylist, function (err, data) {
+            if (!err) {
+                var playlistId = data._id;
+                updateUserPlaylists(playlistId);
+            } else {
+                res.status(500);
+                res.json({err: err});
+            }
+        });
+    }
+
+    function updateUserPlaylists(playlistId) {
+        user.playlists.push(playlistId);
+
+        usersCollection.update({_id: user._id}, user, function (err, docs) {
+            if (!err) {
+                res.status(200);
+                res.json(videoId);
+            } else {
+                res.status(500);
+                res.json({err: err});
+            }
+        });
+    }
+
+});
+
+
+
 //
 // //Add  playlist
 // router.post('/', function (req, res, next) {
