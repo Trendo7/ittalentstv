@@ -2,7 +2,7 @@
     <h5>Your profile</h5>
     <hr/>
     <div class="row"  style="animation: riseUp 0.5s ease-in">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-7 col-12">
             <form>
             <div class="form-group col-10 ">
                 <label for="editUsername">Username:</label>
@@ -18,16 +18,20 @@
             </div>
         </form>     
     </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-md-5 col-12">
             <div class="col-12">
                 <label for="editPhoto">Profile picture:</label>
-            <div class="custom-file" id="customFile" lang="en">
+            <div class="custom-file" id="customFile" lang="en" >
                     <input type="file" id="fileButton" class="custom-file-input  col-lg-6 col-md-7 col-10 ml-5 mt-3" id="editPhoto" ng-model="user.photoUrl" ng-disabled="!isBeingEdited" accept="image/*">
                     <label class="custom-file-label" id="fileName" for="editPhoto">
                         Select file...
                     </label>
+                    
                 </div>
-            <img id="profilePic" class="col-lg-6 col-md-7 col-10 ml-5 mt-2" ng-src="{{image}}" alt="" />
+            
+            </div>
+            <div class="text-center mt-5">
+            <img id="profilePic" class="col-lg-6 col-md-8 col-6 img-fluid" ng-src="{{image}}" alt="" />
             </div>
          </div>
      </div>

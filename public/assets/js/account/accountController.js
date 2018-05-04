@@ -48,7 +48,7 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
         if (file != undefined) {
 
             $scope.$apply(function() {
-                $scope.image = 'http://gifimage.net/wp-content/uploads/2017/09/blue-loading-gif-transparent-10.gif';
+                $scope.image = '../assets/img/loading.gif';
             });
 
             var id = 'pic' + Date.now();
