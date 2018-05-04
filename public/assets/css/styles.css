@@ -382,6 +382,13 @@ opacity: 0.7;
 	cursor: pointer;
 }
 
+.profile-selected-tab {
+	opacity: 1;
+	display:inline-block;
+	border-bottom:2px solid rgb(75, 180, 232);
+	border-bottom:2px solid #999999;
+	padding-bottom:2px;
+}
 
 textarea:hover, input:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
 	outline: 0px !important;

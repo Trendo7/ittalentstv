@@ -8,7 +8,7 @@
         </div>
     </div>
     <div class="row mt-3" >
-        <a class="custom-links mx-auto" href="/#!/user/{{user._id}}/videos">VIDEOS</a>
+        <a class="custom-links mx-auto profile-selected-tab" href="/#!/user/{{user._id}}/videos">VIDEOS</a>
         <a class="custom-links mx-auto" href="/#!/user/{{user._id}}/playlists">PLAYLISTS</a>
     </div>
 
@@ -31,3 +31,4 @@
     <div ng-if="!isValidUser">
         <h1 class="mb-2">{{errMsg}}</h1>
     </div>
+</div>
