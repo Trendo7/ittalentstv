@@ -26,8 +26,9 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
     };
 
     file.addEventListener('click', function() {
-        $scope.isImageSaved = false;
-
+        $scope.$apply(function () {
+            $scope.isImageSaved = false;
+        });
     });
 
     file.addEventListener('change', function(e) {
