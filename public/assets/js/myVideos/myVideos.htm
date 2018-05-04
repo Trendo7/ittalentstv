@@ -8,11 +8,11 @@
                 <img class="img-fluid  img-vid" ng-click="openVideoLink(video)" ng-src="{{video.thumbnailUrl}}" alt=""></a>
             </div>
 
-            <div class="col-lg-7 col-md-6 my-auto" ng-click="openVideoLink(video)">
+            <div class="clickable col-lg-7 col-md-6 my-auto mb-2" ng-click="openVideoLink(video)">
                 <h5>{{video.title}}</h5>
                 <!--   <h6 class="text-muted">{{video.uploadedBy}}</h6> -->
                 <small class="text-muted">{{video.viewCount}} views</small>
-                <p class="text-muted">Published on {{video.uploadDate | date:'MMM d, y'}}</p>
+                <small class="text-muted d-block">Published on {{video.uploadDate | date:'MMM d, y'}}</small>
             </div>
 
             <div class="my-auto col-lg-2 col-md-2">

@@ -20,8 +20,7 @@
                 <div class="">
                     <h5>{{video.title}}</h5>
                     <h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
-                    <p class="text-muted">{{video.viewCount}} views</p>
-                    <p class="text-muted"> {{video.uploadDate | date:'MMM d, y'}}</p>
+                    <p class="text-muted">{{video.viewCount}} views&nbsp;<i class="fas fa-circle align-middle" style="font-size: 4px;"></i> &nbsp;{{video.uploadDate | date:'MMM d, y'}}</p>
                 </div>
             </div>
         </div>
