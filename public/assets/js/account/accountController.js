@@ -27,10 +27,20 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
     };
 
     file.addEventListener('click', function() {
+        document.body.onfocus = checkIt;
         $scope.$apply(function () {
             $scope.isImageSaved = false;
         });
     });
+
+    function checkIt() {
+        if (!file.value.length) {
+            $scope.$apply(function () {
+                $scope.isImageSaved = true;
+            });
+        }
+        document.body.onfocus = null;
+    }
 
     file.addEventListener('change', function(e) {
         $scope.$apply(function() {
@@ -55,7 +65,7 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
             .catch(function(data) {
                 alert(data)
             })
-    })
+    });
 
     $scope.saveChanges = function() {
         console.log('click');
