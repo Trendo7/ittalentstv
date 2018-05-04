@@ -97,29 +97,29 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 					latest.innerText = `${percentage.toFixed(0)}%`;
 				},
 				function error(err) {
-					console.log('error');
+					alert('Video uploading error occur. Try again!')
 				},
 				function complete() {
+
+					var latest = document.querySelector('#prog'); //text under progress bar
+					var result = document.querySelector('#result'); //container with video
+					var video = document.getElementById('videoId'); //video element
+					var canvas = document.getElementById('canvasId'); //canvas element
+					var img = document.getElementById('imgId');
 					var newVideo;
 					var downloadImgUrl;
 
 					//direct link to the video in firebase storage
 					var downloadURL = task.snapshot.downloadURL;
 
-					var latest = document.querySelector('#prog');
-					var result = document.querySelector('#result')
 					latest.innerText = "We are almost ready! Please wait a moment!";
-
-					var video = document.getElementById('videoId')
-					var canvas = document.getElementById('canvasId');
-					var img = document.getElementById('imgId');
 
 					//show and load video
 					$scope.hideVideo = false;
 					video.src = downloadURL;
 
 					video.onloadedmetadata = function() {
-						//getting random position of the video for the screenshot
+						//getting random position of the video for the screenshot * WHEN VIDEO HAS BEEN LOADED
 						video.currentTime = Math.floor(Math.random() * video.duration);
 
 						setTimeout(() => {
@@ -137,7 +137,7 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 							storageRef.put(file)
 								.then(function(snapshot) {
 
-									//direct link to screenshot in videbase
+									//direct link to screenshot in firebase
 									var downloadImgUrl = snapshot.downloadURL;
 
 									//populating video object before send it to the mongoDB

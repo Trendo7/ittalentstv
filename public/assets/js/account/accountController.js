@@ -1,8 +1,8 @@
-app.controller('AccountController', function($scope, $http,$route, $window, AccountService) {
+app.controller('AccountController', function($scope, $http, $route, $window, AccountService) {
     $scope.isBeingEdited = false;
     var database = firebase.database();
     var file = document.getElementById('fileButton');
-    var avatarUploaded = false; 
+    var avatarUploaded = false;
 
     if (!$scope.logged) {
         $window.location.href = '/signin.html#!/#login';
@@ -11,11 +11,11 @@ app.controller('AccountController', function($scope, $http,$route, $window, Acco
     $scope.user = {};
 
     AccountService.getLoggedUser()
-    .then(function(user) {
-        $scope.$apply(function() {
-            $scope.user = user;
+        .then(function(user) {
+            $scope.$apply(function() {
+                $scope.user = user;
+            });
         });
-    });
 
     $scope.editAccount = function() {
         $scope.isBeingEdited = true;
@@ -37,13 +37,16 @@ app.controller('AccountController', function($scope, $http,$route, $window, Acco
                 var imageURL = snapshot.downloadURL
                 console.log(imageURL)
                 $scope.user.imageUrl = imageURL;
-                avatarUploaded = false;
 
-                
+
+            })
+            .catch(function(data) {
+                alert(data)
             })
     })
 
     $scope.saveChanges = function() {
+        console.log('click')
         if ($scope.user.username.trim() == '') {
             $scope.errorMessage = 'Please enter username!';
             return;
@@ -54,28 +57,27 @@ app.controller('AccountController', function($scope, $http,$route, $window, Acco
             return;
         }
 
-        
-            
-        
-
         AccountService.saveChanges($scope.user)
             .then(function(d) {
                 $scope.$apply(function() {
                     console.log(d)
-                    $route.reload()
+
                     avatarUploaded = false;
                     $scope.isBeingEdited = false;
                     $scope.errorMessage = '';
                     $scope.successMessage = 'Your account details have been changed successfully!';
+                    localStorage.setItem('logged', JSON.stringify(d))
+                    $window.location.reload();
 
                 });
+
             })
             .catch(function(err) {
                 $scope.$apply(function() {
                     $scope.errorMessage = err.error;
                 });
             });
-           
+
     }
 
 });
