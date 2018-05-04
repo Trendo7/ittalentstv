@@ -60,18 +60,18 @@ function checkLogin(req, res, next) {
     }
 }
 
-app.use('/', indexRouter);
-app.use('/userCheck', userCheckRouter);
-app.use('/userVideos', userVideosRouter);
-app.use('/userPlaylists', userPlaylistsRouter);
-app.use('/login', loginRouter);
-app.use('/register', registerRouter);
-app.use('/logout', logoutRouter);
-app.use('/searchOptions', searchOptionsRouter);
-app.use('/videos', videosRouter);
-app.use('/account', accountRouter);
-app.use('/results', resultsRouter);
-app.use('/myVideos', myVideosRouter);
+app.use('/api/', indexRouter);
+app.use('/api/userCheck', userCheckRouter);
+app.use('/api/userVideos', userVideosRouter);
+app.use('/api/userPlaylists', userPlaylistsRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/register', registerRouter);
+app.use('/api/logout', logoutRouter);
+app.use('/api/searchOptions', searchOptionsRouter);
+app.use('/api/videos', videosRouter);
+app.use('/api/account', accountRouter);
+app.use('/api/results', resultsRouter);
+app.use('/api/myVideos', myVideosRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

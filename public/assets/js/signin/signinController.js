@@ -20,7 +20,7 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
             password: $scope.password
         };
 
-        $http.post('http://localhost:3000/login', $scope.user)
+        $http.post('/api/login', $scope.user)
             .then(function (response) {
                 if (response.status == OK) {
                     console.log(response.data);
@@ -47,7 +47,7 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
 
         console.log($scope.newUser);
 
-        $http.post('http://localhost:3000/register', $scope.newUser)
+        $http.post('/api/register', $scope.newUser)
             .then(function (response) {
                 if (response.status == OK) {
                     console.log('OK')

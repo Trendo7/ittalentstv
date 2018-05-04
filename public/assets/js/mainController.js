@@ -19,7 +19,7 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
     const OK = 200;
 
     $rootScope.logout = function() {
-        $http.get('http://localhost:3000/logout')
+        $http.get('/api/logout')
             .then(function(response) {
                 if (response.status == OK) {
                     console.log(response.data);

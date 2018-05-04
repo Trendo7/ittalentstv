@@ -16,7 +16,7 @@ app.service('VideosService', function ($http) {
     this.getVideos = function () {
         return new Promise(function (resolve, reject) {
             // $http.get('js/videos/videos.json')
-            $http.get('http://localhost:3000/videos')
+            $http.get('/api/videos')
                 .then(function (response) {
                     resolve(response.data);
                 })
@@ -28,7 +28,7 @@ app.service('VideosService', function ($http) {
     //loads selected video
     this.loadVideo = function (id) {
         return new Promise(function (resolve, reject) {
-            $http.get('http://localhost:3000/videos/' + id)
+            $http.get('/api/videos/' + id)
                 .then(function (response) {
                     var currentVideo = response.data;
                     resolve(currentVideo);
@@ -41,7 +41,7 @@ app.service('VideosService', function ($http) {
     //update video rate (like/dislike) of watched video
     this.updateVideoRate = function (id, vote) {
         return new Promise(function (resolve, reject) {
-            $http.put('http://localhost:3000/videos/rate/' + id, vote)
+            $http.put('/api/videos/rate/' + id, vote)
                 .then(function (response) {
                     resolve(response);
                 })

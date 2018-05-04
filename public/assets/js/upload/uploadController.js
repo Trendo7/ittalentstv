@@ -154,7 +154,7 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 									newVideo = $scope.video;
 
 									//sending request to MongoDB
-									$http.post('http://localhost:3000/videos', newVideo)
+									$http.post('/api/videos', newVideo)
 										.then(function(response) {
 											if (response.status >= STATUS_OK) {
 												latest.innerText = "Your video has been successfully uploaded! Yey!";

@@ -2,7 +2,7 @@ app.service('AccountService', function ($http) {
 
     this.getLoggedUser = function () {
         return new Promise(function (resolve, reject) {
-            $http.get('http://localhost:3000/account')
+            $http.get('/api/account')
                 .then(function (response) {
                     resolve(response.data);
                 })
@@ -12,7 +12,7 @@ app.service('AccountService', function ($http) {
 
     this.saveChanges = function (user) {
         return new Promise(function (resolve, reject) {
-            $http.put('http://localhost:3000/account', user)
+            $http.put('/api/account', user)
                 .then(function (response) {
                     resolve(response.data);
                     localStorage.setItem('logged', JSON.stringify(response.data));
