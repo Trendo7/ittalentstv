@@ -56,7 +56,7 @@ router.post('/', function (req, res, next) {
     var newPlaylist = req.body;
     var user = req.session.user;
     newPlaylist.createdByID = user._id;
-    newPlaylist.imgUrl = '';
+    newPlaylist.imgUrl = 'https://theplaylist.net/wp-content/uploads/2016/05/the-playlist.jpg';
 
     if (!user) {
         res.status(401);

@@ -15,7 +15,6 @@ app.controller('UserPlaylistsController', function ($scope, $window, $location, 
                 if (user.playlists.length > 0) {
                     $scope.hasPlaylists = true;
                     $scope.getUserPlaylists(user._id);
-                    console.log($scope.isValidUser);
                 } else {
                     $scope.hasPlaylists = false;
                 }
@@ -42,19 +41,6 @@ app.controller('UserPlaylistsController', function ($scope, $window, $location, 
                 })
             })
             .catch(err => console.log(err.data));
-    };
-
-
-    //creates new playlist
-    $scope.createUserPlaylists = function (PODAVAME) {
-        MyVideosService.createUserPlaylists(PODAVAME)
-            .then(function (videos) {
-                $scope.$apply(function () {
-                    $scope.myVideos = videos;
-                });
-            })
-            .catch(err => alert(err.data.err));
-
     };
 
 });
