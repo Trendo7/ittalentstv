@@ -24,9 +24,7 @@ router.post('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var newPlaylist = req.body;
     var user = req.session.user;
-    newPlaylist.title = '';
     newPlaylist.createdByID = user._id;
-    newPlaylist.videos = [];
     newPlaylist.imgUrl = '';
 
     if (!user) {
@@ -35,41 +33,20 @@ router.post('/', function (req, res, next) {
         return;
     }
 
-    playlistsCollection.find({title: newPlaylist.title, createdByID: newPlaylist.title}, {}, function (err, docs) {
+    playlistsCollection.insert(newPlaylist, function (err, data) {
         if (!err) {
-            if (docs.length > 0) {
-                res.status(409);
-                res.json({
-                    error: "You already have playlist with such name!"
-                });
-                return;
-            } else {
-                createPlaylist();
-            }
+            updateUserPlaylists(data);
         } else {
             res.status(500);
             res.json({err: err});
         }
     });
 
-    function createPlaylist() {
-        playlistsCollection.insert(newPlaylist, function (err, data) {
-            if (!err) {
-                console.log('createPlaylist function');
-                console.log(data);
-                console.log();
-                updateUserPlaylists(newPlaylist);
-            } else {
-                res.status(500);
-                res.json({err: err});
-            }
-        });
-    }
-
     function updateUserPlaylists(playlist) {
-        user.playlists.push(playlist._id);
-
-        usersCollection.update({_id: user._id}, user, function (err, docs) {
+        // user.playlists.push(playlist._id);
+        var playlistId = playlist._id;
+        console.log(playlistId);
+        usersCollection.findOneAndUpdate({_id: user._id}, {$push: {playlists: playlistId}}, function (err, docs) {
             if (!err) {
                 res.status(200);
                 console.log('usersCollection.update');
@@ -84,50 +61,5 @@ router.post('/', function (req, res, next) {
     }
 
 });
-
-
-
-//
-// //Add  playlist
-// router.post('/', function (req, res, next) {
-//     var playlistsCollection = req.db.get('playlists');
-//     var newPlaylist = req.body;
-//     newPlaylist.uploadedBy = req.session.user.username;
-//     newPlaylist.uploadedByID = req.session.user._id;
-//     newPlaylist.comments = [];
-//     newPlaylist.viewCount = 0;
-//     newPlaylist.likeCount = 0;
-//     newPlaylist.dislikeCount = 0;
-//     newPlaylist.likedByUserIDs = [];
-//     newPlaylist.dislikedByUserIDs = [];
-//
-//
-//     videosCollection.insert(newVideo, function (err, data) {
-//         if (!err) {
-//             var videoId = data._id;
-//             updateUserUploadedVideos(videoId);
-//         } else {
-//             res.status(500);
-//             res.json({err: err});
-//         }
-//     });
-//
-//     function updateUserUploadedVideos(videoId) {
-//         var usersCollection = req.db.get('users');
-//         var user = req.session.user;
-//         user.uploadedVideos.push(videoId);
-//
-//         usersCollection.update({_id: user._id}, user, function (err, docs) {
-//             if (!err) {
-//                 res.status(200);
-//                 res.json(videoId);
-//             } else {
-//                 res.status(500);
-//                 res.json({err: err});
-//             }
-//         });
-//     }
-//
-// });
 
 module.exports = router;

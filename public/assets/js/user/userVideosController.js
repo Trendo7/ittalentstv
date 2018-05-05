@@ -1,5 +1,4 @@
 app.controller('UserVideosController', function ($scope, $window, $location, UserVideosService, UserCheckService) {
-
     const NOT_FOUND = 404;
     $scope.userVideos = [];
     // $scope.userID = $location.path().substring($location.path().lastIndexOf('/') + 1);
@@ -49,8 +48,6 @@ app.controller('UserVideosController', function ($scope, $window, $location, Use
         });
 
 
-
-
     //get all videos that are uploaded by the selected user
     function getUserVideos (userID) {
         UserVideosService.getUserVideos(userID)
@@ -61,11 +58,5 @@ app.controller('UserVideosController', function ($scope, $window, $location, Use
             })
             .catch(err => console.log(err.data));
     }
-
-
-    //moved to mainController
-    // $scope.openVideoLink = function (video) {
-    //     $location.path(video._id);
-    // };
 
 });

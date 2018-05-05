@@ -1,16 +1,3 @@
-// function Video (title, url, description) {
-//     this.title = title;
-//     this.url = url;
-//     this.description = description;
-//     this.id = 0;
-//     this.uploadedBy = '';
-//     this.comments = [];
-//     this.viewCount = 0;
-//     this.likeCount = 0;
-//     this.dislikeCount = 0;
-// }
-
-
 app.service('VideosService', function ($http) {
     //gets all videos in the database
     this.getVideos = function () {
@@ -37,7 +24,7 @@ app.service('VideosService', function ($http) {
         });
     };
 
-    //needs improvement
+
     //update video rate (like/dislike) of watched video
     this.updateVideoRate = function (id, vote) {
         return new Promise(function (resolve, reject) {
@@ -51,5 +38,29 @@ app.service('VideosService', function ($http) {
                 });
         });
     };
+
+
+    //gets all playlists that are created by the logged user
+    this.getLoggedUserPlaylist = function (id) {
+        return new Promise(function (resolve, reject) {
+            $http.get('/api/userPlaylists/' + id)
+                .then(function (response) {
+                    resolve(response.data);
+                })
+                .catch(err => reject(err));
+        });
+    };
+
+
+    //creates new playlist
+    this.createPlaylist = function (newPlaylist) {
+        return new Promise(function (resolve, reject) {
+            $http.post('/api/userPlaylists', newPlaylist)
+                .then(function (response) {
+                    resolve(response.data);
+                })
+                .catch(err => reject(err));
+        });
+    }
 
 });
