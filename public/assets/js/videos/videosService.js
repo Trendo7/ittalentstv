@@ -52,6 +52,18 @@ app.service('VideosService', function ($http) {
     };
 
 
+    //toggle song in the selected playlist
+    this.toggleSong = function (playlist, videoId) {
+        return new Promise(function (resolve, reject) {
+            $http.put('/api/userPlaylists/' + playlist._id, {videoId: videoId, isChecked: playlist.isChecked})
+                .then(function (response) {
+                    resolve(response.data.message);
+                })
+                .catch(err => reject(err));
+        });
+    };
+
+
     //creates new playlist
     this.createPlaylist = function (newPlaylist) {
         return new Promise(function (resolve, reject) {
@@ -61,6 +73,6 @@ app.service('VideosService', function ($http) {
                 })
                 .catch(err => reject(err));
         });
-    }
+    };
 
 });

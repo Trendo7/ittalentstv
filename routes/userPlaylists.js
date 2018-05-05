@@ -18,6 +18,37 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+
+//toggle song in the selected playlist
+router.put('/:id', function (req, res, next) {
+    var playlistsCollection = req.db.get('playlists');
+    var playlistID = req.params.id;
+    var videoID = req.body.videoId;
+    var isChecked = req.body.isChecked;
+
+    var playlistOptions = {};
+    var message = '';
+    if (isChecked) {
+        playlistOptions = {$push: {videos: videoID}};
+        message = 'Added to playlist';
+    } else {
+        playlistOptions = {$pull: {videos: videoID}};
+        message = 'Removed from playlist';
+    }
+
+    playlistsCollection.findOneAndUpdate({_id: playlistID}, playlistOptions, function (err, docs) {
+        if (!err) {
+            res.status(200);
+            res.json({message: message});
+        } else {
+            res.status(500);
+            res.json({err: err});
+        }
+    });
+
+});
+
+
 //Create playlist
 router.post('/', function (req, res, next) {
     var playlistsCollection = req.db.get('playlists');
@@ -43,15 +74,9 @@ router.post('/', function (req, res, next) {
     });
 
     function updateUserPlaylists(playlist) {
-        // user.playlists.push(playlist._id);
-        var playlistId = playlist._id;
-        console.log(playlistId);
-        usersCollection.findOneAndUpdate({_id: user._id}, {$push: {playlists: playlistId}}, function (err, docs) {
+        usersCollection.findOneAndUpdate({_id: user._id}, {$push: {playlists: playlist._id}}, function (err, docs) {
             if (!err) {
                 res.status(200);
-                console.log('usersCollection.update');
-                console.log(docs);
-                console.log();
                 res.json(playlist);
             } else {
                 res.status(500);

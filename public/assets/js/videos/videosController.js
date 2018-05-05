@@ -53,12 +53,26 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
     $scope.userPlaylists = [];
     //gets all playlists that are created by the logged user
     $scope.getLoggedUserPlaylist = function (userID) {
-        console.log(userID);
         VideosService.getLoggedUserPlaylist(userID)
             .then(function (playlists) {
+                playlists.forEach(playlist => {
+                   playlist.isChecked = !!playlist.videos.find(id => id === $scope.videoID);
+                });
                 $scope.$apply(function () {
                     $scope.userPlaylists = playlists;
-                    console.log($scope.userPlaylists);
+                })
+            })
+            .catch(err => console.log(err.data));
+    };
+
+
+    //toggle song in the selected playlist
+    $scope.toggleSong = function (playlist) {
+        playlist.isChecked = !playlist.isChecked;
+        VideosService.toggleSong(playlist, $scope.videoID)
+            .then(function (response) {
+                $scope.$apply(function () {
+                    console.log(response);
                 })
             })
             .catch(err => console.log(err.data));
@@ -67,15 +81,19 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
 
     //creates new playlist
     $scope.createPlaylist = function () {
+        if ($scope.newPlaylistTitle.trim().length === 0) {
+            return;
+        }
+
         var newPlaylist = {
             title: $scope.newPlaylistTitle,
             videos: [$scope.videoID]
         };
         VideosService.createPlaylist(newPlaylist)
             .then(function (playlist) {
+                playlist.isChecked = true;
                 $scope.$apply(function () {
                     $scope.userPlaylists.push(playlist);
-                    console.log($scope.userPlaylists);
                     $scope.newPlaylistTitle = '';
                 })
             })
