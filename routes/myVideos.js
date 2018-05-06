@@ -52,8 +52,9 @@ router.put('/:id', function (req, res, next) {
 //Delete my video
 router.delete('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');
-    var videoToDeleteID = req.params.id;
     var usersCollection = req.db.get('users');
+    var playlistsCollection = req.db.get('playlists');
+    var videoToDeleteID = req.params.id;
     var user = req.session.user;
 
     var isMyVideo = user.uploadedVideos.find(function (videoId) {
@@ -81,6 +82,18 @@ router.delete('/:id', function (req, res, next) {
 
     function updateUser() {
         usersCollection.findOneAndUpdate({_id: user._id}, {$pull: {playlists: videoToDeleteID}}, function (err, docs) {
+            if (!err) {
+                updatePlaylists();
+            } else {
+                res.status(500);
+                res.json({err: err});
+            }
+        });
+    }
+
+    function updatePlaylists() {
+        playlistsCollection.update({videos: videoToDeleteID}, {$pull: {videos: videoToDeleteID}}, {multi: true}, function (err, docs) {
+            console.log(1);
             if (!err) {
                 res.status(200);
                 res.json({message: "The video has been deleted successfully."});
