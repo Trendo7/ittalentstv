@@ -20,6 +20,7 @@ const videosRouter = require('./routes/videos');
 const accountRouter = require('./routes/account');
 const resultsRouter = require('./routes/results');
 const myVideosRouter = require('./routes/myVideos');
+const myPlaylistsRouter = require('./routes/myPlaylists');
 const searchOptionsRouter = require('./routes/searchOptions');
 
 const app = express();
@@ -72,6 +73,7 @@ app.use('/api/videos', videosRouter);
 app.use('/api/account', accountRouter);
 app.use('/api/results', resultsRouter);
 app.use('/api/myVideos', myVideosRouter);
+app.use('/api/myPlaylists', myPlaylistsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,0 +1,62 @@
+<div class="col-lg-10 mx-md-auto mt-md-3">
+    <h5>Your playlists</h5>
+    <hr/>
+    <div ng-repeat="playlist in myPlaylists track by $index" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
+        <div  class="row mb-3 ">
+
+            <div class="col-lg-3 col-md-4 my-auto" >
+                <img class="img-fluid  img-vid" ng-click="openPlaylistLink(playlist)" ng-src="{{playlist.imgUrl}}" alt=""></a>
+            </div>
+
+            <div class="clickable col-lg-7 col-md-6 my-auto mb-2" ng-click="openPlaylistLink(playlist)">
+                <h5>{{playlist.title}}</h5>
+                <small class="text-muted">{{playlist.videos.length}} videos</small>
+            </div>
+
+            <div class="my-auto col-lg-2 col-md-2">
+                <i ng-click="deletePlaylist(playlist)" class="fas fa-trash cl-lg-12 mr-4"></i>
+                <i class="fas fa-pen-square" ng-click="editPlaylist(playlist)" data-toggle="modal"
+                   data-target="#editModal"></i>
+            </div>
+
+        </div>
+    
+    </div>
+<!--     <script src="assets/js/tagsinput.js"></script> -->
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title ml-3" id="exampleModalLabel">Edit Video</h5>
+                    <button type="button" class="close mr-2" data-dismiss="modal" aria-label="Close">
+                        <span id="close-edit-modal" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group mb-1">
+                            <label for="title-edit" class="col-form-label">Title:</label>
+                            <input ng-model="editedVideo.title" type="text" class="form-control" id="title-edit"/>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="description-edit" class="col-form-label">Description:</label>
+                            <textarea ng-model="editedVideo.description" class="form-control"
+                                      id="description-edit"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tags-edit" class="col-form-label">Tags:</label>
+                            <br>
+                            <input ng-model="editedVideo.tags" class="form-control" id="tags-edit"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button ng-click="saveChanges(editedVideo)" type="button" id="save"
+                            class="btn save-btn btn-primary">save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
