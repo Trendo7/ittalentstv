@@ -31,33 +31,30 @@ app.controller('MyPlaylistsController', function($scope, $window, $location, MyP
     };
 
 
-    // //loads video title, description and tags in the edit form
-    // $scope.editVideo = function(video) {
-    //     $scope.editedVideo = {
-    //         _id: video._id,
-    //         title: video.title,
-    //         description: video.description,
-    //         tags: video.tags.toString()
-    //     };
-    // };
-    //
-    //
-    // //saves video details after edit is completed
-    // $scope.saveChanges = function(updatedVideo) {
-    //     updatedVideo.tags = updatedVideo.tags.split(',');
-    //     MyVideosService.updateVideo(updatedVideo)
-    //         .then(function() {
-    //             MyVideosService.getMyVideos()
-    //                 .then(function(videos) {
-    //                     $scope.$apply(function() {
-    //                         $scope.myVideos = videos;
-    //                         angular.element('#close-edit-modal').trigger('click');
-    //                         $scope.editedVideo = {};
-    //                     });
-    //                 })
-    //                 .catch(err => alert(err.data.err));
-    //         })
-    //         .catch(err => alert(err.data.err));
-    // };
+    //loads playlist title in the edit form
+    $scope.editPlaylist = function(playlist) {
+        $scope.editedPlaylist = {
+            _id: playlist._id,
+            title: playlist.title
+        };
+    };
+
+
+    //saves playlist details after edit is completed
+    $scope.saveChanges = function(updatedPlaylist) {
+        MyPlaylistsService.updatePlaylist(updatedPlaylist)
+            .then(function() {
+                MyPlaylistsService.getMyPlaylists()
+                    .then(function(playlists) {
+                        $scope.$apply(function() {
+                            $scope.myPlaylists = playlists;
+                            angular.element('#close-edit-modal').trigger('click');
+                            $scope.editedPlaylist = {};
+                        });
+                    })
+                    .catch(err => alert(err.data.err));
+            })
+            .catch(err => alert(err.data.err));
+    };
 
 });

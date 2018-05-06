@@ -21,17 +21,17 @@ app.service('MyPlaylistsService', function ($http) {
                 .catch(err => reject(err));
         });
     };
-    //
-    //
-    // //updates selected video
-    // this.updateVideo = function (video) {
-    //     return new Promise(function (resolve, reject) {
-    //         $http.put('/api/myVideos/' + video._id, video)
-    //             .then(function (response) {
-    //                 resolve(response);
-    //             })
-    //             .catch(err => reject(err));
-    //     });
-    // };
+
+
+    //updates selected playlist
+    this.updatePlaylist = function (playlist) {
+        return new Promise(function (resolve, reject) {
+            $http.put('/api/myPlaylists/' + playlist._id, playlist)
+                .then(function (response) {
+                    resolve(response);
+                })
+                .catch(err => reject(err));
+        });
+    };
 
 });

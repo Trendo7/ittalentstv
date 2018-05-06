@@ -18,35 +18,35 @@ router.get('/', function (req, res, next) {
     });
 });
 
-//
-// //Update my playlist
-// router.put('/:id', function (req, res, next) {
-//     var videosCollection = req.db.get('videos');
-//     var videoToUpdate = req.body;
-//     var videoToUpdateID = req.params.id;
-//     var user = req.session.user;
-//
-//     var isMyVideo = user.uploadedVideos.find(function (videoId) {
-//         return videoId === videoToUpdateID;
-//     });
-//
-//     if (!isMyVideo) {
-//         res.status(401);
-//         res.json({err: "You are not authorized to edit the selected video!"});
-//         return;
-//     }
-//
-//     videosCollection.update({_id: videoToUpdateID}, {$set: videoToUpdate}, function (err, docs) {
-//         if (err) {
-//             res.status(500);
-//             res.json(err);
-//         } else {
-//             res.status(200);
-//             res.json({message: "The video has been updated successfully."});
-//         }
-//     });
-//
-// });
+
+//Update my playlist
+router.put('/:id', function (req, res, next) {
+    var playlistsCollection = req.db.get('playlists');
+    var playlistToUpdate = req.body;
+    var playlistToUpdateID = req.params.id;
+    var user = req.session.user;
+
+    var isMyPlaylist = user.playlists.find(function (playlistId) {
+        return playlistId === playlistToUpdateID;
+    });
+
+    if (!isMyPlaylist) {
+        res.status(401);
+        res.json({err: "You are not authorized to edit the selected video!"});
+        return;
+    }
+
+    playlistsCollection.update({_id: playlistToUpdateID}, {$set: playlistToUpdate}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json({message: "The playlist has been updated successfully."});
+        }
+    });
+
+});
 
 
 //Delete my playlist
