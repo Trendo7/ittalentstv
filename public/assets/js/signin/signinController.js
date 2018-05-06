@@ -1,5 +1,5 @@
 app.controller('SigninController', function ($scope, $http, $location, $window) {
-
+     $scope.wrongCredentials = false;
     $scope.user = {
         username: '',
         password: ''
@@ -32,7 +32,8 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
                 }
             })
             .catch(function (response) {
-                alert(response.data.error)
+               // alert(response.data.error)
+                 $scope.wrongCredentials = true;
             })
     };
 
