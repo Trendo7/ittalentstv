@@ -22,7 +22,7 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
     $scope.isValidLink = true;
     $scope.errMsg = '';
     $scope.videoID = $location.search().v;
-    $scope.isWatchingPlaylist = false;
+    $scope.playlistID = '';
     $scope.currentVideo = {};
     $scope.videos = [];
     $scope.isLikedByMe = false;
@@ -39,7 +39,6 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
 
     //check if playlistID meets the length requirements of MongoDB
     if ((!!$location.search().p) && ($location.search().p.trim().length == MONGO_ID_LENGTH)) {
-        $scope.isWatchingPlaylist = true;
         $scope.playlistID = $location.search().p;
     }
 
@@ -60,7 +59,7 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
             });
         });
 
-    if ($scope.isWatchingPlaylist) {
+    if (!!$scope.playlistID) {
         getPlaylist($scope.playlistID, $scope.videoID);
     } else {
         getVideos();
@@ -72,6 +71,7 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
             .then(function (videos) {
                 $scope.$apply(function () {
                     $scope.videos = videos;
+                    $scope.playlistID = '';
                 });
             })
             .catch(err => console.log(err));
@@ -82,7 +82,6 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
         VideosService.getPlaylist(playlistID, videoID)
             .then(function (playlist) {
                 if (!!playlist) {
-                    var videoIDs = playlist.videos;
                     getPlaylistVideos(playlist);
                 } else {
                     getVideos();
@@ -187,5 +186,14 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
             }
         }
     }
+
+    //opens selected video and shows selected playlist if there is such
+    $scope.openVideoLink = function (video) {
+        if (!!$scope.playlistID) {
+            $location.url('watch?v=' + video._id + '&p=' + $scope.playlistID);
+        } else {
+            $location.url('watch?v=' + video._id);
+        }
+    };
 
 });

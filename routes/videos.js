@@ -22,7 +22,6 @@ router.get('/', function (req, res, next) {
 router.post('/byPlaylist/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var videoIDs = req.body.videoIDs;
-    console.log(req.body.videoIDs);
 
     videosCollection.find({_id: {$in: videoIDs}}, {title: 1, thumbnailUrl: 1, uploadedBy: 1, uploadedByID: 1, viewCount: 1, uploadDate: 1}, function (err, docs) {
         if (err) {
@@ -130,7 +129,6 @@ router.put('/rate/:id', function (req, res, next) {
     //before setting videoOptions we used this argument ->>> {$inc: {likeCount: likeC, dislikeCount: dislikeC}}
     videosCollection.findOneAndUpdate({_id: videoToUpdateID}, videoOptions, function (err, docs) {
         if (err) {
-            console.log(9090909090);
             res.status(500);
             res.json(err);
         } else {
