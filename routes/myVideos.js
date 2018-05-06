@@ -80,7 +80,7 @@ router.delete('/:id', function (req, res, next) {
     });
 
     function updateUser() {
-        usersCollection.update({_id: user._id}, user, function (err, docs) {
+        usersCollection.findOneAndUpdate({_id: user._id}, {$pull: {playlists: videoToDeleteID}}, function (err, docs) {
             if (!err) {
                 res.status(200);
                 res.json({message: "The video has been deleted successfully."});
