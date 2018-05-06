@@ -42,4 +42,9 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
     $scope.openUserLink = function (video) {
         $location.path('user/' + video.uploadedByID);
     };
+
+    //opens playlist
+    $scope.openPlaylistLink = function (playlist) {
+        $location.url('watch?v=' + playlist.videos[0] + '&p=' + playlist._id);
+    };
 });

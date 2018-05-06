@@ -43,22 +43,22 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
         $scope.playlistID = $location.search().p;
     }
 
-    // //loads selected video
-    // VideosService.loadVideo($scope.videoID)
-    //     .then(function (currentVideo) {
-    //         $scope.$apply(function () {
-    //             $scope.currentVideo = currentVideo;
-    //             checkIsRatedByMe();
-    //         });
-    //     })
-    //     //--->>> must redirect to not found page <<<---
-    //     .catch(err => {
-    //         console.log(err);
-    //         $scope.$apply(function () {
-    //             $scope.isValidLink = false;
-    //             $scope.errMsg = "This page isn't available. Sorry about that.Try searching for something else.";
-    //         });
-    //     });
+    //loads selected video
+    VideosService.loadVideo($scope.videoID)
+        .then(function (currentVideo) {
+            $scope.$apply(function () {
+                $scope.currentVideo = currentVideo;
+                checkIsRatedByMe();
+            });
+        })
+        //--->>> must redirect to not found page <<<---
+        .catch(err => {
+            console.log(err);
+            $scope.$apply(function () {
+                $scope.isValidLink = false;
+                $scope.errMsg = "This page isn't available. Sorry about that.Try searching for something else.";
+            });
+        });
 
     if ($scope.isWatchingPlaylist) {
         getPlaylist($scope.playlistID, $scope.videoID);
