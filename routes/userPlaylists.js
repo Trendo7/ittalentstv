@@ -73,7 +73,6 @@ router.post('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var newPlaylist = req.body;
     var user = req.session.user;
-    newPlaylist.createdByID = user._id;
     // newPlaylist.imgUrl = '../assets/img/the-playlist.jpg';
 
     if (!user) {
@@ -81,6 +80,7 @@ router.post('/', function (req, res, next) {
         res.json({err: "Please login to create your own playlist!"});
         return;
     }
+    newPlaylist.createdByID = user._id;
 
     playlistsCollection.insert(newPlaylist, function (err, data) {
         if (!err) {
@@ -92,8 +92,10 @@ router.post('/', function (req, res, next) {
     });
 
     function updateUserPlaylists(playlist) {
-        usersCollection.findOneAndUpdate({_id: user._id}, {$push: {playlists: playlist._id}}, function (err, docs) {
+        var playlistID = playlist._id.toString();
+        usersCollection.findOneAndUpdate({_id: user._id}, {$push: {playlists: playlistID}}, function (err, docs) {
             if (!err) {
+                req.session.user = docs;
                 res.status(200);
                 res.json(playlist);
             } else {

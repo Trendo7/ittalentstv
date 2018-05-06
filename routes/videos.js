@@ -156,27 +156,11 @@ router.put('/rate/:id', function (req, res, next) {
 });
 
 
-//Delete  video
-router.delete('/:id', function (req, res, next) {
-    var videosCollection = req.db.get('videos');
-    var videoToDeleteID = req.params.id;
-
-    videosCollection.remove({_id: videoToDeleteID}, {}, function (err, docs) {
-        if (err) {
-            res.status(500);
-            res.json(err);
-        } else {
-            res.status(200);
-            res.json({message: "success"});
-        }
-    });
-
-});
-
-
 //Add  video
 router.post('/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
+    var usersCollection = req.db.get('users');
+    var user = req.session.user;
     var newVideo = req.body;
     newVideo.uploadedBy = req.session.user.username;
     newVideo.uploadedByID = req.session.user._id;
@@ -190,7 +174,7 @@ router.post('/', function (req, res, next) {
 
     videosCollection.insert(newVideo, function (err, data) {
         if (!err) {
-            var videoId = data._id;
+            var videoId = data._id.toString();
             updateUserUploadedVideos(videoId);
         } else {
             res.status(500);
@@ -199,12 +183,9 @@ router.post('/', function (req, res, next) {
     });
 
     function updateUserUploadedVideos(videoId) {
-        var usersCollection = req.db.get('users');
-        var user = req.session.user;
-        user.uploadedVideos.push(videoId);
-
-        usersCollection.update({_id: user._id}, user, function (err, docs) {
+        usersCollection.findOneAndUpdate({_id: user._id}, {$push: {uploadedVideos: videoId}}, function (err, docsU) {
             if (!err) {
+                req.session.user = docsU;
                 res.status(200);
                 res.json(videoId);
             } else {

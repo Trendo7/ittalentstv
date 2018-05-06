@@ -72,17 +72,14 @@ router.delete('/:id', function (req, res, next) {
             res.status(500);
             res.json(err);
         } else {
-            var videoIndex = user.uploadedVideos.findIndex(function (videoId) {
-                return videoId === videoToDeleteID;
-            });
-            user.uploadedVideos.splice(videoIndex, 1);
             updateUser();
         }
     });
 
     function updateUser() {
-        usersCollection.findOneAndUpdate({_id: user._id}, {$pull: {playlists: videoToDeleteID}}, function (err, docs) {
+        usersCollection.findOneAndUpdate({_id: user._id}, {$pull: {uploadedVideos: videoToDeleteID}}, function (err, docs) {
             if (!err) {
+                req.session.user = docs;
                 updatePlaylists();
             } else {
                 res.status(500);
@@ -93,7 +90,6 @@ router.delete('/:id', function (req, res, next) {
 
     function updatePlaylists() {
         playlistsCollection.update({videos: videoToDeleteID}, {$pull: {videos: videoToDeleteID}}, {multi: true}, function (err, docs) {
-            console.log(1);
             if (!err) {
                 res.status(200);
                 res.json({message: "The video has been deleted successfully."});
