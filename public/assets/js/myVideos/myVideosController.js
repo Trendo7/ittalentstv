@@ -1,12 +1,12 @@
-app.controller('MyVideosController', function ($scope, $window, $location, MyVideosService, $timeout) {
+app.controller('MyVideosController', function($scope, $window, $location, MyVideosService, $timeout) {
     $scope.myVideos = [];
     $scope.editedVideo = {};
 
 
     //loads all user videos
     MyVideosService.getMyVideos()
-        .then(function (videos) {
-            $scope.$apply(function () {
+        .then(function(videos) {
+            $scope.$apply(function() {
                 $scope.myVideos = videos;
             });
         })
@@ -14,14 +14,33 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
 
 
     //deletes the selected video
-    $scope.deleteVideo = function (video) {
+    $scope.deleteVideo = function(video) {
         var videoId = video._id;
+        var firebaseId = video.uploadDate;
 
+        //Reference to firebase storage => videos
+        var storageRef = firebase.storage().ref('videos')
+
+        // Create a reference to the file which we want to delete
+        var desertRef = storageRef.child(firebaseId.toString() + ".mp4");
+
+         // Delete the file from mongo
         MyVideosService.deleteVideo(videoId)
-            .then(function () {
+            .then(function() {
+
+                // If the file has successfully deleted from mongo, we delete it from firebase
+                desertRef.delete()
+                    .then(function() {
+                        console.log('Deleted from firebase!')
+                    })
+                    .catch(function(error) {
+                        console.log(error)
+                    });
+
+                //    
                 MyVideosService.getMyVideos()
-                    .then(function (videos) {
-                        $scope.$apply(function () {
+                    .then(function(videos) {
+                        $scope.$apply(function() {
                             $scope.myVideos = videos;
                         });
                     })
@@ -37,7 +56,7 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
 
 
     //loads video title, description and tags in the edit form
-    $scope.editVideo = function (video) {
+    $scope.editVideo = function(video) {
         $scope.editedVideo = {
             _id: video._id,
             title: video.title,
@@ -48,13 +67,13 @@ app.controller('MyVideosController', function ($scope, $window, $location, MyVid
 
 
     //saves video details after edit is completed
-    $scope.saveChanges = function (updatedVideo) {
+    $scope.saveChanges = function(updatedVideo) {
         updatedVideo.tags = updatedVideo.tags.split(',');
         MyVideosService.updateVideo(updatedVideo)
-            .then(function () {
+            .then(function() {
                 MyVideosService.getMyVideos()
-                    .then(function (videos) {
-                        $scope.$apply(function () {
+                    .then(function(videos) {
+                        $scope.$apply(function() {
                             $scope.myVideos = videos;
                             angular.element('#close-edit-modal').trigger('click');
                             $scope.editedVideo = {};
