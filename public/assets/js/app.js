@@ -43,6 +43,6 @@ app.config(function ($routeProvider) {
             controller: 'CurrentVideoController'
         })
         .otherwise({
-            template: "<h1>Please visit our video webpage</h1>"
+            templateUrl: "notFound.htm"
         });
 });
