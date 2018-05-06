@@ -18,6 +18,23 @@ router.get('/', function (req, res, next) {
 });
 
 
+//Get playlist videos (selected videos by id)
+router.post('/byPlaylist/', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var videoIDs = req.body.videoIDs;
+    console.log(req.body.videoIDs);
+
+    videosCollection.find({_id: {$in: videoIDs}}, {title: 1, thumbnailUrl: 1, uploadedBy: 1, uploadedByID: 1, viewCount: 1, uploadDate: 1}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    });
+});
+
 //Get selected video (by its ID) and increment the viewCount
 router.get('/:id', function (req, res, next) {
     var videosCollection = req.db.get('videos');

@@ -35,7 +35,7 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
     
     //opens selected video
     $scope.openVideoLink = function (video) {
-        $location.path(video._id);
+        $location.url('watch?v=' + video._id);
     };
 
     //opens list with videos uploaded by selected user

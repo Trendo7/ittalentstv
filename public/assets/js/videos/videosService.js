@@ -41,9 +41,33 @@ app.service('VideosService', function ($http) {
 
 
     //gets all playlists that are created by the logged user
-    this.getLoggedUserPlaylist = function (id) {
+    this.getLoggedUserPlaylist = function (userID) {
         return new Promise(function (resolve, reject) {
-            $http.get('/api/userPlaylists/' + id)
+            $http.get('/api/userPlaylists/' + userID)
+                .then(function (response) {
+                    resolve(response.data);
+                })
+                .catch(err => reject(err));
+        });
+    };
+
+
+    //checks if the playlist is valid and whether the video is part of the playlist
+    this.getPlaylist = function (playlistID, videoID) {
+        return new Promise(function (resolve, reject) {
+            $http.post('/api/userPlaylists/playlist/' + playlistID, {videoID})
+                .then(function (response) {
+                    resolve(response.data);
+                })
+                .catch(err => reject(err));
+        });
+    };
+
+
+    //get playlist videos
+    this.getPlaylistVideos = function (videoIDs) {
+        return new Promise(function (resolve, reject) {
+            $http.post('/api/videos/byPlaylist/', {videoIDs})
                 .then(function (response) {
                     resolve(response.data);
                 })

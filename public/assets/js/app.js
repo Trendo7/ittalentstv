@@ -38,7 +38,7 @@ app.config(function ($routeProvider) {
             templateUrl: 'assets/js/user/userPlaylist.htm',
             controller: 'UserPlaylistsController'
         })
-        .when('/:videoID', {
+        .when('/watch', {
             templateUrl: 'assets/js/videos/selectedVideo.htm',
             controller: 'CurrentVideoController'
         })

@@ -19,6 +19,24 @@ router.get('/:id', function (req, res, next) {
 });
 
 
+//Get playlist by playlistId
+router.post('/playlist/:id', function (req, res, next) {
+    var playlistsCollection = req.db.get('playlists');
+    var playlistID = req.params.id;
+    var videoID = req.body.videoID;
+
+    playlistsCollection.findOne({_id: playlistID, videos: videoID}, {}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    });
+});
+
+
 //toggle song in the selected playlist
 router.put('/:id', function (req, res, next) {
     var playlistsCollection = req.db.get('playlists');
@@ -56,7 +74,7 @@ router.post('/', function (req, res, next) {
     var newPlaylist = req.body;
     var user = req.session.user;
     newPlaylist.createdByID = user._id;
-    newPlaylist.imgUrl = 'https://theplaylist.net/wp-content/uploads/2016/05/the-playlist.jpg';
+    // newPlaylist.imgUrl = '../assets/img/the-playlist.jpg';
 
     if (!user) {
         res.status(401);

@@ -1,78 +1,86 @@
 <div class="row" style="animation: riseUp 0.5s ease-in">
     <div class="col-lg-8 col-md-12 col-12 embed-responsive embed-responsive-16by9 videoDisplay">
         <video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" poster="{{currentVideo.thumbnailUrl}}"
-        controls controlsList="nodownload"></video>
+               controls controlsList="nodownload"></video>
     </div>
     <div class="side-clips col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto mt-md-1">
-        <h6 class="mb-0">Recomended videos</h6>
+        <h6 class="mb-0">{{categoryTitle}}</h6>
         <hr/>
         <div ng-click="openVideoLink(video)" ng-repeat="video in videos | limitTo:9">
             <div class="row side-clip mb-3 ">
                 <div class="col-lg-5 my-auto">
-                <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
+                    <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
+                </div>
+                <div class="clip my-auto col-lg-6 p-1">
+                    <h6 class="side-clip-title">{{video.title}}</h6>
+                    <h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
+                    <p class="text-muted">{{video.viewCount}} views</p>
+                </div>
+
             </div>
-            <div class="clip my-auto col-lg-6 p-1">
-                <h6 class="side-clip-title">{{video.title}}</h6>
-                <h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
-                <p class="text-muted">{{video.viewCount}} views</p>
-            </div>
-            
         </div>
     </div>
-</div>
-<div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 " style="word-break: break-word;" >
-    <div class="row ">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-8 mt-3">
-            <h3 class="video-title">{{currentVideo.title}}</h3>
-            <p class="text-muted">{{currentVideo.viewCount}} views</p>
-        </div>
-        <div class="col-xl-6 col-lg-6  col-md-6 col-4 my-auto">
-            <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)"  ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
-            <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)"  ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
+    <div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 " style="word-break: break-word;">
+        <div class="row ">
+            <div class="col-xl-6 col-lg-6 col-md-6 col-8 mt-3">
+                <h3 class="video-title">{{currentVideo.title}}</h3>
+                <p class="text-muted">{{currentVideo.viewCount}} views</p>
+            </div>
+            <div class="col-xl-6 col-lg-6  col-md-6 col-4 my-auto">
+                <span class="text-muted mt-1 float-right "><i ng-click="updateVideoRate(false)"
+                                                              ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"'
+                                                              class=" far fa-thumbs-down" id="dislike-button"></i>&nbsp;{{currentVideo.dislikedByUserIDs.length}}</span>
+                <span class="text-muted mr-3 float-right"><i ng-click="updateVideoRate(true)"
+                                                             ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"'
+                                                             class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}</span>
 
-            <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="modal"
-               class="btn btn-primary float-right fas fa-list-ul" data-target="#myPlaylists"></i>
+                <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="modal"
+                   class="btn btn-primary float-right fas fa-list-ul" data-target="#myPlaylists"></i>
 
-            <!-- The Modal -->
-            <div class="modal" id="myPlaylists">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
+                <!-- The Modal -->
+                <div class="modal" id="myPlaylists">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
 
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h3 class="modal-title">Add to:</h3>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                            <div class="form-check" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)">
-                                <input class="form-check-input" type="checkbox" value="checked"
-                                       id="{{playlist._id}}" ng-checked="playlist.isChecked">
-                                <label class="form-check-label" for="{{playlist._id}}">
-                                    {{playlist.title}}
-                                </label>
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h3 class="modal-title">Add to:</h3>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
-                            <div>
-                                <input type="text" placeholder="Create new playlist" ng-model="newPlaylistTitle"/>
-                                <i class="fas fa-check" ng-click="createPlaylist()"></i>
+
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <div class="form-check" ng-repeat="playlist in userPlaylists"
+                                     ng-click="toggleSong(playlist)">
+                                    <input class="form-check-input" type="checkbox" value="checked"
+                                           id="{{playlist._id}}" ng-checked="playlist.isChecked">
+                                    <label class="form-check-label" for="{{playlist._id}}">
+                                        {{playlist.title}}
+                                    </label>
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Create new playlist" ng-model="newPlaylistTitle"/>
+                                    <i class="fas fa-check" ng-click="createPlaylist()"></i>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div>
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <hr style="margin-top: 0;"/>
+        <h6><i><strong>Uploaded by: </strong></i><span class="uploaded-by" ng-click="openUserLink(currentVideo)"> {{currentVideo.uploadedBy}}</span>
+        </h6>
+        <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
+        <h6><i><strong>Published on: </strong></i> {{currentVideo.uploadDate | date:'MMM d, y'}}</h6>
+        <h6><i><strong>Tags: &nbsp;</strong></i><span ng-repeat="tag in currentVideo.tags"><span
+                class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span> </span>
+        </h6>
     </div>
-    <hr style="margin-top: 0;" />
-    <h6><i><strong>Uploaded by: </strong></i><span class="uploaded-by" ng-click="openUserLink(currentVideo)"> {{currentVideo.uploadedBy}}</span></h6>
-    <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
-    <h6><i><strong>Published on: </strong></i> {{currentVideo.uploadDate | date:'MMM d, y'}}</h6>
-    <h6><i><strong>Tags: &nbsp;</strong></i><span ng-repeat="tag in currentVideo.tags"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span> </span></h6>
-</div>
 </div>

@@ -15,40 +15,94 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
 
     }
 
-    //moved to main controller
-    // $scope.openVideoLink
-    // $scope.openUserLink
-
 });
 
 app.controller('CurrentVideoController', function ($scope, $location, VideosService) {
-    $scope.videoID = $location.path().substring(1);
+    const MONGO_ID_LENGTH = 24;
+    $scope.isValidLink = true;
+    $scope.errMsg = '';
+    $scope.videoID = $location.search().v;
+    $scope.isWatchingPlaylist = false;
     $scope.currentVideo = {};
     $scope.videos = [];
     $scope.isLikedByMe = false;
     $scope.isDislikedByMe = false;
+    $scope.categoryTitle = "Recommended videos";
     $scope.newPlaylistTitle = '';
 
-    //loads selected video
-    VideosService.loadVideo($scope.videoID)
-        .then(function (currentVideo) {
-            $scope.$apply(function () {
-                $scope.currentVideo = currentVideo;
-                checkIsRatedByMe();
-            });
-        })
-        //--->>> must redirect to not found page <<<---
-        .catch(err => console.log(err));
+    //check if videoID is invalid
+    if ($scope.videoID.trim().length != MONGO_ID_LENGTH) {
+        $scope.isValidLink = false;
+        $scope.errMsg = "This page isn't available. Sorry about that.Try searching for something else.";
+        return;
+    }
 
+    //check if playlistID meets the length requirements of MongoDB
+    if ((!!$location.search().p) && ($location.search().p.trim().length == MONGO_ID_LENGTH)) {
+        $scope.isWatchingPlaylist = true;
+        $scope.playlistID = $location.search().p;
+    }
+
+    // //loads selected video
+    // VideosService.loadVideo($scope.videoID)
+    //     .then(function (currentVideo) {
+    //         $scope.$apply(function () {
+    //             $scope.currentVideo = currentVideo;
+    //             checkIsRatedByMe();
+    //         });
+    //     })
+    //     //--->>> must redirect to not found page <<<---
+    //     .catch(err => {
+    //         console.log(err);
+    //         $scope.$apply(function () {
+    //             $scope.isValidLink = false;
+    //             $scope.errMsg = "This page isn't available. Sorry about that.Try searching for something else.";
+    //         });
+    //     });
+
+    if ($scope.isWatchingPlaylist) {
+        getPlaylist($scope.playlistID, $scope.videoID);
+    } else {
+        getVideos();
+    }
 
     //gets all videos in the right sidebar
-    VideosService.getVideos()
-        .then(function (videos) {
-            $scope.$apply(function () {
-                $scope.videos = videos;
-            });
-        })
-        .catch(err => console.log(err));
+    function getVideos() {
+        VideosService.getVideos()
+            .then(function (videos) {
+                $scope.$apply(function () {
+                    $scope.videos = videos;
+                });
+            })
+            .catch(err => console.log(err));
+    }
+
+    //checks if the playlist is valid, whether the video is part of the playlist and gets playlist videos in the right sidebar
+    function getPlaylist(playlistID,videoID) {
+        VideosService.getPlaylist(playlistID, videoID)
+            .then(function (playlist) {
+                if (!!playlist) {
+                    var videoIDs = playlist.videos;
+                    getPlaylistVideos(playlist);
+                } else {
+                    getVideos();
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
+    //get playlist videos
+    function getPlaylistVideos(playlist) {
+        VideosService.getPlaylistVideos(playlist.videos)
+            .then(function (videos) {
+                $scope.$apply(function () {
+                    $scope.videos = videos;
+                    $scope.categoryTitle = playlist.title;
+                });
+            })
+            .catch(err => console.log(err));
+    }
+
 
     $scope.userPlaylists = [];
     //gets all playlists that are created by the logged user
@@ -87,7 +141,8 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
 
         var newPlaylist = {
             title: $scope.newPlaylistTitle,
-            videos: [$scope.videoID]
+            videos: [$scope.currentVideo._id],
+            imgUrl: $scope.currentVideo.thumbnailUrl
         };
         VideosService.createPlaylist(newPlaylist)
             .then(function (playlist) {
@@ -132,9 +187,5 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
             }
         }
     }
-
-    //moved to main controller
-    // $scope.openVideoLink
-    // $scope.openUserLink
 
 });
