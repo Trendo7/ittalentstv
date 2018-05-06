@@ -45,6 +45,6 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
 
     //opens playlist
     $scope.openPlaylistLink = function (playlist) {
-        $location.url('watch?v=' + playlist.videos[0] + '&p=' + playlist._id);
+        $location.url('watch?v=' + playlist.videos[0] + '&list=' + playlist._id);
     };
 });

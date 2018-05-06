@@ -28,6 +28,10 @@ router.post('/byPlaylist/', function (req, res, next) {
             res.status(500);
             res.json(err);
         } else {
+            docs.sort(function (a, b) {
+                return videoIDs.indexOf(a._id.toString()) - videoIDs.indexOf(b._id.toString());
+            });
+
             res.status(200);
             res.json(docs);
         }
