@@ -29,15 +29,19 @@
 <div ng-controller="SigninController">
 
      <div class="alert alert-danger alert-dismissible fade show container-fluid" ng-show="﻿wrongCredentials" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
-    <button type="button" ng-click="alertToggle()" class="close" >&times;</button>
+    <button type="button" ng-click="toggleError()" class="close" >&times;</button>
     <span id="error"></span>
+  </div>
+
+     <div class="alert alert-success alert-dismissible fade show container-fluid" ng-show="successReg" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
+    <span id="alertSuccess"></span>
   </div>
 
 <!--     <div >
         <h1 style="position:absolute; font-size: 100px">greshka</h1>
     </div> -->
 
-
+    
     <div class="form">
         <a href="/"><img src="assets/img/dark-logo.png"/></a>
 

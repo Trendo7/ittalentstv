@@ -1,4 +1,4 @@
-app.controller('UploadController', function($scope, $http, $window, $route) {
+app.controller('UploadController', function($scope, $http, $window,$timeout, $route) {
 
 	if (!$scope.logged) {
 		$window.location.href = '/signin.html#!/#login';
@@ -122,7 +122,7 @@ app.controller('UploadController', function($scope, $http, $window, $route) {
 						//getting random position of the video for the screenshot * WHEN VIDEO HAS BEEN LOADED
 						video.currentTime = Math.floor(Math.random() * video.duration);
 
-						setTimeout(() => {
+						$timeout(() => {
 
 							//create the snapshot
 							var file = draw();
