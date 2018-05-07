@@ -16,27 +16,27 @@
   </head>
   <body ng-app="app" style="animation: riseUp 0.4s ease-in">
     <div ng-controller="SigninController">
-      <div class="alert alert-danger alert-dismissible fade show container-fluid" ng-show="﻿wrongCredentials" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
-        <button type="button" ng-click="toggleError()" class="close align" >&times;</button>
-        <span id="error"></span>
+      <div class="alert alert-danger alert-dismissible fade show container-fluid" ng-show="wrongCredentials" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
+        <button type="button" ng-click="closeError()" class="close align" >&times;</button>
+        <span id="error">{{wrongCredentials}}</span>
       </div>
       <div class="alert alert-success alert-dismissible fade show container-fluid" ng-show="successReg" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
-        <span id="alertSuccess"></span>
+        <span id="alertSuccess">{{successReg}}</span>
       </div>
       <div class="form">
         <a href="/"><img src="assets/img/dark-logo.png"/></a>
         <form class="register-form">
-          <input type="text" ng-model="rUsername" placeholder="name" required minlength="5"/>
+          <input type="text" ng-model="rUsername" placeholder="name" required minlength="4"/>
           <input type="password" ng-model="rPassword" placeholder="password" required minlength="8"/>
-          <input type="email" ng-model="rEmail" placeholder="email address" required minlength="5"/>
+          <input type="email" ng-model="rEmail" placeholder="email address" required minlength="6"/>
           <button ng-click="register()">create</button>
-          <p class="message">Already registered? <a id="back" href="#login">Sign In</a></p>
+          <p class="message">Already registered? <a id="back" href="#login" ng-click="closeError()">Sign In</a></p>
         </form>
         <form class="login-form">
-          <input type="text" ng-model="username" placeholder="username" required minlength="5"/>
-          <input type="password" ng-model="password" placeholder="password" required minlength="5"/>
+          <input type="text" ng-model="username" placeholder="username" required minlength="4"/>
+          <input type="password" ng-model="password" placeholder="password" required minlength="8"/>
           <button ng-click="login()">login</button>
-          <p class="message">Not registered? <a href="#register">Create an account</a></p>
+          <p class="message">Not registered? <a href="#register" ng-click="closeError()">Create an account</a></p>
         </form>
       </div>
     </div>

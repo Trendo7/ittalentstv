@@ -1,96 +1,94 @@
-app.controller('SigninController', function($scope, $http, $location,$timeout, $window) {
-    
+app.controller('SigninController', function ($scope, $http, $location, $timeout, $window) {
+    const OK = 200;
+    const SERVER_ERROR = 500;
+    const NAME_MIN_LENGTH = 4;
+    const PASSWORD_MIN_LENGTH = 8;
+
     $scope.user = {
         username: '',
         password: ''
-    }
+    };
 
     $scope.newUser = {
         username: '',
         password: '',
         email: ''
-    }
+    };
 
-    const error = angular.element('.alert-danger');
-    const success = angular.element('.alert-success');
+    $scope.wrongCredentials = '';
+    $scope.successReg = '';
 
-    $scope.wrongCredentials = false;
-    $scope.successReg = false;
+    $scope.closeError = function () {
+        $scope.wrongCredentials = '';
+    };
 
-
-    $scope.toggleError = function() {
-        error.hide()
-    }
-
-    const OK = 200;
-    const USERNAME_EXISTS = 409;
-    const SERVER_ERROR = 500;
-
-    $scope.login = function() {
-
+    $scope.login = function () {
         $scope.user = {
             username: $scope.username,
             password: $scope.password
         };
 
+        if ((!$scope.user.username) || ($scope.user.username.trim().length < NAME_MIN_LENGTH) ||
+            (!$scope.user.password) || ($scope.user.password.trim().length < PASSWORD_MIN_LENGTH)) {
+            $scope.wrongCredentials = 'Oops! Wrong username or password. Try again!';
+            return;
+        }
+
         $http.post('/api/login', $scope.user)
-            .then(function(response) {
-                if (response.status == OK) {
-                    console.log(response.data);
-                    localStorage.setItem('logged', JSON.stringify(response.data));
-                    // alert('Zapisano v localStorage')
+            .then(function (response) {
+                localStorage.setItem('logged', JSON.stringify(response.data));
 
-                    // redirect to home page
-                    $window.location.href = '/'
-                }
+                // redirect to home page
+                $window.location.href = '/';
             })
-            .catch(function(response) {
-                // alert(response.data.error)
-                angular.element('#error').html(response.data.error)
-                error.show()
-                $scope.wrongCredentials = true;
-
+            .catch(function (response) {
                 if (response.status == SERVER_ERROR) {
-                    angular.element('#error').html('SERVER ERROR!')
+                    $scope.wrongCredentials = 'SERVER ERROR!';
+                } else {
+                    $scope.wrongCredentials = response.data.error;
                 }
             })
     };
 
-    $scope.register = function() {
 
+    $scope.register = function () {
         $scope.newUser = {
             username: $scope.rUsername,
             password: $scope.rPassword,
-            email: $scope.rEmail,
-            imageUrl: ''
+            email: $scope.rEmail
         };
 
-        console.log($scope.newUser);
+        if ((!$scope.newUser.username) || ($scope.newUser.username.trim().length < NAME_MIN_LENGTH)) {
+            $scope.wrongCredentials = 'Your username must be at least ' + NAME_MIN_LENGTH + ' characters long!';
+            return;
+        }
+
+        if ((!$scope.newUser.password) || ($scope.newUser.password.trim().length < PASSWORD_MIN_LENGTH)) {
+            $scope.wrongCredentials = 'Your password must be at least ' + PASSWORD_MIN_LENGTH + ' characters long!';
+            return;
+        }
+
+        if (!$scope.newUser.email) {
+            $scope.wrongCredentials = 'Invalid Email Format!';
+            return;
+        }
 
         $http.post('/api/register', $scope.newUser)
-            .then(function(response) {
-                if (response.status == OK) {
-                    console.log('OK')
+            .then(function (response) {
+                $scope.wrongCredentials = '';
+                $scope.successReg = 'Successful registration!';
 
-                    angular.element('#alertSuccess').html('Successful registration!')
-                    success.show()
-                    $scope.successReg = true;
+                $timeout(function () {
+                    $scope.successReg = '';
+                }, 2000);
 
-                    $timeout(function(){
-                        success.hide()
-                        $scope.successReg = false;
-                    }, 2000)
-
-                    angular.element('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-                } 
-
+                angular.element('form').animate({height: "toggle", opacity: "toggle"}, "slow");
             })
-            .catch (function(response){
-
-                if (response.status == USERNAME_EXISTS) {
-                angular.element('#error').html(response.data.error)
-                error.show()
-                $scope.wrongCredentials = true;
+            .catch(function (response) {
+                if (response.status == SERVER_ERROR) {
+                    $scope.wrongCredentials = 'SERVER ERROR!';
+                } else {
+                    $scope.wrongCredentials = response.data.error;
                 }
             })
     }

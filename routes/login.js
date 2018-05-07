@@ -7,31 +7,36 @@ const sha1 = require('sha1');
 router.post('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var user = req.body;
+    const NAME_MIN_LENGTH = 4;
+    const PASSWORD_MIN_LENGTH = 8;
+
+    if ((!user.username) || (String(user.username).trim().length < NAME_MIN_LENGTH) ||
+        (!user.password) || (String(user.password).trim().length < PASSWORD_MIN_LENGTH)) {
+        res.status(401);
+        res.json({
+            error: "Oops! Wrong username or password. Try again!"
+        });
+        return;
+    }
 
     user.password = sha1(user.password);
 
-    usersCollection.find({username: user.username, password: user.password}, {}, function (err, docs) {
+    usersCollection.findOne({username: user.username, password: user.password}, {}, function (err, docs) {
         if (!err) {
-            if (docs.length > 0) {
-                //returns the user
-                req.session.user = docs[0];
+            if (!!docs) {
+                req.session.user = docs;
                 res.status(200);
                 res.json({
-                    userId: docs[0]._id,
-                    username: docs[0].username,
-                    imageUrl: docs[0].imageUrl
+                    userId: docs._id,
+                    username: docs.username,
+                    imageUrl: docs.imageUrl
                 });
 
-                //res.redirect('http://localhost/......');
-                return;
             } else {
                 res.status(401);
                 res.json({
                     error: "Oops! Wrong username or password. Try again!"
                 });
-
-                //res.redirect('http://localhost/....../login.html');
-                return;
             }
         } else {
             res.status(500);

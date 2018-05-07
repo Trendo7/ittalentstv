@@ -7,33 +7,44 @@ const sha1 = require('sha1');
 router.post('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var newUser = req.body;
+    newUser.imageUrl = '';
     newUser.playlists = [];
     newUser.uploadedVideos = [];
     newUser.history = [];
     newUser.likedVideos = [];
     newUser.dislikedVideos = [];
+    const NAME_MIN_LENGTH = 4;
+    const PASSWORD_MIN_LENGTH = 8;
 
-    if (newUser.username.trim() == '') {
+    if ((!newUser.username) || (String(newUser.username).trim().length < NAME_MIN_LENGTH)) {
         res.status(412);
         res.json({
-            error: 'Please enter username!'
+            error: 'Your username must be at least ' + NAME_MIN_LENGTH + ' characters long!'
         });
         return;
     }
 
-    if (String(newUser.password).trim().length < 8) {
+    if ((!newUser.password) || (String(newUser.password).trim().length < PASSWORD_MIN_LENGTH)) {
         res.status(412);
         res.json({
-            error: 'Your password must be at least 8 characters long!'
+            error: 'Your password must be at least ' + PASSWORD_MIN_LENGTH + ' characters long!'
+        });
+        return;
+    }
+
+    if (!newUser.email) {
+        res.status(412);
+        res.json({
+            error: 'Invalid Email Format!'
         });
         return;
     }
 
     newUser.password = sha1(newUser.password);
 
-    usersCollection.find({username: newUser.username}, {}, function (err, docs) {
+    usersCollection.findOne({username: newUser.username}, {}, function (err, docs) {
         if (!err) {
-            if (docs.length > 0) {
+            if (!!docs) {
                 res.status(409);
                 res.json({
                     error: "This username is already in use! Please choose another one!"
