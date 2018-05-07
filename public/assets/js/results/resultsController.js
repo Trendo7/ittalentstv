@@ -1,15 +1,24 @@
 app.controller('ResultsController', function($scope, $window, $location, ResultsService) {
     $scope.searchQuery = $location.search().search_query;
     $scope.videos = [];
+    $scope.options = [
+        {description: 'Most Popular', value: '-viewCount'},
+        {description: 'Title', value: 'title'},
+        {description: 'Likes', value: '-likedByUserIDs.length'},
+        {description: 'Upload Date', value: '-uploadDate'}
+    ];
+
+    $scope.sortSelect = '';
+    $scope.sortedBy = '';
+
+    $scope.changeOption = function(option){
+        $scope.sortedBy = option.description;
+        $scope.sortSelect = option.value;
+    };
 
     if (!$scope.searchQuery) {
-        console.log($scope.searchQuery);
-        console.log('molq vyvedete tekst');
         $location.url('/');
         return;
-    } else {
-        console.log($scope.searchQuery);
-        console.log('vashata zаqvka se obrabotva');
     }
 
     ResultsService.getVideos($scope.searchQuery)
