@@ -408,6 +408,15 @@ opacity: 0.7;
 	cursor: pointer;
 }
 
+.add {
+	padding-top: 2px;
+}
+
+.fa-thumbs-down {
+	margin-top: 3px;
+}
+
+
 
 .pointed-playlist:hover {
 	cursor: pointer;

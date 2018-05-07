@@ -27,25 +27,25 @@
         </div>
         <!--   if user is logged -->
         <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" ng-if="logged">
-            <span class="text-muted mt-1 float-right ">
+            <span class="text-muted float-right ">
                 <i ng-click="updateVideoRate(false)" ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button" title="Dislike this video!"></i>&nbsp;
                 {{currentVideo.dislikedByUserIDs.length}}
             </span>
             <span class="text-muted mr-3 float-right">
                 <i ng-click="updateVideoRate(true)" ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button" title="Like this video!"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}
             </span>
-            <span class="text-muted float-right pt-1 mr-4">
+            <span class="text-muted float-right add mr-4">
                 <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="collapse" class=" fas fa-plus" data-target="#collapseExample"  title="Add to playlist."></i>
             </span>
         </div>
-        <div class="dropdown-menu noselect p-3 pt-1 mt-2 ml-lg-5 ml-md-5 ml-0" >
+        <div class="dropdown-menu noselect p-3 pt-1 mt-2 ml-lg-5 ml-md-5 ml-0" style="animation: riseUp 0.3s linear">
             <p>Sign in to use this options.</p>
             <hr class="col-8" />
             <a class="nav-link text-info text-center" href="signin.html#!/#login">SIGN IN</a>
         </div>
         <!--  if user isn't logged -->
         <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-if="!logged">
-            <span class="text-muted mt-1 float-right ">
+            <span class="text-muted float-right ">
                 <i  class=" far fa-thumbs-down" id="dislike-button" title="Dislike this video!"></i>
                 &nbsp;{{currentVideo.dislikedByUserIDs.length}}
             </span>
@@ -53,7 +53,7 @@
                 <i  class="far fa-thumbs-up" id="like-button" title="Like this video!"></i>
                 &nbsp;{{currentVideo.likedByUserIDs.length}}
             </span>
-            <span class="text-muted float-right pt-1 mr-4">
+            <span class="text-muted float-right add mr-4">
                 <i   class=" fas fa-plus" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist."></i>
             </span>
         </div>
