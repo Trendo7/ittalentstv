@@ -1,5 +1,5 @@
 app.controller('MainController', function($scope, $rootScope, $http, $location, $window) {
-    (function() {
+    (function () {
         if ($rootScope.logged != JSON.parse(localStorage.getItem('logged'))) {
             $rootScope.logged = JSON.parse(localStorage.getItem('logged'));
         }
@@ -18,20 +18,17 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
 
     const OK = 200;
 
-    $rootScope.logout = function() {
+    $rootScope.logout = function () {
         $http.get('/api/logout')
-            .then(function(response) {
+            .then(function (response) {
                 if (response.status == OK) {
-                    console.log(response.data);
                     localStorage.removeItem('logged');
                     $window.location.href = '/';
                 }
             })
+            .catch(err => reject(err));
     };
 
-    $scope.go = function(path) {
-        $location.path(path + "="); //here we should get search parameters
-    };
 
     //opens selected video
     $scope.openVideoLink = function(video) {
@@ -46,10 +43,5 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
     //opens playlist
     $scope.openPlaylistLink = function(playlist) {
         $location.url('watch?v=' + playlist.videos[0] + '&list=' + playlist._id);
-    };
-
-    //search videos
-    $scope.searchVideos = function(searchQuery) {
-        $location.url('results?search_query=' + searchQuery);
     };
 });

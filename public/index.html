@@ -36,7 +36,8 @@
                 <div class="navbar-collapse collapse" id="collapsingNavbar">
                     <form class="mx-auto my-auto">
                         <div class="input-group align-content-center" ng-controller="SearchOptionsController">
-                            <input list="searchOptions" name="searchOptions" class="search" placeholder="Search..." type="text" ng-model="searchStr">
+                            <input list="searchOptions" name="searchOptions" class="search" placeholder="Search..."
+                                   type="text" ng-model="searchStr" ng-keypress="listenForEnter($event, searchStr)">
                             <span class="input-group-append">
                                 <datalist id="searchOptions" >
                                 <option ng-repeat="searchOption in searchOptions track by $index" value="{{searchOption}}"/>
