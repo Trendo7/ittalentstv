@@ -131,7 +131,6 @@ label {
 	opacity: 1;
 }
 
-
 .navbar-toggler span:nth-child(1), .navbar-toggler span:nth-child(3) {
 	-webkit-transition: transform .35s ease-in-out;
 	-moz-transition: transform .35s ease-in-out;
@@ -277,7 +276,6 @@ label {
 }
 
 .fa-trash:hover {
-
 	color: #FF0000;
 	cursor: pointer;
 }
@@ -343,10 +341,8 @@ label {
 	opacity: 1;
 }
 
-
 .fa-upload {
-opacity: 0.7;
-
+	opacity: 0.7;
 	font-size: 21px;
 }
 
@@ -365,7 +361,6 @@ opacity: 0.7;
 	color: #666666;
 	cursor: pointer;
 	opacity: 0.7;
-	
 }
 
 .custom-links:hover {
@@ -385,10 +380,10 @@ opacity: 0.7;
 
 .profile-selected-tab {
 	opacity: 1;
-	display:inline-block;
-	border-bottom:2px solid rgb(75, 180, 232);
-	border-bottom:2px solid #999999;
-	padding-bottom:2px;
+	display: inline-block;
+	border-bottom: 2px solid rgb(75, 180, 232);
+	border-bottom: 2px solid #999999;
+	padding-bottom: 2px;
 }
 
 .fa-check {
@@ -417,36 +412,90 @@ opacity: 0.7;
 	margin-top: 3px;
 }
 
-
+#playlistsDropdown {
+	width: 180px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 
 .pointed-playlist:hover {
 	cursor: pointer;
 }
 
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+	                                  supported by Chrome and Opera */
+}
+
+input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] + label {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 20px;
+	color: #666666;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+input[type="checkbox"] + label:hover {
+	color: #333333;
+}
+
+input[type="checkbox"] + label:last-child {
+	margin-bottom: 0;
+}
+
+input[type="checkbox"] + label:before {
+	content: '';
+	display: block;
+	width: 20px;
+	height: 20px;
+	border: 1px solid rgb(75, 180, 232);
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 1;
+	-webkit-transition: all .12s, border-color .08s;
+	transition: all .12s, border-color .08s;
+}
+
+input[type="checkbox"]:checked + label:before {
+	width: 10px;
+	top: -5px;
+	left: 5px;
+	border-radius: 0;
+	opacity: 1;
+	border-top-color: transparent;
+	border-left-color: transparent;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
 }
 
 textarea:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
 	outline: 0px !important;
-	
 }
 
 option {
 	border: 1px solid red !important;
 }
 
-
 @media only screen and (max-width:1200px) {
 	.side-clips {
-		display: none;
-	/*	height: 315px;*/
+
+		/*display: none;*/
+		height: 315px;
 	}
 
 }
@@ -503,53 +552,62 @@ option {
 
 }
 
-
-.error {    
-    -webkit-animation: shake 0.4s ease-in-out 0.4s infinite alternate;
+.error {
+	-webkit-animation: shake 0.4s ease-in-out 0.4s infinite alternate;
 }
 
 @-webkit-keyframes shake {
- from {
-    -webkit-transform: rotate(5deg);
- }
- to {
-   -webkit-transform-origin:center center;
-   -webkit-transform: rotate(-5deg);
- }
+	from {
+		-webkit-transform: rotate(5deg);
+	}
+
+	to {
+		-webkit-transform-origin: center center;
+		-webkit-transform: rotate(-5deg);
+	}
 
 }
 
 @-webkit-keyframes riseUp {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes riseUp {
-   0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+
 }
 
+@keyframes riseUp {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+
+}
 
 @-webkit-keyframes moveUp {
-  0% {
-    top: 500px;
-  }
-  100% {
-    top: 0px;
-  }
+	0% {
+		top: 500px;
+	}
+
+	100% {
+		top: 0px;
+	}
+
 }
+
 @keyframes moveUp {
-  0% {
-    top: 500px;
-  }
-  100% {
-    top: 0px;
-  }
+	0% {
+		top: 500px;
+	}
+
+	100% {
+		top: 0px;
+	}
+
 }

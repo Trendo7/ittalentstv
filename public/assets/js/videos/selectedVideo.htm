@@ -1,32 +1,52 @@
 <div class="row" style="animation: riseUp 0.5s ease-in">
+    
+   <!--  video player -->
     <div class="col-lg-8 col-md-12 col-12 embed-responsive embed-responsive-16by9 videoDisplay">
         <video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" poster="{{currentVideo.thumbnailUrl}}"
-        controls controlsList="nodownload"></video>
+        controls controlsList="nodownload">
+        </video>
     </div>
-    <div class="side-clips col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto mt-md-1">
-        <h6 class="mb-0">{{categoryTitle}}</h6>
+
+
+    <div class="col-lg-4 d-none d-xl-block d-lg-block d-md-none mx-md-auto mt-md-1">
+       
+        <h6 class="">{{categoryTitle}}</h6>
+        
         <hr/>
-        <div ng-click="openVideoLink(video)" ng-repeat="video in videos | limitTo:9">
-            <div class="row side-clip mb-3 ">
-                <div class="col-lg-5 my-auto">
-                <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
+        <!-- side clips -->
+        <div class="side-clips">
+
+            <div ng-click="openVideoLink(video)" ng-repeat="video in videos | limitTo:9">
+                <div class="row side-clip mb-lg-3 ">
+                    <div class="col-lg-5 ml-2 my-auto">
+                    <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
+                </div>
+                <div class="clip my-auto col-lg-6 p-1">
+                    <h6 class="side-clip-title">{{video.title}}</h6>
+                    <h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
+                    <p class="text-muted">{{video.viewCount}} views</p>
+                </div>
             </div>
-            <div class="clip my-auto col-lg-6 p-1">
-                <h6 class="side-clip-title">{{video.title}}</h6>
-                <h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
-                <p class="text-muted">{{video.viewCount}} views</p>
-            </div>
+
         </div>
     </div>
+
+
 </div>
-<div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 ">
-    <div class="row" >
+
+
+    <!-- content under the video -->
+<div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 " >
+    <div class="row">
+
         <div class="col-xl-6 col-lg-6 col-md-6 col-6 mt-3">
             <h3 class="video-title">{{currentVideo.title}}</h3>
             <p class="text-muted">{{currentVideo.viewCount}} views</p>
         </div>
+
+
         <!--   if user is logged -->
-        <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" ng-if="logged">
+        <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" ng-if="logged" >
             <span class="text-muted float-right ">
                 <i ng-click="updateVideoRate(false)" ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button" title="Dislike this video!"></i>&nbsp;
                 {{currentVideo.dislikedByUserIDs.length}}
@@ -38,11 +58,8 @@
                 <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="collapse" class=" fas fa-plus" data-target="#collapseExample"  title="Add to playlist."></i>
             </span>
         </div>
-        <div class="dropdown-menu noselect p-3 pt-1 mt-2 ml-lg-5 ml-md-5 ml-0" style="animation: riseUp 0.3s linear">
-            <p>Sign in to use this options.</p>
-            <hr class="col-8" />
-            <a class="nav-link text-info text-center" href="signin.html#!/#login">SIGN IN</a>
-        </div>
+
+
         <!--  if user isn't logged -->
         <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-if="!logged">
             <span class="text-muted float-right ">
@@ -57,26 +74,42 @@
                 <i   class=" fas fa-plus" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist."></i>
             </span>
         </div>
+        
+        <!-- dropdown when user is not logged -->
+        <div class="dropdown-menu noselect p-3 pt-1 mt-2 ml-lg-5 ml-md-5 ml-0" style="animation: riseUp 0.3s linear">
+            <p>Sign in to use this options.</p>
+            <hr class="col-8" />
+            <a class="nav-link text-info text-center" href="signin.html#!/#login">SIGN IN</a>
+        </div>
+
+
     </div>
-    <div class="row">
-        <div class="collapse col-lg-12 col-md-12 mb-3" id="collapseExample">
-            <div class="form-check d-inline mr-3 noselect" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
-                <input class="form-check-input mb-3"  type="checkbox" value="checked" id="{{playlist._id}}" ng-checked="playlist.isChecked">
-                <label class="form-check-label" for="{{playlist._id}}"> {{playlist.title}} </label>
+
+       <!--  playlists dropdown -->
+        <div class="collapse col-lg-12 col-md-12" id="collapseExample">
+            <div class="d-inline  col-12 mx-auto noselect" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
+                <label  for="{{playlist._id}}" id="playlistsDropdown">
+                    <input class="mb-3"  type="checkbox" value="checked" id="{{playlist._id}}" ng-checked="playlist.isChecked" ">
+                    <label>{{playlist.title}}</label>
+                </label>
             </div>
-            <div class="col-lg-12 text-center mt-2">
-                <input class="col-lg-6 col-md-8 col-6 form-control form-control-sm d-inline" type="text" placeholder="Create new playlist" ng-model="newPlaylistTitle"/>
-                <i class="fas fa-check col-lg-1 col-md-2 col-2 align-middle" ng-click="createPlaylist()" title="Create new playlist!"></i>
+
+            <div class="col-lg-12 text-right mb-4 noselect">
+                <input class="col-lg-4 col-md-4 col-6 form-control form-control-sm d-inline " type="text" placeholder="Create new playlist" ng-model="newPlaylistTitle" maxlength="20"/>
+                <i class="fas fa-check col-lg-1 col-md-1 col-1 align-middle" ng-click="createPlaylist()" title="Create new playlist!"></i>
             </div>
         </div>
-    </div>
+
+
+    
     <hr style="margin-top: 0;"/>
-    <h6><i><strong>Uploaded by: </strong></i><span class="uploaded-by" ng-click="openUserLink(currentVideo)"> {{currentVideo.uploadedBy}}</span>
-    </h6>
-    <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
-    <h6><i><strong>Published on: </strong></i> {{currentVideo.uploadDate | date:'MMM d, y'}}</h6>
-    <h6><i><strong>Tags: &nbsp;</strong></i><span ng-repeat="tag in currentVideo.tags"><span
-    class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span> </span>
-    </h6>
-</div>
+
+        <h6><i><strong>Uploaded by: </strong></i><span class="uploaded-by" ng-click="openUserLink(currentVideo)"> {{currentVideo.uploadedBy}}</span></h6>
+        <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
+        <h6><i><strong>Published on: </strong></i> {{currentVideo.uploadDate | date:'MMM d, y'}}</h6>
+        <h6><i><strong>Tags: &nbsp;</strong></i>
+        <span ng-repeat="tag in currentVideo.tags"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span></span>
+        </h6>
+
+    </div>
 </div>
