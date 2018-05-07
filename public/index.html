@@ -62,7 +62,7 @@
                                     <img id="navbar-avatar" ng-if="logged.imageUrl" ng-src="{{logged.imageUrl}}" alt="" style=" height: 24px; width: 24px; border-radius: 50%;">
                                     <i ng-if="!logged.imageUrl" class="fas fa-user-circle"></i>
                                 </a>
-                                <div class="dropdown-menu mt-2 text-center" style="animation: riseUp 0.3s ease-in">
+                                <div class="dropdown-menu mt-2 text-center noselect " style="animation: riseUp 0.3s ease-in">
                                     <h6 class="dropdown-header">{{logged.username}}</h6>
                                     <a class="dropdown-item" href="#!/my_videos">My Videos</a>
                                     <a class="dropdown-item" href="#!/my_playlists">My Playlists</a>

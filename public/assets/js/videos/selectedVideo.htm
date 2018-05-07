@@ -20,33 +20,53 @@
     </div>
 </div>
 <div class="col-xl-8 col-lg-10 col-md-12 col-12 ml-0 ">
-    <div class="row " >
+    <div class="row" >
         <div class="col-xl-6 col-lg-6 col-md-6 col-6 mt-3">
             <h3 class="video-title">{{currentVideo.title}}</h3>
             <p class="text-muted">{{currentVideo.viewCount}} views</p>
         </div>
-        <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto">
+        <!--   if user is logged -->
+        <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" ng-if="logged">
             <span class="text-muted mt-1 float-right ">
-                <i ng-click="updateVideoRate(false)" ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button"></i>&nbsp;
+                <i ng-click="updateVideoRate(false)" ng-class='isDislikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class=" far fa-thumbs-down" id="dislike-button" title="Dislike this video!"></i>&nbsp;
                 {{currentVideo.dislikedByUserIDs.length}}
             </span>
             <span class="text-muted mr-3 float-right">
-                <i ng-click="updateVideoRate(true)" ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}
+                <i ng-click="updateVideoRate(true)" ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button" title="Like this video!"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}
             </span>
             <span class="text-muted float-right pt-1 mr-4">
-                <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="collapse" class=" fas fa-plus" data-target="#collapseExample"></i>
+                <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="collapse" class=" fas fa-plus" data-target="#collapseExample"  title="Add to playlist."></i>
+            </span>
+        </div>
+        <div class="dropdown-menu noselect p-3 pt-1 mt-2 ml-lg-5 ml-md-5 ml-0" >
+            <p>Sign in to use this options.</p>
+            <hr class="col-8" />
+            <a class="nav-link text-info text-center" href="signin.html#!/#login">SIGN IN</a>
+        </div>
+        <!--  if user isn't logged -->
+        <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-if="!logged">
+            <span class="text-muted mt-1 float-right ">
+                <i  class=" far fa-thumbs-down" id="dislike-button" title="Dislike this video!"></i>
+                &nbsp;{{currentVideo.dislikedByUserIDs.length}}
+            </span>
+            <span class="text-muted mr-3 float-right">
+                <i  class="far fa-thumbs-up" id="like-button" title="Like this video!"></i>
+                &nbsp;{{currentVideo.likedByUserIDs.length}}
+            </span>
+            <span class="text-muted float-right pt-1 mr-4">
+                <i   class=" fas fa-plus" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist."></i>
             </span>
         </div>
     </div>
-    <div class="row ">
+    <div class="row">
         <div class="collapse col-lg-12 col-md-12 mb-3" id="collapseExample">
-            <div class="form-check d-inline mr-3" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
+            <div class="form-check d-inline mr-3 noselect" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
                 <input class="form-check-input mb-3"  type="checkbox" value="checked" id="{{playlist._id}}" ng-checked="playlist.isChecked">
                 <label class="form-check-label" for="{{playlist._id}}"> {{playlist.title}} </label>
             </div>
             <div class="col-lg-12 text-center mt-2">
                 <input class="col-lg-6 col-md-8 col-6 form-control form-control-sm d-inline" type="text" placeholder="Create new playlist" ng-model="newPlaylistTitle"/>
-                <i class="fas fa-check col-lg-1 col-md-2 col-2 align-middle" ng-click="createPlaylist()"></i>
+                <i class="fas fa-check col-lg-1 col-md-2 col-2 align-middle" ng-click="createPlaylist()" title="Create new playlist!"></i>
             </div>
         </div>
     </div>

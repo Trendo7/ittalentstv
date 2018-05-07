@@ -17,6 +17,8 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
 
 });
 
+
+
 app.controller('CurrentVideoController', function ($scope, $location, VideosService) {
     const MONGO_ID_LENGTH = 24;
     $scope.errMsg = "";
