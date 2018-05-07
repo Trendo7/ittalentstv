@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
             } else {
                 res.status(401);
                 res.json({
-                    error: "invalid username/password"
+                    error: "Oops! Wrong username or password. Try again!"
                 });
 
                 //res.redirect('http://localhost/....../login.html');

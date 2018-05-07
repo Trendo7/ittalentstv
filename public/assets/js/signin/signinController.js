@@ -1,5 +1,5 @@
-app.controller('SigninController', function ($scope, $http, $location, $window) {
-     $scope.wrongCredentials = false;
+app.controller('SigninController', function($scope, $http, $location, $window) {
+    $scope.wrongCredentials = false;
     $scope.user = {
         username: '',
         password: ''
@@ -11,9 +11,16 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
         email: ''
     }
 
+    const alert = angular.element('.alert');
+
+    $scope.alertToggle = function() {
+        alert.hide()
+    }
+
+
     const OK = 200;
 
-    $scope.login = function () {
+    $scope.login = function() {
 
         $scope.user = {
             username: $scope.username,
@@ -21,7 +28,7 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
         };
 
         $http.post('/api/login', $scope.user)
-            .then(function (response) {
+            .then(function(response) {
                 if (response.status == OK) {
                     console.log(response.data);
                     localStorage.setItem('logged', JSON.stringify(response.data));
@@ -31,13 +38,15 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
                     $window.location.href = '/'
                 }
             })
-            .catch(function (response) {
-               // alert(response.data.error)
-                 $scope.wrongCredentials = true;
+            .catch(function(response) {
+                // alert(response.data.error)
+                angular.element('#error').html(response.data.error)
+                alert.show()
+                $scope.wrongCredentials = true;
             })
     };
 
-    $scope.register = function () {
+    $scope.register = function() {
 
         $scope.newUser = {
             username: $scope.rUsername,
@@ -49,7 +58,7 @@ app.controller('SigninController', function ($scope, $http, $location, $window) 
         console.log($scope.newUser);
 
         $http.post('/api/register', $scope.newUser)
-            .then(function (response) {
+            .then(function(response) {
                 if (response.status == OK) {
                     console.log('OK')
                     angular.element('#back').trigger('click');
