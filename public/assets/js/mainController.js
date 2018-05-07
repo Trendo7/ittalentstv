@@ -6,12 +6,12 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
 
         // Initialize Firebase
         var config = {
-            apiKey: "AIzaSyCIsC29eahBX2CgCAscvwj_9Z08mdAFHeI",
-            authDomain: "ittalentstv-3.firebaseapp.com",
-            databaseURL: "https://ittalentstv-3.firebaseio.com",
-            projectId: "ittalentstv-3",
-            storageBucket: "ittalentstv-3.appspot.com",
-            messagingSenderId: "559863242330"
+            apiKey: "AIzaSyAUHckBJlquo3NQzXQ88Trhs6P-gFo_4SM",
+            authDomain: "videotalentstv-2.firebaseapp.com",
+            databaseURL: "https://videotalentstv-2.firebaseio.com",
+            projectId: "videotalentstv-2",
+            storageBucket: "videotalentstv-2.appspot.com",
+            messagingSenderId: "165285487985"
         };
         firebase.initializeApp(config);
     })();
@@ -32,19 +32,19 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
     $scope.go = function(path) {
         $location.path(path + "="); //here we should get search parameters
     };
-    
+
     //opens selected video
-    $scope.openVideoLink = function (video) {
+    $scope.openVideoLink = function(video) {
         $location.url('watch?v=' + video._id);
     };
 
     //opens list with videos uploaded by selected user
-    $scope.openUserLink = function (video) {
+    $scope.openUserLink = function(video) {
         $location.url('user/' + video.uploadedByID);
     };
 
     //opens playlist
-    $scope.openPlaylistLink = function (playlist) {
+    $scope.openPlaylistLink = function(playlist) {
         $location.url('watch?v=' + playlist.videos[0] + '&list=' + playlist._id);
     };
 });
