@@ -23,6 +23,8 @@ app.controller('SigninController', function($scope, $http, $location,$timeout, $
     }
 
     const OK = 200;
+    const USERNAME_EXISTS = 409;
+    const SERVER_ERROR = 500;
 
     $scope.login = function() {
 
@@ -47,6 +49,10 @@ app.controller('SigninController', function($scope, $http, $location,$timeout, $
                 angular.element('#error').html(response.data.error)
                 error.show()
                 $scope.wrongCredentials = true;
+
+                if (response.status == SERVER_ERROR) {
+                    angular.element('#error').html('SERVER ERROR!')
+                }
             })
     };
 
@@ -66,28 +72,22 @@ app.controller('SigninController', function($scope, $http, $location,$timeout, $
                 if (response.status == OK) {
                     console.log('OK')
 
-                    angular.element('#alertSuccess').html('Success registration!')
+                    angular.element('#alertSuccess').html('Successful registration!')
                     success.show()
                     $scope.successReg = true;
 
-                    $timeout(function(){ 
+                    $timeout(function(){
                         success.hide()
                         $scope.successReg = false;
-                        angular.element('#back').trigger('click');
-                     }, 2000);
+                    }, 2000)
 
-                    
-                    
-                    
-                    
-
-                    // $window.location.href = "/signin"
+                    angular.element('form').animate({height: "toggle", opacity: "toggle"}, "slow");
                 } 
 
             })
             .catch (function(response){
 
-                if (response.status == 409) {
+                if (response.status == USERNAME_EXISTS) {
                 angular.element('#error').html(response.data.error)
                 error.show()
                 $scope.wrongCredentials = true;

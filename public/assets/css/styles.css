@@ -376,6 +376,7 @@ opacity: 0.7;
 
 #profilePic {
 	max-height: 150px;
+	max-width: 150px;
 }
 
 .clickable {

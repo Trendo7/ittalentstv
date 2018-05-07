@@ -4,9 +4,9 @@
   top: 25vh;
   z-index: 1;
   background: #FFFFFF;
-  max-width: 300px;
+  max-width: 360px;
   margin: 0 auto 100px;
-  padding: 30px;
+  padding: 40px;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-bottom-left-radius: 3px;
@@ -114,4 +114,9 @@ body:before {
   100% {
     opacity: 1;
   }
+}
+
+textarea:hover, textarea:active, input:active, textarea:focus, input:focus, button:focus, button:active, button:hover, label:focus, .btn:active, .btn.active {
+  outline: 0px !important;
+  
 }
