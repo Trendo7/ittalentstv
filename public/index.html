@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to ITTalents TV</title>
+        <title>ITTalents TV</title>
         <!--stylesheets / link tags loaded here-->
         <link rel="stylesheet" type="text/css" href="assets/css/tagsinput.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -41,7 +41,8 @@
                                 <datalist id="searchOptions" >
                                 <option ng-repeat="searchOption in searchOptions track by $index" value="{{searchOption}}"/>
                                     </datalist>
-                                    <button class="btn btn-outline-secondary border border-left-0" ng-click="go('/search')" type="button">
+                                    <button class="btn btn-outline-secondary border border-left-0" type="button"
+                                            ng-disabled="!searchStr" ng-click="searchVideos(searchStr)">
                                     <i class="fa fa-search"></i>
                                     </button>
                                 </span>
@@ -90,7 +91,8 @@
             <script src="assets/js/videos/videosService.js"></script>
             <script src="assets/js/videos/videosController.js"></script>
             <script src="assets/js/upload/uploadController.js"></script>
-            <script src="assets/js/search/searchController.js"></script>
+            <script src="assets/js/results/resultsService.js"></script>
+            <script src="assets/js/results/resultsController.js"></script>
             <script src="assets/js/signin/signinController.js"></script>
             <script src="assets/js/logout/logoutController.js"></script>
             <script src="assets/js/account/accountService.js"></script>

@@ -47,4 +47,9 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
     $scope.openPlaylistLink = function(playlist) {
         $location.url('watch?v=' + playlist.videos[0] + '&list=' + playlist._id);
     };
+
+    //search videos
+    $scope.searchVideos = function(searchQuery) {
+        $location.url('results?search_query=' + searchQuery);
+    };
 });

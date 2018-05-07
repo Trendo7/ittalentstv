@@ -18,7 +18,7 @@
 		</div>
 	</div>
 	<hr/>
-	<div ng-repeat="video in myVideos | orderBy: sortSelect" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
+	<div ng-repeat="video in videos | orderBy: sortSelect" style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
 		<div class="row mb-3 ">
 			<div class="col-lg-3 col-md-4 my-auto" >
 			<img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openLink(video)" alt=""></a>

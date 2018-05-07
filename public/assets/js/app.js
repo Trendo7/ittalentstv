@@ -26,9 +26,9 @@ app.config(function ($routeProvider) {
             templateUrl: 'assets/js/myPlaylists/myPlaylists.htm',
             controller: 'MyPlaylistsController'
         })
-        .when('/search', {
-            templateUrl: 'assets/js/search/search.htm',
-            controller: 'SearchController'
+        .when('/results', {
+            templateUrl: 'assets/js/results/results.htm',
+            controller: 'ResultsController'
         })
         .when('/user/:userID', {
             templateUrl: 'assets/js/user/userVideos.htm',
