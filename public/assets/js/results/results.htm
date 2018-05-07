@@ -2,6 +2,7 @@
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-10">
 			<h5>Search results</h5>
+			<h5>{{videos.length}} results</h5>
 			<p ng-show="sortedBy">Sorted by: {{sortedBy}}</p>
 		</div>
 		<div class="clearfix"></div>
@@ -17,15 +18,14 @@
 
 	<hr/>
 	<div ng-repeat="video in videos | orderBy: sortSelect" style="animation: riseUp {{(0.4 + 0.1  * $index) + 's' }} ease-in">
-		<div class="row mb-3 ">
+		<div class="row mb-3" ng-click="openVideoLink(video)">
 			<div class="col-lg-3 col-md-4 my-auto">
-				<img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" ng-click="openVideoLink(video)"
-					 alt="">
+				<img class="img-fluid  img-vid mb-2" ng-src="{{video.thumbnailUrl}}" alt="">
 			</div>
 
-			<div class="clip col-lg-6 col-md-6 my-auto" ng-click="openVideoLink(video)">
+			<div class="clip col-lg-6 col-md-6 my-auto">
 				<h5 class="mb-2">{{video.title}}</h5>
-				<h6 class="text-muted" ng-click="openVideoLink(video)">{{video.uploadedBy}}</h6>
+				<h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
 				<small class="text-muted">{{video.viewCount}} views&nbsp;
 					<i class="fas fa-circle align-middle" style="font-size: 4px;"></i> &nbsp;{{video.uploadDate | date:'MMM d, y'}}
 				</small>
