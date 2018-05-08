@@ -175,7 +175,7 @@ label {
 }
 
 .container {
-	margin-top: 20px;	/*border: 1px solid red;*/
+	margin-top: 20px;	
 }
 
 .img-vid {
@@ -395,17 +395,14 @@ label {
 	cursor: pointer;
 }
 
-.fa-plus {
+
+#addPlaylist {
 	opacity: 0.5;
 }
 
-.fa-plus:hover {
-	opacity: 1;
-	cursor: pointer;
-}
-
-.add {
-	padding-top: 2px;
+#addPlaylist:hover {
+	cursor:pointer;
+	opacity: 0.9;
 }
 
 .fa-thumbs-down {
@@ -429,8 +426,7 @@ label {
 	-khtml-user-select: none; /* Konqueror HTML */
 	-moz-user-select: none; /* Firefox */
 	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none; /* Non-prefixed version, currently
-	                                  supported by Chrome and Opera */
+	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 input[type="checkbox"] {

@@ -54,8 +54,9 @@
             <span class="text-muted mr-3 float-right">
                 <i ng-click="updateVideoRate(true)" ng-class='isLikedByMe ? "isVotedByUser" : "isNotVotedByUser"' class="far fa-thumbs-up" id="like-button" title="Like this video!"></i>&nbsp;{{currentVideo.likedByUserIDs.length}}
             </span>
-            <span class="text-muted float-right add mr-4">
-                <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="collapse" class=" fas fa-plus" data-target="#collapseExample"  title="Add to playlist."></i>
+            <span class="text-muted float-right mr-3"  id="addPlaylist">
+                <!-- <i ng-click="getLoggedUserPlaylist(logged.userId)" data-toggle="collapse" class=" fas fa-plus" data-target="#collapseExample"  title="Add to playlist."></i> -->
+                <img ng-click="getLoggedUserPlaylist(logged.userId)" id="addPlaylist" data-toggle="collapse" src="assets/img/playlistAdd.png" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist." alt="">
             </span>
         </div>
 
@@ -70,8 +71,9 @@
                 <i  class="far fa-thumbs-up" id="like-button" title="Like this video!"></i>
                 &nbsp;{{currentVideo.likedByUserIDs.length}}
             </span>
-            <span class="text-muted float-right add mr-4">
-                <i   class=" fas fa-plus" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist."></i>
+            <span class="text-muted float-right mr-3" id="addPlaylist">
+               <!--  <i   class=" fas fa-plus" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist."></i> -->
+               <img src="assets/img/playlistAdd.png" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist." alt="">
             </span>
         </div>
         
