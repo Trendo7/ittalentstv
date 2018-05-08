@@ -24,7 +24,7 @@ app.controller('SearchOptionsController', function ($scope, $location, $timeout,
     });
 
 
-    //search videos
+    //search videos by searchQuery
     $scope.searchVideos = function (searchQuery) {
         $location.url('results?search_query=' + searchQuery);
     };

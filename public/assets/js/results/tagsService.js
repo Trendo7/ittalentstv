@@ -1,8 +1,8 @@
-app.service('ResultsService', function ($http) {
-    //gets all videos that match the search query
-    this.getVideos = function (searchQuery) {
+app.service('TagsService', function ($http) {
+    //gets all videos that have the searched TAG
+    this.getVideos = function (tag) {
         return new Promise(function (resolve, reject) {
-            $http.get('/api/results/search_query/' + searchQuery)
+            $http.get('/api/results/tags/' + tag)
                 .then(function (response) {
                     console.log(response.data);
                     resolve(response.data);

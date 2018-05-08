@@ -210,4 +210,9 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
         }
     };
 
+    //search videos by tag
+    $scope.searchVideosByTag = function (tag) {
+        $location.url('tags?tag=' + tag);
+    };
+
 });

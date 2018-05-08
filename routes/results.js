@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 
-//Get search results
-router.get('/:searchQuery', function (req, res, next) {
+//Get search results by search_query and tags
+router.get('/search_query/:searchQuery', function (req, res, next) {
     var videosCollection = req.db.get('videos');
     var searchPhrase = req.params.searchQuery.toLowerCase().trim();
     var keyWords = searchPhrase.split(' ');
@@ -35,5 +35,21 @@ router.get('/:searchQuery', function (req, res, next) {
     });
 });
 
+
+//Get search results by tag
+router.get('/tags/:tag', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var tag = req.params.tag.toLowerCase().trim();
+
+    videosCollection.find({tags: tag}, {}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    });
+});
 
 module.exports = router;

@@ -52,6 +52,7 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 	var file = document.getElementById('fileButton');
 	var deleteBtn = document.getElementById('delete-btn');
 	var id;
+	const FAKE_PATH = 12; // in order to eliminate the following path -> C:\fakepath\
 
 
 	fileButton.addEventListener('change', function(e) {
@@ -59,7 +60,7 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 		var file = e.target.files[0];
 
 		//get the file name without fake path
-		var fileName = angular.element(this).val().slice(12);
+        var fileName = angular.element(this).val().slice(FAKE_PATH);
 
 		//replace the "Choose a file" label text
 		angular.element(this).next('.custom-file-label').html(fileName);

@@ -110,7 +110,7 @@
         <h6><i><strong>Description: </strong></i> {{currentVideo.description}}</h6>
         <h6><i><strong>Added: </strong></i> &nbsp;<span am-time-ago="currentVideo.uploadDate"></span></h6>
         <h6><i><strong>Tags: &nbsp;</strong></i>
-        <span ng-repeat="tag in currentVideo.tags"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span></span>
+        <span ng-repeat="tag in currentVideo.tags" ng-click="searchVideosByTag(tag)"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span></span>
         </h6>
 
     </div>
