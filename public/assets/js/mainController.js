@@ -44,4 +44,11 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
     $scope.openPlaylistLink = function(playlist) {
         $location.url('watch?v=' + playlist.videos[0] + '&list=' + playlist._id);
     };
+
+    /*We store the url when SIGN IN is clicked. Then when users log in,
+    we redirect them to the page where they were before clicking the SIGN IN button.*/
+    $scope.signinRedirect = function () {
+        var path = $location.url();
+        $window.sessionStorage.setItem('returnPath', path);
+    }
 });

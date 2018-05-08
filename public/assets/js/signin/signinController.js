@@ -38,12 +38,12 @@ app.controller('SigninController', function ($scope, $http, $location, $timeout,
             .then(function (response) {
                 $window.localStorage.setItem('logged', JSON.stringify(response.data));
 
-                let returnPath = $window.sessionStorage.getItem('returnPath')
+                let returnPath = $window.sessionStorage.getItem('returnPath');
                 
                 if (returnPath != null) {
-                    // redirect to previous watched video if there is one
+                    //we redirect users to the page where they were before clicking the SIGN IN button
                     $window.location.href = '/#!' + returnPath;
-                    $window.sessionStorage.removeItem('returnPath')
+                    $window.sessionStorage.removeItem('returnPath');
 
                 } else {
                     // redirect to home page

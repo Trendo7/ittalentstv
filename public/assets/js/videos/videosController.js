@@ -14,11 +14,7 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
         console.log(moment(date).fromNow())
 
     }
-
-
-
 });
-
 
 
 
@@ -33,13 +29,6 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
     $scope.isDislikedByMe = false;
     $scope.categoryTitle = "";
     $scope.newPlaylistTitle = "";
-
-    $scope.signinRedirect = function (){
-        var path = $location.url()
-        console.log(path)
-        $window.sessionStorage.setItem('returnPath' , path)
-
-    }
 
     //check if videoID is invalid
     if ($scope.videoID.trim().length != MONGO_ID_LENGTH) {
