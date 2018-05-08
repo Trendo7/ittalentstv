@@ -15,10 +15,14 @@ app.controller('VideosController', function ($scope, $window, $location, VideosS
 
     }
 
+
+
 });
 
 
-app.controller('CurrentVideoController', function ($scope, $location, VideosService) {
+
+
+app.controller('CurrentVideoController', function ($scope, $window, $location, VideosService) {
     const MONGO_ID_LENGTH = 24;
     $scope.errMsg = "";
     $scope.videoID = $location.search().v;
@@ -29,6 +33,13 @@ app.controller('CurrentVideoController', function ($scope, $location, VideosServ
     $scope.isDislikedByMe = false;
     $scope.categoryTitle = "";
     $scope.newPlaylistTitle = "";
+
+    $scope.signinRedirect = function (){
+        var path = $location.url()
+        console.log(path)
+        $window.sessionStorage.setItem('returnPath' , path)
+
+    }
 
     //check if videoID is invalid
     if ($scope.videoID.trim().length != MONGO_ID_LENGTH) {

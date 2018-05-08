@@ -36,10 +36,20 @@ app.controller('SigninController', function ($scope, $http, $location, $timeout,
 
         $http.post('/api/login', $scope.user)
             .then(function (response) {
-                localStorage.setItem('logged', JSON.stringify(response.data));
+                $window.localStorage.setItem('logged', JSON.stringify(response.data));
 
-                // redirect to home page
-                $window.location.href = '/';
+                let returnPath = $window.sessionStorage.getItem('returnPath')
+                
+                if (returnPath != null) {
+                    // redirect to previous watched video if there is one
+                    $window.location.href = '/#!' + returnPath;
+                    $window.sessionStorage.removeItem('returnPath')
+
+                } else {
+                    // redirect to home page
+                    $window.location.href = '/';
+                }
+                
             })
             .catch(function (response) {
                 if (response.status == SERVER_ERROR) {

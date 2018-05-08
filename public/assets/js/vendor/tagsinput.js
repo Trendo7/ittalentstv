@@ -24,7 +24,7 @@
     addOnBlur: true,
     maxTags: 5,
     maxChars: 20,
-    confirmKeys: [13, 44],
+    confirmKeys: [13, 32, 44],
     delimiter: ',',
     delimiterRegex: null,
     cancelConfirmKeysOnEmpty: false,
