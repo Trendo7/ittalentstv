@@ -22,6 +22,7 @@ canvas {
 .side-clips {
 	height: 430px;
 	overflow-y: scroll;
+	overflow-x: hidden;
 }
 
 .side-clip {

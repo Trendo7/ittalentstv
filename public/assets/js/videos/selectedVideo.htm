@@ -21,7 +21,7 @@
                     <div class="col-lg-5 ml-2 my-auto">
                     <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
                 </div>
-                <div class="clip my-auto col-lg-6 p-1">
+                <div class="clip my-auto col-lg-6">
                     <h6 class="side-clip-title">{{video.title}}</h6>
                     <h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
                     <p class="text-muted">{{video.viewCount}} views</p>
@@ -89,7 +89,7 @@
 
        <!--  playlists dropdown -->
         <div class="collapse col-lg-12 col-md-12" id="collapseExample">
-            <div class="d-inline  col-lg-12 col-md-12 mx-auto noselect" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
+            <div class="d-inline  col-12 mx-auto noselect" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
                 <label  for="{{playlist._id}}" id="playlistsDropdown">
                     <input class="mb-3"  type="checkbox" value="checked" id="{{playlist._id}}" ng-checked="playlist.isChecked" ">
                     <label>{{playlist.title}}</label>
