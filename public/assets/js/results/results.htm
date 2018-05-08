@@ -37,10 +37,10 @@
 			<div class="clip col-lg-6 col-md-6 my-auto">
 				<h5 class="mb-2">{{video.title}}</h5>
 				<h6 class="text-muted uploaded-by" ng-click="openUserLink(video)">{{video.uploadedBy}}</h6>
-				<small class="text-muted">{{video.viewCount}} views&nbsp;
-					<i class="fas fa-circle align-middle" style="font-size: 4px;"></i> &nbsp;{{video.uploadDate | date:'MMM d, y'}}
+
+				<small class="text-muted">{{video.viewCount}} views&nbsp; <i class="fas fa-circle align-middle" style="font-size: 4px;"></i>&nbsp; <span class="text-muted">{{video.likedByUserIDs.length}} likes</span>&nbsp; <i class="fas fa-circle align-middle" style="font-size: 4px;"></i>&nbsp; <span am-time-ago="video.uploadDate"></span>
 				</small>
-				<p class="text-muted">{{video.likedByUserIDs.length}} likes</p>
+				
 			</div>
 
 		</div>

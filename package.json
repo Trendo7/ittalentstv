@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angular-moment": "^1.2.0",
     "cookie-parser": "~1.4.3",
     "cors": "^2.8.4",
     "debug": "~2.6.9",
@@ -13,6 +14,7 @@
     "express-session": "^1.15.6",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
+    "moment": "^2.22.1",
     "mongodb": "^3.0.7",
     "mongoose": "^5.0.16",
     "monk": "^6.0.5",

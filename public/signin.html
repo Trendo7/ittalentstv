@@ -14,14 +14,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+
   </head>
   <body ng-app="app" style="animation: riseUp 0.4s ease-in">
     <div ng-controller="SigninController">
-      <div class="alert alert-danger alert-dismissible fade show container-fluid" ng-show="wrongCredentials" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
+      <div class="alert alert-danger alert-dismissible fade show container-fluid" ng-hide="!wrongCredentials" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
         <button type="button" ng-click="closeError()" class="close align" >&times;</button>
         <span id="error">{{wrongCredentials}}</span>
       </div>
-      <div class="alert alert-success alert-dismissible fade show container-fluid" ng-show="successReg" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
+      <div class="alert alert-success alert-dismissible fade show container-fluid" ng-hide="!successReg" style="animation: riseUp 0.3s ease-in-out; position: fixed;">
         <span id="alertSuccess">{{successReg}}</span>
       </div>
       <div class="form">
@@ -48,5 +50,7 @@
     <script src="assets/js/app.js"></script>
     <script src="assets/js/signin/signinController.js"></script>
     <script src="assets/js/signin/login-animation.js"></script>
+                <script src="http://momentjs.com/downloads/moment.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.2.0/angular-moment.min.js"></script>
   </body>
 </html>

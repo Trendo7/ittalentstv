@@ -12,7 +12,7 @@
                 <h5>{{video.title}}</h5>
                 <!--   <h6 class="text-muted">{{video.uploadedBy}}</h6> -->
                 <small class="text-muted">{{video.viewCount}} views</small>
-                <small class="text-muted d-block">Published on {{video.uploadDate | date:'MMM d, y'}}</small>
+                <small class="text-muted d-block"><span am-time-ago="video.uploadDate"></span></small>
             </div>
 
             <div class="my-auto col-lg-2 col-md-2">
