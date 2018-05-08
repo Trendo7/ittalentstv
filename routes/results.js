@@ -8,19 +8,29 @@ router.get('/:searchQuery', function (req, res, next) {
     var searchPhrase = req.params.searchQuery.toLowerCase().trim();
     var keyWords = searchPhrase.split(' ');
     var uniqueKeyWords = keyWords.filter(function (elem, pos, arr) {
-        return arr.indexOf(elem) == pos;
+        return ((arr.indexOf(elem) == pos) && (elem != ''));
     });
-    console.log(searchPhrase);
-    console.log(uniqueKeyWords);
 
-    videosCollection.find({$or: [{title: new RegExp(searchPhrase, 'i')}, {tags: {$in: uniqueKeyWords}}]}, {}, function (err, docs) {
+    // //provides those titles(videos) in which all search words are found (AND)
+    // var regExpArgument = '^';
+    // uniqueKeyWords.forEach(function (word) {
+    //     regExpArgument += "(?=.*" + word + ")";
+    // });
+    // regExpArgument += ".*$";
+    // var regularExpression1 = new RegExp(regExpArgument, "i");
+    // console.log(regularExpression1);
+
+    //provides those titles(videos) in which any search word is found (OR)
+    var regularExpression = new RegExp(searchPhrase.replace(/[, ]+/g, " ").trim().replace(/ /g, "|"), "i");
+    console.log(regularExpression);
+
+    videosCollection.find({$or: [{title: regularExpression}, {tags: {$in: uniqueKeyWords}}]}, {}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
         } else {
             res.status(200);
             res.json(docs);
-            console.log(docs);
         }
     });
 });
