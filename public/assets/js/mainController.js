@@ -5,14 +5,14 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
         }
 
         // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAUHckBJlquo3NQzXQ88Trhs6P-gFo_4SM",
-            authDomain: "videotalentstv-2.firebaseapp.com",
-            databaseURL: "https://videotalentstv-2.firebaseio.com",
-            projectId: "videotalentstv-2",
-            storageBucket: "videotalentstv-2.appspot.com",
-            messagingSenderId: "165285487985"
-        };
+  var config = {
+    apiKey: "AIzaSyCIhpw08oRhdBRaSIma-2h96d_BRYQ0QMA",
+    authDomain: "videotalents-d652e.firebaseapp.com",
+    databaseURL: "https://videotalents-d652e.firebaseio.com",
+    projectId: "videotalents-d652e",
+    storageBucket: "videotalents-d652e.appspot.com",
+    messagingSenderId: "200617454566"
+  };
         firebase.initializeApp(config);
     })();
 
