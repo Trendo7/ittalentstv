@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongo = require('mongodb');
 const monk = require('monk');
-const db = monk('mongodb://admin:spgcpaptzi@ds253959.mlab.com:53959/it_talents_tv');
+const db = monk('mongodb://admin:spgcpaptzi@ds119110.mlab.com:19110/it_talents_tv');
 const cors = require('cors');
 const session = require('express-session');
 
