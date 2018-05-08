@@ -4,7 +4,7 @@ app.controller('UserPlaylistsController', function ($scope, $window, $location, 
     $scope.userID = $location.path().split('/')[2];
     $scope.user = {};
     $scope.errMsg = {};
-    $scope.isValidUser = true;
+    // $scope.isValidUser = true;
     $scope.hasPlaylists = true;
 
     UserCheckService.checkUser($scope.userID)

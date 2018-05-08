@@ -1,4 +1,4 @@
-<div class="col-lg-10 mx-md-auto mt-md-3">
+<div class="col-lg-10 mx-md-auto mt-md-3" style="animation: riseUp 0.7s ease-in">
 	<div class="row">
 		<div class="col-lg-8 col-md-8 col-10">
 			<h5 ng-if="videos.length == 1">Only {{videos.length}} search result</h5>
@@ -19,8 +19,8 @@
 
 	<hr/>
 
-	<div ng-if="videos.length == 0" class="row">
-		<div class="col-lg-10 col-md-10 col-10 mt-5 mx-auto text-center" style="animation: riseUp 0.7s ease-in">
+	<div ng-if="videos.length == 0" class="row" style="animation: riseUp 1.5s ease-in">
+		<div class="col-lg-10 col-md-10 col-10 mt-5 mx-auto text-center">
 			<a href="/"><img class="img-responsive error" src="assets/img/noSignal.png" height="200px"></a>
 			
 			<h3 class="mt-3">Oops! Sorry, we didn't find anything to show here.</h3>

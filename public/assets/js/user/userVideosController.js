@@ -5,7 +5,7 @@ app.controller('UserVideosController', function ($scope, $window, $location, Use
     $scope.userID = $location.path().split('/')[2];
     $scope.user = {};
     $scope.errMsg = {};
-    $scope.isValidUser = true;
+    // $scope.isValidUser = true;
     $scope.hasVideos = true;
     $scope.options = [
         {description: 'Most Popular', value: '-viewCount'},

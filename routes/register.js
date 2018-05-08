@@ -7,7 +7,7 @@ const sha1 = require('sha1');
 router.post('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var newUser = req.body;
-    newUser.imageUrl = '';
+    newUser.imageUrl = 'assets/img/defaultAvatar.png';
     newUser.playlists = [];
     newUser.uploadedVideos = [];
     newUser.history = [];

@@ -51,6 +51,6 @@ app.config(function ($routeProvider) {
             controller: 'CurrentVideoController'
         })
         .otherwise({
-            templateUrl: "notFound.htm"
+            templateUrl: "assets/html/notFound.htm"
         });
 });
