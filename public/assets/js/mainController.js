@@ -6,12 +6,12 @@ app.controller('MainController', function($scope, $rootScope, $http, $location, 
 
         // Initialize Firebase
   var config = {
-    apiKey: "AIzaSyCIhpw08oRhdBRaSIma-2h96d_BRYQ0QMA",
-    authDomain: "videotalents-d652e.firebaseapp.com",
-    databaseURL: "https://videotalents-d652e.firebaseio.com",
-    projectId: "videotalents-d652e",
-    storageBucket: "videotalents-d652e.appspot.com",
-    messagingSenderId: "200617454566"
+    apiKey: "AIzaSyCIsC29eahBX2CgCAscvwj_9Z08mdAFHeI",
+    authDomain: "ittalentstv-3.firebaseapp.com",
+    databaseURL: "https://ittalentstv-3.firebaseio.com",
+    projectId: "ittalentstv-3",
+    storageBucket: "ittalentstv-3.appspot.com",
+    messagingSenderId: "559863242330"
   };
         firebase.initializeApp(config);
     })();
