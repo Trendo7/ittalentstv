@@ -1,14 +1,27 @@
 app.controller('VideosController', function ($scope, $window, $location, VideosService) {
+    $scope.newestVideos = [];
+    $scope.mostPopularVideos = [];
 
-    $scope.videos = [];
 
-    VideosService.getVideos()
+    //gets the newest videos form the database
+    VideosService.getNewestVideos()
         .then(function (videos) {
             $scope.$apply(function () {
-                $scope.videos = videos;
+                $scope.newestVideos = videos;
             });
         })
         .catch(err => console.log(err));
+
+
+    //gets the most popular videos form the database
+    VideosService.getMostPopularVideos()
+        .then(function (videos) {
+            $scope.$apply(function () {
+                $scope.mostPopularVideos = videos;
+            });
+        })
+        .catch(err => console.log(err));
+
 
     $scope.getDate = function (date) {
         console.log(moment(date).fromNow())

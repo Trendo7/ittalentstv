@@ -2,11 +2,27 @@ const express = require('express');
 const router = express.Router();
 const MONGO_ID_LENGTH = 24;
 
-//Get all videos
-router.get('/', function (req, res, next) {
+//Get the newest 8 videos
+router.get('/newest/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
 
-    videosCollection.find({}, {title: 1, thumbnailUrl: 1, uploadedBy: 1, uploadedByID: 1, viewCount: 1, uploadDate: 1}, function (err, docs) {
+    videosCollection.find({}, {limit: 8, sort: {uploadDate: -1}}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    });
+});
+
+
+//Get the most popular 8 videos
+router.get('/mostPopular/', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+
+    videosCollection.find({}, {limit: 8, sort: {viewCount: -1}}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
