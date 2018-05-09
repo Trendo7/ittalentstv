@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const MONGO_ID_LENGTH = 24;
 const HOME_PAGE_LIMIT = 8;
+const SIDEBAR_LIMIT = 10;
 
 //Get the newest n videos (n is equal to HOME_PAGE_LIMIT)
 router.get('/newest/', function (req, res, next) {
@@ -32,6 +33,47 @@ router.get('/mostPopular/', function (req, res, next) {
             res.json(docs);
         }
     });
+});
+
+
+//Get similar videos
+router.post('/similarVideos/', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var titleArr = req.body.title.trim().toLowerCase().split(' ');
+    var tags = req.body.tags;
+    var keyWords = titleArr.concat(tags);
+    var idToExclude = req.body._id;
+
+    //searches for similar videos
+    videosCollection.find({_id: {$ne: idToExclude}, tags: {$in: keyWords}}, {limit: SIDEBAR_LIMIT}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            if (docs.length > 0) {
+                res.status(200);
+                res.json({videos: docs, message: 'Recommended videos'});
+            } else {
+                findNewestVideos(idToExclude);
+            }
+            console.log(docs);
+        }
+    });
+
+    //if no similar videos are found we het the newest n videos (n is equal to SIDEBAR_LIMIT)
+    function findNewestVideos(idToExclude){
+        videosCollection.find({_id: {$ne: idToExclude}}, {limit: SIDEBAR_LIMIT, sort: {uploadDate: -1}}, function (err, docsN) {
+            if (err) {
+                res.status(500);
+                res.json(err);
+            } else {
+                res.status(200);
+                res.json({videos: docsN, message: 'Newest videos'});
+            }
+            console.log({videos: docsN, message: 'Newest videos'});
+        });
+    }
+
 });
 
 

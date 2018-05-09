@@ -29,6 +29,13 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
     //loads selected video
     SelectedVideoService.loadVideo($scope.videoID)
         .then(function (currentVideo) {
+            var selectedVideo = {_id: currentVideo._id, title: currentVideo.title, tags: currentVideo.tags};
+            if (!!$scope.playlistID) {
+                getPlaylist($scope.playlistID, $scope.videoID);
+            } else {
+                getSimilarVideos(selectedVideo);
+            }
+
             $scope.$apply(function () {
                 $scope.currentVideo = currentVideo;
                 checkIsRatedByMe();
@@ -50,11 +57,20 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
             });
         });
 
-    if (!!$scope.playlistID) {
-        getPlaylist($scope.playlistID, $scope.videoID);
-    } else {
-        getNewestVideos();
+
+    //gets similar videos in the right sidebar
+    function getSimilarVideos(selectedVideo) {
+        SelectedVideoService.getSimilarVideos(selectedVideo)
+            .then(function (videos) {
+                $scope.$apply(function () {
+                    $scope.videos = videos;
+                    $scope.playlistID = "";
+                    $scope.categoryTitle = "Recommended videos";
+                });
+            })
+            .catch(err => console.log(err));
     }
+
 
     //gets all videos in the right sidebar
     function getNewestVideos() {

@@ -24,6 +24,20 @@ app.service('SelectedVideoService', function ($http) {
     };
 
 
+    //loads similar videos
+    this.getSimilarVideos = function (selectedVideo) {
+        return new Promise(function (resolve, reject) {
+            $http.post('/api/videos/similarVideos', selectedVideo)
+                .then(function (response) {
+                    var similarVideos = response.data;
+                    console.log(response);
+                    resolve(similarVideos);
+                })
+                .catch(err => reject(err));
+        });
+    };
+
+
     //update video rate (like/dislike) of watched video
     this.updateVideoRate = function (id, vote) {
         return new Promise(function (resolve, reject) {
