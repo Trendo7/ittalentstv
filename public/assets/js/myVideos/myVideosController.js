@@ -49,11 +49,6 @@ app.controller('MyVideosController', function($scope, $window, $location, MyVide
             .catch(err => alert(err.data.err));
     };
 
-    //moved to mainController
-    // $scope.openVideoLink = function (video) {
-    //     $location.path(video._id);
-    // };
-
 
     //loads video title, description and tags in the edit form
     $scope.editVideo = function(video) {

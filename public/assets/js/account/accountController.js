@@ -1,4 +1,4 @@
-app.controller('AccountController', function($scope, $http, $route, $window, AccountService) {
+app.controller('AccountController', function ($scope, $http, $route, $window, AccountService) {
     $scope.isBeingEdited = false;
     $scope.isImageSaved = true;
     const MAX_AVATAR_SIZE = 3e+6;
@@ -13,58 +13,58 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
     $scope.alert = true;
 
     AccountService.getLoggedUser()
-        .then(function(user) {
-            $scope.$apply(function() {
+        .then(function (user) {
+            $scope.$apply(function () {
                 $scope.user = user;
                 $scope.image = user.imageUrl;
             });
         });
 
-    $scope.editAccount = function() {
+    $scope.editAccount = function () {
         $scope.isBeingEdited = true;
         $scope.user.password = '';
         $scope.errorMessage = '';
         $scope.successMessage = '';
     };
 
-    file.addEventListener('click', function() {
+    file.addEventListener('click', function () {
         document.body.onfocus = checkIt;
-        $scope.$apply(function() {
+        $scope.$apply(function () {
             $scope.isImageSaved = false;
         });
     });
 
     function checkIt() {
         if (!file.value.length) {
-            $scope.$apply(function() {
+            $scope.$apply(function () {
                 $scope.isImageSaved = true;
             });
         }
         document.body.onfocus = null;
     }
 
-    file.addEventListener('change', function(e) {
+    file.addEventListener('change', function (e) {
         var file = e.target.files[0];
 
         if (file.size > MAX_AVATAR_SIZE) {
-            $scope.$apply(function(){
+            $scope.$apply(function () {
                 $scope.alert = false;
-        })
-            angular.element('#profilePic').hide()
-            angular.element('#error').html('Max file size is 20MB!')
+            });
+            angular.element('#profilePic').hide();
+            angular.element('#error').html('Max file size is 20MB!');
             angular.element(this).val(null);
-            angular.element('#fileName').html('Select file...')
+            angular.element('#fileName').html('Select file...');
             return;
         } else {
-            $scope.$apply(function(){
+            $scope.$apply(function () {
                 $scope.alert = true;
-            })
+            });
             angular.element('#profilePic').show()
         }
 
         if (file != undefined) {
 
-            $scope.$apply(function() {
+            $scope.$apply(function () {
                 $scope.image = '../assets/img/loading.gif';
             });
 
@@ -76,23 +76,22 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
             var storageRef = firebase.storage().ref('avatars/' + id);
 
             storageRef.put(file, metadata)
-                .then(function(snapshot) {
+                .then(function (snapshot) {
                     var imageURL = snapshot.downloadURL;
                     console.log(imageURL);
-                    $scope.$apply(function() {
+                    $scope.$apply(function () {
                         $scope.user.imageUrl = imageURL;
                         $scope.image = imageURL;
                         $scope.isImageSaved = true;
                     });
                 })
-                .catch(function(data) {
+                .catch(function (data) {
                     alert(data)
                 })
         }
     });
 
-    $scope.saveChanges = function() {
-        console.log('click');
+    $scope.saveChanges = function () {
         if ($scope.user.username.trim() == '') {
             $scope.errorMessage = 'Please enter username!';
             return;
@@ -104,8 +103,8 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
         }
 
         AccountService.saveChanges($scope.user)
-            .then(function(user) {
-                $scope.$apply(function() {
+            .then(function (user) {
+                $scope.$apply(function () {
                     $scope.isBeingEdited = false;
                     $scope.errorMessage = '';
                     $scope.logged.username = user.username;
@@ -114,12 +113,11 @@ app.controller('AccountController', function($scope, $http, $route, $window, Acc
                 });
 
             })
-            .catch(function(err) {
-                $scope.$apply(function() {
+            .catch(function (err) {
+                $scope.$apply(function () {
                     $scope.errorMessage = err.error;
                 });
             });
-
     }
 
 });

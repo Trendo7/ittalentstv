@@ -22,7 +22,6 @@ router.get('/search_query/:searchQuery', function (req, res, next) {
 
     //provides those titles(videos) in which any search word is found (OR)
     var regularExpression = new RegExp(searchPhrase.replace(/[, ]+/g, " ").trim().replace(/ /g, "|"), "i");
-    console.log(regularExpression);
 
     videosCollection.find({$or: [{title: regularExpression}, {tags: {$in: uniqueKeyWords}}]}, {}, function (err, docs) {
         if (err) {

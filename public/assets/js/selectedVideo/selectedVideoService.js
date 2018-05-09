@@ -32,10 +32,7 @@ app.service('SelectedVideoService', function ($http) {
                 .then(function (response) {
                     resolve(response);
                 })
-                .catch(err => {
-                    reject(err);
-                    console.log(err);
-                });
+                .catch(err => reject(err));
         });
     };
 

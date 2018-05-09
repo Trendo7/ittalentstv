@@ -15,7 +15,6 @@ app.controller('SearchOptionsController', function ($scope, $location, $timeout,
                     .then(function (results) {
                         $scope.$apply(function () {
                             $scope.searchOptions = results;
-                            console.log(results);
                         });
                     })
                     .catch(err => console.log(err.data));

@@ -4,7 +4,6 @@ app.service('ResultsService', function ($http) {
         return new Promise(function (resolve, reject) {
             $http.get('/api/results/search_query/' + searchQuery)
                 .then(function (response) {
-                    console.log(response.data);
                     resolve(response.data);
                 })
                 .catch(err => reject(err));
