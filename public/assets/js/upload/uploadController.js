@@ -18,7 +18,7 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 		videoUrl: '',
 		tags: null,
 		thumbnailUrl: ''
-	}
+	};
 
 	$scope.alert = true;
 
@@ -158,10 +158,10 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 										uploadedBy: {},
 										description: $scope.description,
 										videoUrl: downloadURL,
-										tags: $scope.tags.split(','),
+										tags: $scope.tags.toLowerCase().split(','),
 										thumbnailUrl: downloadImgUrl,
 										uploadDate: id
-									}
+									};
 
 									newVideo = $scope.video;
 
@@ -174,12 +174,12 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 											}
 										})
 										.catch(function(err) {
-											console.log(id)
+											console.log(id);
 
-											var storageRef = firebase.storage().ref('videos')
+											var storageRef = firebase.storage().ref('videos');
 											// Create a reference to the file to delete
 											var desertRef = storageRef.child(id.toString() + ".mp4");
-											console.log(desertRef)
+											console.log(desertRef);
 											// Delete the file
 											setTimeout(function() {
 												desertRef.delete()
@@ -200,4 +200,4 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 
 	})
 
-})
+});
