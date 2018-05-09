@@ -1,5 +1,13 @@
 app.controller("chat", function($scope, $firebaseArray, $location, SelectedVideoService) {
 
+	const ENTER_KEY = 13;
+
+	$scope.listenForEnter = function (keyEvent) {
+        if (keyEvent.which === ENTER_KEY) {
+            $scope.send();
+        }
+    };
+
 	//getting video ID
 	$scope.videoID = $location.search().v;
 	//new chat
@@ -10,7 +18,9 @@ app.controller("chat", function($scope, $firebaseArray, $location, SelectedVideo
 
 	//if there is logged user, add username to new chat obj
 	if ($scope.user != null) {
-		$scope.newChat.username = JSON.parse(localStorage.getItem('logged')).username
+		$scope.newChat.username = JSON.parse(localStorage.getItem('logged')).username;
+		$scope.newChat.userId = JSON.parse(localStorage.getItem('logged')).userId;
+		$scope.newChat.imageUrl = JSON.parse(localStorage.getItem('logged')).imageUrl;
 	}
 
 	// Create firebase ref 
@@ -18,6 +28,8 @@ app.controller("chat", function($scope, $firebaseArray, $location, SelectedVideo
 
 	// Bind (three-way // view-controller-firebase)
 	$scope.chats = $firebaseArray(ref);
+
+	console.log($scope.chats)
 
 	// Add new chat message
 	$scope.send = function() {

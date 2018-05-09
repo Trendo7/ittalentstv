@@ -12,7 +12,7 @@
         <hr/>
         <!-- side clips -->
         <div class="side-clips">
-            <div ng-click="openVideoLink(video)" ng-repeat="video in videos | limitTo:9">
+            <div ng-click="openVideoLink(video)" ng-repeat="video in videos">
                 <div class="row side-clip mb-lg-3 ">
                     <div class="col-lg-5 ml-2 my-auto">
                     <img class="img-fluid img-vid" ng-src="{{video.thumbnailUrl}}" alt=""></a>
@@ -91,14 +91,28 @@
     <h6><i><strong>Tags: &nbsp;</strong></i>
     <span ng-repeat="tag in currentVideo.tags" ng-click="searchVideosByTag(tag)"><span class="selected-video-tag">{{tag}}&nbsp;&nbsp;&nbsp;<i class="far fa-dot-circle"></i></span></span>
     </h6>
+
+
     <hr>
-    <div>
-        <div  ng-controller="chat" class="mb-5">
-            <div ng-if="logged">
-                <input ng-model="newChat.msg" class="form-control form-control-sm d-inline" placeholder="Enter your message" />
-                <button ng-disabled="!newChat.msg || !newChat.username" ng-click="send()">Send</button>
+
+    <div class="row">
+        <div ng-controller="chat" class="col-lg-12 mb-5">
+            <div ng-if="logged" class="mb-3 text-center">
+                <input id="commentInput" class="col-lg-10 col-md-10 col-10 mb-2" ng-model="newChat.msg" class="form-control form-control-sm d-inline" placeholder="Add comment" maxlength="250" ng-keypress="listenForEnter($event)" />
+
+                <button id="commentBtn" class="btn btn-sm btn-outline-secondary border col-lg-2 col-md-2 col-2 align-middle" ng-disabled="!newChat.msg || !newChat.username" ng-click="send()"><i class="fas fa-comment"></i></button>
             </div>
-            <div ng-repeat="chat in chats"><strong>{{chat.username}}</strong>({{chat.time | date: 'dd-MM-yyyy HH:mm:ss'}}): {{chat.msg}}</div>
+            <div class="row mb-2 ml-2" ng-repeat="chat in chats">
+                <div class="col-lg-1 col-md-1 col-1 mr-lg-2 mr-md-2 mr-3">
+                <img class="img-responsive commentImg" src="{{chat.imageUrl}}" alt="" style="">
+                </div>
+                <div class="col-lg-9 col-md-9 col-9 ml-lg-1 ml-md-0 ml-2">
+                <span>{{chat.username}} <small class="text-muted " am-time-ago="chat.time"></small></span>
+                <p class="col-lg-8 comments">{{chat.msg}}</p>
+                </div>
+
+            </div>
+            
             
         </div>
     </div>

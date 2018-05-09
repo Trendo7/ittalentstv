@@ -430,6 +430,36 @@ label {
 	user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
+.comments {
+	max-width: 100%; 
+	word-wrap: break-word;
+}
+
+#commentInput {
+	height: 30px;
+	margin-right: -5px;
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+	border-style: none;
+	border: 1px solid #D6D6D6;
+	padding: 0 10px;
+	font-family: 'Helvetica', sans-serif;
+	font-weight: 200;
+}
+
+#commentBtn {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	height: 30px;
+	top: -1px;
+}
+
+.commentImg {
+	height: 40px; 
+	width: 40px; 
+	border-radius: 50%;
+}
+
 .marginless {
 	margin-bottom: 0px;
 }
