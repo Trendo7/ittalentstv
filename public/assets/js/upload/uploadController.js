@@ -6,7 +6,8 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 
 	const STATUS_OK = 200;
 	const STATUS_ERR = 400;
-	const MAX_FILE_SIZE = 5e+6;
+	const MAX_VIDEO_SIZE = 2e+7; //max video size is 20MB
+	const FAKE_PATH = 12; // in order to eliminate the following path -> C:\fakepath\
 
 	$scope.hideVideo = true;
 
@@ -18,6 +19,8 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 		tags: null,
 		thumbnailUrl: ''
 	}
+
+	$scope.alert = true;
 
 	//function that makes screenshot of the video
 	function draw() {
@@ -50,9 +53,8 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 
 	var uploader = document.getElementById('uploader');
 	var file = document.getElementById('fileButton');
-	var deleteBtn = document.getElementById('delete-btn');
 	var id;
-	const FAKE_PATH = 12; // in order to eliminate the following path -> C:\fakepath\
+	
 
 
 	fileButton.addEventListener('change', function(e) {
@@ -66,9 +68,18 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 		angular.element(this).next('.custom-file-label').html(fileName);
 
 		//check file size
-		if (file.size > MAX_FILE_SIZE) {
-			alert('MAX FILE SIZE IS 5MB! THIS IS ONLY ALERT!')
-
+		if (file.size > MAX_VIDEO_SIZE) {
+			$scope.$apply(function(){
+				$scope.alert = false;
+		})
+			angular.element('#error').html('Max file size is 20MB!')
+			angular.element(this).val(null);
+			angular.element('#fileName').html('Select file...')
+			return;
+		} else {
+			$scope.$apply(function(){
+				$scope.alert = true;
+			})
 		}
 
 		//create metadata
@@ -189,31 +200,4 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 
 	})
 
-	// deleteBtn.addEventListener('click', function(event) {
-	// 	var storageRef = firebase.storage().ref('videos')
-	// 	var db = firebase.database().ref('clips')
-	// 	// Create a reference to the file to delete
-	// 	var desertRef = storageRef.child(id.toString());
-	// 	var dbDelRef = db.child(id.toString());
-	// 	// Delete the file
-	// 	desertRef.delete()
-	// 		.then(function() {
-	// 			var latest = document.querySelector('#latest');
-	// 			deleteBtn.style.display = 'none'
-	// 			latest.innerHTML = '<h1>DELETED</h1>'
-	// 		})
-	// 		.catch(function(error) {
-	// 			console.log(error)
-	// 		});
-	// 	dbDelRef.remove()
-	// })
-
-	// function writeClipData(id, name, description, url) {
-	// 	firebase.database().ref('clips/' + id).set({
-	// 		id: id,
-	// 		name: name,
-	// 		description: description,
-	// 		url: url
-	// 	});
-	// }
 })
