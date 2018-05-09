@@ -93,9 +93,9 @@
     </h6>
     <hr>
     <div>
-        <div  ng-controller="chat">
+        <div  ng-controller="chat" class="mb-5">
             <div ng-if="logged">
-                <input ng-model="newChat.msg" placeholder="Enter your message" />
+                <input ng-model="newChat.msg" class="form-control form-control-sm d-inline" placeholder="Enter your message" />
                 <button ng-disabled="!newChat.msg || !newChat.username" ng-click="send()">Send</button>
             </div>
             <div ng-repeat="chat in chats"><strong>{{chat.username}}</strong>({{chat.time | date: 'dd-MM-yyyy HH:mm:ss'}}): {{chat.msg}}</div>
