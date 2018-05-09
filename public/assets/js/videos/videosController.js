@@ -77,17 +77,17 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
     if (!!$scope.playlistID) {
         getPlaylist($scope.playlistID, $scope.videoID);
     } else {
-        getVideos();
+        getNewestVideos();
     }
 
     //gets all videos in the right sidebar
-    function getVideos() {
-        VideosService.getVideos()
+    function getNewestVideos() {
+        VideosService.getNewestVideos()
             .then(function (videos) {
                 $scope.$apply(function () {
                     $scope.videos = videos;
                     $scope.playlistID = "";
-                    $scope.categoryTitle = "Recommended videos";
+                    $scope.categoryTitle = "Newest videos";
                 });
             })
             .catch(err => console.log(err));
@@ -100,7 +100,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
                 if (!!playlist) {
                     getPlaylistVideos(playlist);
                 } else {
-                    getVideos();
+                    getNewestVideos();
                 }
             })
             .catch(err => console.log(err));
