@@ -2,7 +2,7 @@
 
    <!--  video player -->
     <div class="col-lg-8 col-md-12 col-12 embed-responsive embed-responsive-16by9 videoDisplay">
-        <video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" poster="{{currentVideo.thumbnailUrl}}"
+        <video class="embed-responsive-item" ng-src="{{currentVideo.videoUrl}}" ng-attr-poster="{{currentVideo.thumbnailUrl}}"
         controls controlsList="nodownload">
         </video>
     </div>
@@ -91,13 +91,13 @@
         <div class="collapse col-lg-12 col-md-12" id="collapseExample">
             <div class="d-inline  col-12 mx-auto noselect" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
                 <label  for="{{playlist._id}}" id="playlistsDropdown">
-                    <input class="mb-3"  type="checkbox" value="checked" id="{{playlist._id}}" ng-checked="playlist.isChecked" ">
+                    <input class="mb-3"  type="checkbox" value="checked" id="{{playlist._id}}" ng-checked="playlist.isChecked">
                     <label>{{playlist.title}}</label>
                 </label>
             </div>
 
             <div class="col-lg-12 text-right mb-4 noselect">
-                <input class="col-lg-4 col-md-4 col-6 form-control form-control-sm d-inline " type="text" placeholder="Create new playlist" ng-model="newPlaylistTitle" maxlength="20"/>
+                <input class="col-lg-4 col-md-4 col-6 form-control form-control-sm d-inline " type="text" placeholder="Create new playlist" ng-model="newPlaylistTitle.title" maxlength="20"/>
                 <i class="fas fa-check col-lg-1 col-md-1 col-1 align-middle" ng-click="createPlaylist()" title="Create new playlist!"></i>
             </div>
         </div>

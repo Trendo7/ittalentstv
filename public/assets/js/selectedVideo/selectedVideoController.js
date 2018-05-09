@@ -11,7 +11,7 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
     $scope.isLikedByMe = false;
     $scope.isDislikedByMe = false;
     $scope.categoryTitle = "";
-    $scope.newPlaylistTitle = "";
+    $scope.newPlaylistTitle = {title: ""};
 
     //check if videoID is invalid
     if ($scope.videoID.trim().length != MONGO_ID_LENGTH) {
@@ -126,12 +126,16 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
 
     //creates new playlist
     $scope.createPlaylist = function () {
-        if ($scope.newPlaylistTitle.trim().length === 0) {
+        if ($scope.newPlaylistTitle.title.trim().length === 0) {
+            console.log($scope.newPlaylistTitle);
+            console.log($scope.newPlaylistTitle);
             return;
         }
+        console.log(111);
+        console.log($scope.newPlaylistTitle);
 
         var newPlaylist = {
-            title: $scope.newPlaylistTitle,
+            title: $scope.newPlaylistTitle.title,
             videos: [$scope.currentVideo._id],
             imgUrl: $scope.currentVideo.thumbnailUrl
         };
@@ -140,7 +144,7 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
                 playlist.isChecked = true;
                 $scope.$apply(function () {
                     $scope.userPlaylists.push(playlist);
-                    $scope.newPlaylistTitle = "";
+                    $scope.newPlaylistTitle.title = "";
                 })
             })
             .catch(err => console.log(err.data));
