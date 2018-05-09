@@ -1,8 +1,8 @@
 app.controller('UserVideosController', function ($scope, $window, $location, UserVideosService, UserCheckService) {
     const NOT_FOUND = 404;
+    const USER_POSITION = 2;
     $scope.userVideos = [];
-    // $scope.userID = $location.path().substring($location.path().lastIndexOf('/') + 1);
-    $scope.userID = $location.path().split('/')[2];
+    $scope.userID = $location.path().split('/')[USER_POSITION];
     $scope.user = {};
     $scope.errMsg = {};
     // $scope.isValidUser = true;

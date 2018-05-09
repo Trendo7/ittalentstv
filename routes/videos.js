@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const MONGO_ID_LENGTH = 24;
+const HOME_PAGE_LIMIT = 8;
 
-//Get the newest 8 videos
+//Get the newest n videos (n is equal to HOME_PAGE_LIMIT)
 router.get('/newest/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
 
-    videosCollection.find({}, {limit: 8, sort: {uploadDate: -1}}, function (err, docs) {
+    videosCollection.find({}, {limit: HOME_PAGE_LIMIT, sort: {uploadDate: -1}}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
@@ -18,11 +19,11 @@ router.get('/newest/', function (req, res, next) {
 });
 
 
-//Get the most popular 8 videos
+//Get the most popular n videos (n is equal to HOME_PAGE_LIMIT)
 router.get('/mostPopular/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
 
-    videosCollection.find({}, {limit: 8, sort: {viewCount: -1}}, function (err, docs) {
+    videosCollection.find({}, {limit: HOME_PAGE_LIMIT, sort: {viewCount: -1}}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);

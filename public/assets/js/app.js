@@ -3,8 +3,8 @@ var app = angular.module('app', ['ngRoute', 'angularMoment']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            templateUrl: 'assets/js/videos/videos.htm',
-            controller: 'VideosController'
+            templateUrl: 'assets/js/homePage/homePage.htm',
+            controller: 'HomePageController'
         })
         .when('/signin', {
             templateUrl: 'signin.html',
@@ -47,8 +47,8 @@ app.config(function ($routeProvider) {
             controller: 'UserPlaylistsController'
         })
         .when('/watch', {
-            templateUrl: 'assets/js/videos/selectedVideo.htm',
-            controller: 'CurrentVideoController'
+            templateUrl: 'assets/js/selectedVideo/selectedVideo.htm',
+            controller: 'SelectedVideoController'
         })
         .otherwise({
             templateUrl: "assets/html/notFound.htm"

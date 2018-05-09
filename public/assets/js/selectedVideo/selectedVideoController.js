@@ -1,37 +1,4 @@
-app.controller('VideosController', function ($scope, $window, $location, VideosService) {
-    $scope.newestVideos = [];
-    $scope.mostPopularVideos = [];
-
-
-    //gets the newest videos form the database
-    VideosService.getNewestVideos()
-        .then(function (videos) {
-            $scope.$apply(function () {
-                $scope.newestVideos = videos;
-            });
-        })
-        .catch(err => console.log(err));
-
-
-    //gets the most popular videos form the database
-    VideosService.getMostPopularVideos()
-        .then(function (videos) {
-            $scope.$apply(function () {
-                $scope.mostPopularVideos = videos;
-            });
-        })
-        .catch(err => console.log(err));
-
-
-    $scope.getDate = function (date) {
-        console.log(moment(date).fromNow())
-
-    }
-});
-
-
-
-app.controller('CurrentVideoController', function ($scope, $window, $location, VideosService) {
+app.controller('SelectedVideoController', function ($scope, $window, $location, SelectedVideoService) {
     const MONGO_ID_LENGTH = 24;
     $scope.errMsg = "";
     $scope.videoID = $location.search().v;
@@ -57,7 +24,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
     }
 
     //loads selected video
-    VideosService.loadVideo($scope.videoID)
+    SelectedVideoService.loadVideo($scope.videoID)
         .then(function (currentVideo) {
             $scope.$apply(function () {
                 $scope.currentVideo = currentVideo;
@@ -82,7 +49,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
 
     //gets all videos in the right sidebar
     function getNewestVideos() {
-        VideosService.getNewestVideos()
+        SelectedVideoService.getNewestVideos()
             .then(function (videos) {
                 $scope.$apply(function () {
                     $scope.videos = videos;
@@ -95,7 +62,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
 
     //checks if the playlist is valid, whether the video is part of the playlist and gets playlist videos in the right sidebar
     function getPlaylist(playlistID,videoID) {
-        VideosService.getPlaylist(playlistID, videoID)
+        SelectedVideoService.getPlaylist(playlistID, videoID)
             .then(function (playlist) {
                 if (!!playlist) {
                     getPlaylistVideos(playlist);
@@ -108,7 +75,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
 
     //get playlist videos
     function getPlaylistVideos(playlist) {
-        VideosService.getPlaylistVideos(playlist.videos)
+        SelectedVideoService.getPlaylistVideos(playlist.videos)
             .then(function (videos) {
                 $scope.$apply(function () {
                     $scope.videos = videos;
@@ -122,7 +89,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
     $scope.userPlaylists = [];
     //gets all playlists that are created by the logged user
     $scope.getLoggedUserPlaylist = function (userID) {
-        VideosService.getLoggedUserPlaylist(userID)
+        SelectedVideoService.getLoggedUserPlaylist(userID)
             .then(function (playlists) {
                 playlists.forEach(playlist => {
                    playlist.isChecked = !!playlist.videos.find(id => id === $scope.videoID);
@@ -138,7 +105,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
     //toggle song in the selected playlist
     $scope.toggleSong = function (playlist) {
         playlist.isChecked = !playlist.isChecked;
-        VideosService.toggleSong(playlist, $scope.videoID)
+        SelectedVideoService.toggleSong(playlist, $scope.videoID)
             .then(function (response) {
                 $scope.$apply(function () {
                     console.log(response);
@@ -159,7 +126,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
             videos: [$scope.currentVideo._id],
             imgUrl: $scope.currentVideo.thumbnailUrl
         };
-        VideosService.createPlaylist(newPlaylist)
+        SelectedVideoService.createPlaylist(newPlaylist)
             .then(function (playlist) {
                 playlist.isChecked = true;
                 $scope.$apply(function () {
@@ -173,7 +140,7 @@ app.controller('CurrentVideoController', function ($scope, $window, $location, V
 
     //update video rate (like/dislike) of watched video
     $scope.updateVideoRate = function (vote) {
-        VideosService.updateVideoRate($scope.videoID, {vote: vote})
+        SelectedVideoService.updateVideoRate($scope.videoID, {vote: vote})
             .then(function (response) {
                 $scope.$apply(function () {
                     $scope.currentVideo.likedByUserIDs = response.data.likedByUserIDs;

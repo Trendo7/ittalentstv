@@ -1,7 +1,8 @@
 app.controller('UserPlaylistsController', function ($scope, $window, $location, UserPlaylistsService, UserCheckService) {
     const NOT_FOUND = 404;
+    const USER_POSITION = 2;
     $scope.userPlaylists = [];
-    $scope.userID = $location.path().split('/')[2];
+    $scope.userID = $location.path().split('/')[USER_POSITION];
     $scope.user = {};
     $scope.errMsg = {};
     // $scope.isValidUser = true;
