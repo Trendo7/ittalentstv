@@ -1,6 +1,9 @@
 app.controller('SelectedVideoController', function ($scope, $window, $location, SelectedVideoService) {
     const MONGO_ID_LENGTH = 24;
+    const NOT_FOUND_ERROR = 404;
+    const SERVER_ERROR = 500;
     $scope.notFound = false;
+    $scope.serverError = false;
     $scope.videoID = $location.search().v;
     $scope.playlistID = "";
     $scope.currentVideo = {};
@@ -31,12 +34,19 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
                 checkIsRatedByMe();
             });
         })
-        //--->>> must redirect to not found page <<<---
+        //--->>> redirects to notFound/serverError page <<<---
         .catch(err => {
             $scope.$apply(function () {
                 $scope.videoID = '';
-                console.log("This page isn't available. Sorry about that.Try searching for something else.");
-                $scope.notFound = true;
+                if (err.status == NOT_FOUND_ERROR) {
+                    console.log("This page isn't available. Sorry about that.Try searching for something else.");
+                    $scope.notFound = true;
+                }
+
+                if (err.status == SERVER_ERROR){
+                    console.log("Oops, something went wrong :(");
+                    $scope.serverError = true;
+                }
             });
         });
 

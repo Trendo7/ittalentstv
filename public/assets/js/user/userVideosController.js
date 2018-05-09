@@ -1,11 +1,12 @@
 app.controller('UserVideosController', function ($scope, $window, $location, UserVideosService, UserCheckService) {
-    const NOT_FOUND = 404;
-    const USER_POSITION = 2;
+    const NOT_FOUND_ERROR = 404;
+    const SERVER_ERROR = 500;
+    const USER_POSITION = 2; //user position in the URL
+    $scope.isValidUser = true;
+    $scope.serverError = false;
     $scope.userVideos = [];
     $scope.userID = $location.path().split('/')[USER_POSITION];
     $scope.user = {};
-    $scope.errMsg = {};
-    // $scope.isValidUser = true;
     $scope.hasVideos = true;
     $scope.options = [
         {description: 'Most Popular', value: '-viewCount'},
@@ -36,15 +37,19 @@ app.controller('UserVideosController', function ($scope, $window, $location, Use
                 }
             });
         })
-        //if 404 it means that there is no such user if 500 server error
+        //--->>> redirects to notFound/serverError page <<<---
         .catch(err => {
-            console.log(err);
-            if (err.status === NOT_FOUND) {
-                $scope.$apply(function () {
+            $scope.$apply(function () {
+                if (err.status == NOT_FOUND_ERROR) {
+                    console.log("This page isn't available. Sorry about that.Try searching for something else.");
                     $scope.isValidUser = false;
-                    $scope.errMsg = err.data.err;
-                });
-            }
+                }
+
+                if (err.status == SERVER_ERROR){
+                    console.log("Oops, something went wrong :(");
+                    $scope.serverError = true;
+                }
+            });
         });
 
 

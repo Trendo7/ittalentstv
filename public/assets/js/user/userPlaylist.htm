@@ -1,5 +1,5 @@
-<div ng-if="isValidUser" class="col-lg-12 mx-md-auto mt-md-3">
-    
+<div ng-if="isValidUser && !serverError" class="col-lg-12 mx-md-auto mt-md-3">
+
     <div class="row" >
         <div class="mx-auto my-auto">
             <img class="rounded-circle d-inline" src="{{user.imageUrl}}" width="80vh" height="80vh" style="animation: riseUp 0.5s linear" alt="">
@@ -29,4 +29,7 @@
 </div>
 <div ng-if="!isValidUser">
     <div ng-include src="'assets/html/notFound.htm'"></div>
+</div>
+<div ng-if="serverError">
+    <div ng-include src="'assets/html/serverError.htm'"></div>
 </div>
