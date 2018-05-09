@@ -21,10 +21,5 @@ app.controller('HomePageController', function ($scope, $window, $location, HomeP
             });
         })
         .catch(err => console.log(err));
-
-
-    $scope.getDate = function (date) {
-        console.log(moment(date).fromNow())
-
-    }
+    
 });
