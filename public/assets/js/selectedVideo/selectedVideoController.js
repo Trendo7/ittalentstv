@@ -1,6 +1,6 @@
 app.controller('SelectedVideoController', function ($scope, $window, $location, SelectedVideoService) {
     const MONGO_ID_LENGTH = 24;
-    $scope.errMsg = "";
+    $scope.notFound = false;
     $scope.videoID = $location.search().v;
     $scope.playlistID = "";
     $scope.currentVideo = {};
@@ -14,7 +14,7 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
     if ($scope.videoID.trim().length != MONGO_ID_LENGTH) {
         $scope.videoID = '';
         console.log("This page isn't available. Sorry about that.Try searching for something else.");
-        $scope.errMsg = "This page isn't available. Sorry about that.Try searching for something else.";
+        $scope.notFound = true;
         return;
     }
 
@@ -33,11 +33,10 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
         })
         //--->>> must redirect to not found page <<<---
         .catch(err => {
-            console.log(err);
             $scope.$apply(function () {
                 $scope.videoID = '';
                 console.log("This page isn't available. Sorry about that.Try searching for something else.");
-                $scope.errMsg = "This page isn't available. Sorry about that.Try searching for something else.";
+                $scope.notFound = true;
             });
         });
 

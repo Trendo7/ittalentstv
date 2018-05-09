@@ -1,5 +1,5 @@
-<div class="row" style="animation: riseUp 0.5s ease-in">
-    
+<div ng-if="!notFound" class="row" style="animation: riseUp 0.5s ease-in">
+
    <!--  video player -->
     <div class="col-lg-8 col-md-12 col-12 embed-responsive embed-responsive-16by9 videoDisplay">
         <video class="embed-responsive-item" src="{{currentVideo.videoUrl}}" poster="{{currentVideo.thumbnailUrl}}"
@@ -114,4 +114,7 @@
         </h6>
 
     </div>
+</div>
+<div ng-if="notFound">
+    <div ng-include src="'assets/html/notFound.htm'"></div>
 </div>
