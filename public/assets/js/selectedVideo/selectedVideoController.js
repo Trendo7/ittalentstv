@@ -31,7 +31,7 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
         .then(function (currentVideo) {
             var selectedVideo = {_id: currentVideo._id, title: currentVideo.title, tags: currentVideo.tags};
             if (!!$scope.playlistID) {
-                getPlaylist($scope.playlistID, $scope.videoID);
+                getPlaylist($scope.playlistID, $scope.videoID, selectedVideo);
             } else {
                 getSimilarVideos(selectedVideo);
             }
@@ -61,44 +61,30 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
     //gets similar videos in the right sidebar
     function getSimilarVideos(selectedVideo) {
         SelectedVideoService.getSimilarVideos(selectedVideo)
-            .then(function (videos) {
+            .then(function (response) {
                 $scope.$apply(function () {
-                    $scope.videos = videos;
+                    $scope.videos = response.videos;
                     $scope.playlistID = "";
-                    $scope.categoryTitle = "Recommended videos";
-                });
-            })
-            .catch(err => console.log(err));
-    }
-
-
-    //gets all videos in the right sidebar
-    function getNewestVideos() {
-        SelectedVideoService.getNewestVideos()
-            .then(function (videos) {
-                $scope.$apply(function () {
-                    $scope.videos = videos;
-                    $scope.playlistID = "";
-                    $scope.categoryTitle = "Newest videos";
+                    $scope.categoryTitle = response.message;
                 });
             })
             .catch(err => console.log(err));
     }
 
     //checks if the playlist is valid, whether the video is part of the playlist and gets playlist videos in the right sidebar
-    function getPlaylist(playlistID,videoID) {
+    function getPlaylist(playlistID,videoID, selectedVideo) {
         SelectedVideoService.getPlaylist(playlistID, videoID)
             .then(function (playlist) {
                 if (!!playlist) {
                     getPlaylistVideos(playlist);
                 } else {
-                    getNewestVideos();
+                    getSimilarVideos(selectedVideo);
                 }
             })
             .catch(err => console.log(err));
     }
 
-    //get playlist videos
+    //get playlist videos in the right sidebar
     function getPlaylistVideos(playlist) {
         SelectedVideoService.getPlaylistVideos(playlist.videos)
             .then(function (videos) {
@@ -143,12 +129,8 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
     //creates new playlist
     $scope.createPlaylist = function () {
         if ($scope.newPlaylistTitle.title.trim().length === 0) {
-            console.log($scope.newPlaylistTitle);
-            console.log($scope.newPlaylistTitle);
             return;
         }
-        console.log(111);
-        console.log($scope.newPlaylistTitle);
 
         var newPlaylist = {
             title: $scope.newPlaylistTitle.title,

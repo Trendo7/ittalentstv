@@ -4,6 +4,7 @@ const MONGO_ID_LENGTH = 24;
 const HOME_PAGE_LIMIT = 8;
 const SIDEBAR_LIMIT = 10;
 
+
 //Get the newest n videos (n is equal to HOME_PAGE_LIMIT)
 router.get('/newest/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
@@ -56,7 +57,6 @@ router.post('/similarVideos/', function (req, res, next) {
             } else {
                 findNewestVideos(idToExclude);
             }
-            console.log(docs);
         }
     });
 
@@ -70,7 +70,6 @@ router.post('/similarVideos/', function (req, res, next) {
                 res.status(200);
                 res.json({videos: docsN, message: 'Newest videos'});
             }
-            console.log({videos: docsN, message: 'Newest videos'});
         });
     }
 

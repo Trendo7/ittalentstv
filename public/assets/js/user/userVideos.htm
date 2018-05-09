@@ -11,6 +11,7 @@
         <a class="custom-links mx-auto" href="/#!/user/{{user._id}}/playlists">PLAYLISTS</a>
     </div>
     <hr/>
+    <div ng-if="hasVideos">
     <div class="row">
         <div class="col-lg-8 col-md-8 col-10">
             <h5 ng-show="sortedBy" class="marginless">Sorted by: {{sortedBy}}</h5>
@@ -24,10 +25,11 @@
             </div>
 
         </div>
+
     </div>
     <hr/>
     <div class="row ">
-        <div ng-if="hasVideos" ng-repeat="video in userVideos | orderBy: sortSelect" class="col-lg-4 col-md-6  col-12 mb-4 " style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
+        <div ng-repeat="video in userVideos | orderBy: sortSelect" class="col-lg-4 col-md-6  col-12 mb-4 " style="animation: riseUp {{ (0.4 + 0.1  * $index) + 's' }} ease-in">
             <div class="clip container-fluid " ng-click="openVideoLink(video)">
                 <img class="img-fluid img-vid"  ng-src="{{video.thumbnailUrl}}" alt="" />
                 <div class="">
@@ -37,6 +39,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div ng-if="!hasVideos" >
         <h1 class="mt-5 text-center">{{user.username}} hasn't uploaded any videos yet.</h1>

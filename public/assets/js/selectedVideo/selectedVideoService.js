@@ -1,16 +1,4 @@
 app.service('SelectedVideoService', function ($http) {
-    //gets the newest videos form the database
-    this.getNewestVideos = function () {
-        return new Promise(function (resolve, reject) {
-            $http.get('/api/videos/newest')
-                .then(function (response) {
-                    resolve(response.data);
-                })
-                .catch(err => reject(err));
-        });
-    };
-
-
     //loads selected video
     this.loadVideo = function (id) {
         return new Promise(function (resolve, reject) {
@@ -29,9 +17,8 @@ app.service('SelectedVideoService', function ($http) {
         return new Promise(function (resolve, reject) {
             $http.post('/api/videos/similarVideos', selectedVideo)
                 .then(function (response) {
-                    var similarVideos = response.data;
-                    console.log(response);
-                    resolve(similarVideos);
+                    //response.data contains 2 properties: 1)message, 2)videos (array with videos)
+                    resolve(response.data);
                 })
                 .catch(err => reject(err));
         });
