@@ -30,7 +30,7 @@ app.controller("chat", function($scope, $firebaseArray, $location, $timeout, Sel
 	}
 
 	// Create firebase ref 
-	var ref = new Firebase("https://ittalentstv-3.firebaseio.com/" + $scope.videoID);
+	var ref = new Firebase("https://videotalents-d652e.firebaseio.com/" + $scope.videoID);
 
 	// Bind (three-way // view-controller-firebase)
 	$scope.chats = $firebaseArray(ref);
