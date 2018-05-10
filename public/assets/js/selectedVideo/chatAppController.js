@@ -10,6 +10,10 @@ app.controller("chat", function($scope, $firebaseArray, $location, $timeout, Sel
         }
     };
 
+    $scope.openUserProfile = function(userId) {
+        $location.url('user/' + userId);
+    };
+
 	//getting video ID
 	$scope.videoID = $location.search().v;
 	//new chat

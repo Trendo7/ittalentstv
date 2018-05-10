@@ -458,6 +458,18 @@ label {
 	height: 40px; 
 	width: 40px; 
 	border-radius: 50%;
+	cursor: pointer;
+}
+
+.comment-username:hover {
+	cursor: pointer;
+	font-weight: bold;
+}
+
+.uploaderImg {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
 }
 
 .marginless {
