@@ -87,7 +87,7 @@
     <hr style="margin-top: 0;"/>
     <div class="row mb-2 ml-2">
         <div class="col-lg-1 col-md-1 col-1 mr-lg-1 mr-md-2 mr-3 ">
-            <img class="img-responsive uploaderImg" ng-src="{{uploaderImgUrl}}" alt="">
+            <img class="img-responsive uploaderImg" ng-src="{{uploaderImgUrl}}" alt="" ng-click="openUserLink(currentVideo)">
         </div>
         <div class="col-lg-9 col-md-9 col-9 ml-lg-2 ml-md-3 ml-3 pt-1">
             <span class="uploaded-by" ng-click="openUserLink(currentVideo)">{{currentVideo.uploadedBy}} </span>

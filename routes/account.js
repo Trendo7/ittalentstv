@@ -7,7 +7,7 @@ router.get('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var user = req.session.user;
 
-    usersCollection.findOne({_id: user._id}, {}, function (err, docs) {
+    usersCollection.findOne({_id: user._id}, {username: 1, password: 1, email: 1, imageUrl: 1}, function (err, docs) {
         if (err) {
             res.status(500);
             res.json(err);
@@ -23,10 +23,10 @@ router.put('/', function (req, res, next) {
     var usersCollection = req.db.get('users');
     var user = req.body;
 
-    if (user.username.trim() == '') {
-        res.status(412);
+    if (user.username.trim() != req.session.user.username) {
+        res.status(403);
         res.json({
-            error: 'Please enter username!'
+            error: 'You are not allowed to change your username!'
         });
         return;
     }
@@ -41,39 +41,21 @@ router.put('/', function (req, res, next) {
 
     user.password = sha1(user.password);
 
-    usersCollection.findOne({username: user.username}, {}, function (err, docs) {
+    usersCollection.findOneAndUpdate({_id: user._id}, {$set: {password: user.password, email: user.email, imageUrl: user.imageUrl}}, function (err, docs) {
         if (!err) {
-            if ((docs != null) && (req.session.user.username != user.username)) {
-                res.status(409);
-                res.json({
-                    error: "This username is already in use! Please choose another one!"
-                });
-                return;
-            } else {
-                updateUser();
-            }
+            req.session.user = docs;
+            res.status(200);
+            res.json({
+                userId: docs._id,
+                username: docs.username,
+                imageUrl: docs.imageUrl
+            });
         } else {
             res.status(500);
             res.json({err: err});
         }
     });
 
-    function updateUser() {
-        usersCollection.findOneAndUpdate({_id: user._id}, user, function (err, docs) {
-            if (!err) {
-                req.session.user = docs;
-                res.status(200);
-                res.json({
-                    userId: docs._id,
-                    username: docs.username,
-                    imageUrl: docs.imageUrl
-                });
-            } else {
-                res.status(500);
-                res.json({err: err});
-            }
-        });
-    }
 });
 
 module.exports = router;
