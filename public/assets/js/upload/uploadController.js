@@ -1,4 +1,4 @@
-app.controller('UploadController', function($scope, $http, $window,$timeout, $route) {
+app.controller('UploadController', function($scope, $http, $window,$timeout,$location, $route) {
 
 	if (!$scope.logged) {
 		$window.location.href = '/signin.html#!/#login';
@@ -127,7 +127,7 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 					latest.innerText = "We are almost ready! Please wait a moment!";
 
 					//show and load video
-					$scope.hideVideo = false;
+					$scope.hideVideo = true;
 					video.src = downloadURL;
 
 					video.onloadedmetadata = function() {
@@ -172,6 +172,12 @@ app.controller('UploadController', function($scope, $http, $window,$timeout, $ro
 												latest.innerText = "Your video has been successfully uploaded! Yey!";
 												video.currentTime = 0;
 											}
+
+											$timeout(function(){
+												$location.url('watch?v=' + response.data);
+											}, 1000)
+											
+											
 										})
 										.catch(function(err) {
 											console.log(id);
