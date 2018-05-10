@@ -47,6 +47,8 @@
                 <img ng-click="getLoggedUserPlaylist(logged.userId)" id="addPlaylist" data-toggle="collapse" src="assets/img/playlistAdd.png" data-target="#collapseExample" style="opacity: 1;" title="Add to playlist." alt="">
             </span>
         </div>
+
+
         <!--  if user isn't logged -->
         <div class="col-xl-6 col-lg-6  col-md-6 col-6 my-auto" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-if="!logged">
             <span class="text-muted float-right ">
@@ -62,6 +64,8 @@
                 <img src="assets/img/playlistAdd.png" data-target="#collapseExample"  title="Add to playlist." alt="">
             </span>
         </div>
+
+
         
         <!-- dropdown when user is not logged -->
         <div class="dropdown-menu noselect p-3 pt-1 mt-2 ml-lg-5 ml-md-5 ml-0" style="animation: riseUp 0.3s linear">
@@ -70,6 +74,8 @@
             <a class="nav-link text-info text-center" href="signin.html#!/#login" ng-click="signinRedirect()">SIGN IN</a>
         </div>
     </div>
+
+
     <!--  playlists dropdown -->
     <div class="collapse col-lg-12 col-md-12" id="collapseExample">
         <div class="d-inline  col-12 mx-auto noselect" ng-repeat="playlist in userPlaylists" ng-click="toggleSong(playlist)" >
@@ -102,15 +108,20 @@
 
                 <button id="commentBtn" class="btn btn-sm btn-outline-secondary border col-lg-2 col-md-2 col-2 align-middle" ng-disabled="!newChat.msg || !newChat.username" ng-click="send()"><i class="fas fa-comment"></i></button>
             </div>
+            <div ng-hide="isCommented" class="text-center mt-3 mb-5" style="animation: riseUp 0.7s linear">
+                <i class="far fa-comments mb-3" style="font-size: 40px; opacity: 0.8"></i>
+                <h4>There are no comments so far.. Be the first and add one!</h4>
+                <h6 class="nav-item" ng-if="!logged">
+                <a class="nav-link mr-1 mt-sm-1 mt-*-1 text-center" href="signin.html#!/#login" ng-click="signinRedirect()">SIGN IN</a></h6>
+            </div>
             <div class="row mb-2 ml-2" ng-repeat="chat in chats">
                 <div class="col-lg-1 col-md-1 col-1 mr-lg-2 mr-md-2 mr-3">
-                <img class="img-responsive commentImg" src="{{chat.imageUrl}}" alt="" style="">
+                    <img class="img-responsive commentImg" ng-src="{{chat.imageUrl}}" alt="">
                 </div>
                 <div class="col-lg-9 col-md-9 col-9 ml-lg-1 ml-md-0 ml-2">
-                <span>{{chat.username}} <small class="text-muted " am-time-ago="chat.time"></small></span>
-                <p class="col-lg-8 comments">{{chat.msg}}</p>
+                    <span>{{chat.username}} <small class="text-muted " am-time-ago="chat.time"></small></span>
+                    <p class="col-lg-8 comments">{{chat.msg}}</p>
                 </div>
-
             </div>
             
             

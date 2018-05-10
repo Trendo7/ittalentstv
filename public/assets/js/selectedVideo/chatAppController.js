@@ -1,6 +1,8 @@
-app.controller("chat", function($scope, $firebaseArray, $location, SelectedVideoService) {
+app.controller("chat", function($scope, $firebaseArray, $location, $timeout, SelectedVideoService) {
 
 	const ENTER_KEY = 13;
+
+	$scope.isCommented = true;
 
 	$scope.listenForEnter = function (keyEvent) {
         if (keyEvent.which === ENTER_KEY) {
@@ -29,7 +31,11 @@ app.controller("chat", function($scope, $firebaseArray, $location, SelectedVideo
 	// Bind (three-way // view-controller-firebase)
 	$scope.chats = $firebaseArray(ref);
 
-	console.log($scope.chats)
+	$timeout(function(){
+		if ($scope.chats.length == 0) {
+		$scope.isCommented = false;
+		}
+	}, 1500)
 
 	// Add new chat message
 	$scope.send = function() {
@@ -39,5 +45,6 @@ app.controller("chat", function($scope, $firebaseArray, $location, SelectedVideo
 		$scope.chats.$add($scope.newChat);
 		//Reset msg
 		$scope.newChat.msg = '';
+		$scope.isCommented = true;
 	}
 });
