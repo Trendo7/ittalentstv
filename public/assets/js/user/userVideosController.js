@@ -8,21 +8,8 @@ app.controller('UserVideosController', function ($scope, $window, $location, Use
     $scope.userID = $location.path().split('/')[USER_POSITION];
     $scope.user = {};
     $scope.hasVideos = true;
-    $scope.options = [
-        {description: 'Most Popular', value: '-viewCount'},
-        {description: 'Title', value: 'title'},
-        {description: 'Likes', value: '-likedByUserIDs.length'},
-        {description: 'Upload Date', value: '-uploadDate'}
-    ];
 
-    $scope.sortSelect = '';
-    $scope.sortedBy = '';
-
-    $scope.changeOption = function(option){
-        $scope.sortedBy = option.description;
-        $scope.sortSelect = option.value;
-    };
-
+    filterOptions($scope);
 
     UserCheckService.checkUser($scope.userID)
         .then(function (user) {

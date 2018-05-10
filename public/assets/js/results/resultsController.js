@@ -5,21 +5,7 @@ app.controller('ResultsController', function($scope, $window, $location, Results
         return;
     }
 
-    $scope.videos = [];
-    $scope.options = [
-        {description: 'Most Popular', value: '-viewCount'},
-        {description: 'Title', value: 'title'},
-        {description: 'Likes', value: '-likedByUserIDs.length'},
-        {description: 'Upload Date', value: '-uploadDate'}
-    ];
-
-    $scope.sortSelect = '';
-    $scope.sortedBy = '';
-
-    $scope.changeOption = function(option){
-        $scope.sortedBy = option.description;
-        $scope.sortSelect = option.value;
-    };
+    filterOptions($scope);
 
     ResultsService.getVideos(searchQuery)
         .then(function (videos) {
