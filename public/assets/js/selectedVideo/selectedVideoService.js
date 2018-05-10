@@ -12,7 +12,19 @@ app.service('SelectedVideoService', function ($http) {
     };
 
 
-    //loads similar videos
+    //gets the profile picture of the video uploader
+    this.getUploaderImg = function (videoID) {
+        return new Promise(function (resolve, reject) {
+            $http.get('/api/videos/uploaderImg/' + videoID)
+                .then(function (response) {
+                    resolve(response.data.imageUrl);
+                })
+                .catch(err => reject(err));
+        });
+    };
+
+
+    //loads similar videos; if there are no similar videos we obtain the most recent videos
     this.getSimilarVideos = function (selectedVideo) {
         return new Promise(function (resolve, reject) {
             $http.post('/api/videos/similarVideos', selectedVideo)

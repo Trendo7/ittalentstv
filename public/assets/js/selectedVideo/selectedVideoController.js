@@ -12,6 +12,7 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
     $scope.isDislikedByMe = false;
     $scope.categoryTitle = "";
     $scope.newPlaylistTitle = {title: ""};
+    $scope.uploaderImgUrl = '';
 
     //check if videoID is invalid
     if ($scope.videoID.trim().length != MONGO_ID_LENGTH) {
@@ -58,7 +59,17 @@ app.controller('SelectedVideoController', function ($scope, $window, $location, 
         });
 
 
-    //gets similar videos in the right sidebar
+    //get the profile picture of the video uploader
+    SelectedVideoService.getUploaderImg($scope.videoID)
+        .then(function (imageUrl) {
+            $scope.$apply(function () {
+                $scope.uploaderImgUrl = imageUrl;
+            });
+        })
+        .catch(err => console.log(err));
+
+
+    //gets similar videos in the right sidebar; if there are no similar videos we obtain the most recent videos
     function getSimilarVideos(selectedVideo) {
         SelectedVideoService.getSimilarVideos(selectedVideo)
             .then(function (response) {

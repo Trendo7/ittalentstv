@@ -37,6 +37,51 @@ router.get('/mostPopular/', function (req, res, next) {
 });
 
 
+//Get selected video (by its ID) and increment the viewCount
+router.get('/:id', function (req, res, next) {
+    var videosCollection = req.db.get('videos');
+    var videoToGetID = req.params.id;
+
+    if (videoToGetID.trim().length != MONGO_ID_LENGTH) {
+        res.status(404);
+        res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
+        return;
+    }
+
+    videosCollection.findOneAndUpdate({_id: videoToGetID}, {$inc: {viewCount: 1}}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            if (docs === null) {
+                res.status(404);
+                res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
+            } else {
+                res.status(200);
+                res.json(docs);
+            }
+        }
+    });
+});
+
+
+//Get profile picture of selected user based on videoID (the video is uploaded by the selected user)
+router.get('/uploaderImg/:videoID', function (req, res, next) {
+    var usersCollection = req.db.get('users');
+    var videoID = req.params.videoID;
+
+    usersCollection.findOne({uploadedVideos: videoID}, {imageUrl: 1}, function (err, docs) {
+        if (err) {
+            res.status(500);
+            res.json(err);
+        } else {
+            res.status(200);
+            res.json(docs);
+        }
+    });
+});
+
+
 //Get similar videos
 router.post('/similarVideos/', function (req, res, next) {
     var videosCollection = req.db.get('videos');
@@ -60,7 +105,7 @@ router.post('/similarVideos/', function (req, res, next) {
         }
     });
 
-    //if no similar videos are found we het the newest n videos (n is equal to SIDEBAR_LIMIT)
+    //if no similar videos are found we get the newest n videos (n is equal to SIDEBAR_LIMIT)
     function findNewestVideos(idToExclude){
         videosCollection.find({_id: {$ne: idToExclude}}, {limit: SIDEBAR_LIMIT, sort: {uploadDate: -1}}, function (err, docsN) {
             if (err) {
@@ -92,33 +137,6 @@ router.post('/byPlaylist/', function (req, res, next) {
 
             res.status(200);
             res.json(docs);
-        }
-    });
-});
-
-//Get selected video (by its ID) and increment the viewCount
-router.get('/:id', function (req, res, next) {
-    var videosCollection = req.db.get('videos');
-    var videoToGetID = req.params.id;
-
-    if (videoToGetID.trim().length != MONGO_ID_LENGTH) {
-        res.status(404);
-        res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
-        return;
-    }
-
-    videosCollection.findOneAndUpdate({_id: videoToGetID}, {$inc: {viewCount: 1}}, function (err, docs) {
-        if (err) {
-            res.status(500);
-            res.json(err);
-        } else {
-            if (docs === null) {
-                res.status(404);
-                res.json({err: "This page isn't available. Sorry about that.Try searching for something else."});
-            } else {
-                res.status(200);
-                res.json(docs);
-            }
         }
     });
 });
